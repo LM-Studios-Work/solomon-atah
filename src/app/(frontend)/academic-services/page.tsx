@@ -1,0 +1,183 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Academic Services — Solomon Atah Pty Ltd',
+  description:
+    'Speaking, keynotes, academic consulting, research advisory, institutional workshops, and website services for academics.',
+}
+
+const SERVICES = [
+  {
+    title: 'Speaking & Keynotes',
+    description:
+      'Solomon Atah delivers keynote addresses and panel contributions on narrative intelligence, African intellectual production, public scholarship, and the intersection of media and knowledge systems.',
+    themes: [
+      'Narrative and institutional power',
+      'The future of African scholarship',
+      'Public intellectual practice',
+      'Media, knowledge, and accountability',
+      'Storytelling as strategy',
+    ],
+  },
+  {
+    title: 'Academic Consulting',
+    description:
+      'Strategic consulting for academic institutions, research centres, and universities seeking to position their intellectual work for broader public impact — including media strategy, knowledge translation, and public engagement frameworks.',
+    themes: [],
+  },
+  {
+    title: 'Research Advisory',
+    description:
+      'Advisory support for research projects, doctoral candidates, and academic programmes — with particular expertise in narrative methodology, qualitative research design, and knowledge dissemination.',
+    themes: [],
+  },
+  {
+    title: 'Institutional Workshops',
+    description:
+      'Structured workshops delivered to academic departments, research institutes, and professional organisations on narrative analysis, public communication of research, and institutional storytelling.',
+    themes: [],
+  },
+  {
+    title: 'Website Services for Academics',
+    description:
+      'Design and development of professional academic websites — helping scholars establish a durable digital presence that reflects the quality of their intellectual work. Includes portfolio sites, research pages, and speaking profiles.',
+    themes: [],
+  },
+]
+
+const UPCOMING_EVENTS: { title: string; date: string; location: string; type: string }[] = [
+  // Static placeholder — add events here
+]
+
+export default function AcademicServicesPage() {
+  return (
+    <div>
+      {/* ── Page Header ───────────────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+            Solomon Atah Pty Ltd
+          </p>
+          <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6">
+            Academic Services
+          </h1>
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+            Institutional engagement, scholarly consulting, and professional services at the
+            intersection of academic rigour and public practice.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Services ──────────────────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-10">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              What We Offer
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="space-y-8">
+            {SERVICES.map((service) => (
+              <div
+                key={service.title}
+                className="border border-border rounded-sm p-8 hover:border-purple/30 transition-colors"
+              >
+                <h2 className="font-fraunces text-2xl mb-4">{service.title}</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4 max-w-3xl">
+                  {service.description}
+                </p>
+                {service.themes.length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                      Keynote Themes
+                    </p>
+                    <ul className="space-y-1">
+                      {service.themes.map((theme) => (
+                        <li key={theme} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <span className="text-gold mt-1">—</span>
+                          {theme}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
+            >
+              Book a Speaking Engagement
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
+            >
+              Academic Consulting Enquiry
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Awards & Recognitions ─────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Awards &amp; Recognitions
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Awards and institutional recognitions will be listed here.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Event Calendar ────────────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Upcoming Events
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          {UPCOMING_EVENTS.length > 0 ? (
+            <div className="divide-y divide-border">
+              {UPCOMING_EVENTS.map((event) => (
+                <div key={event.title} className="py-5 grid sm:grid-cols-4 gap-4 items-baseline">
+                  <div className="text-sm font-medium text-gold">{event.date}</div>
+                  <div className="sm:col-span-2">
+                    <p className="font-medium">{event.title}</p>
+                    <p className="text-sm text-muted-foreground">{event.location}</p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground">
+                      {event.type}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              No events currently scheduled. Check back soon or{' '}
+              <Link href="/contact" className="text-purple hover:underline">
+                get in touch
+              </Link>{' '}
+              to arrange a speaking engagement.
+            </p>
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}

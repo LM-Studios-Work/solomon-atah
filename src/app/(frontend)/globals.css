@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand colors */
+    --color-purple: 74 25 66;        /* #4A1942 */
+    --color-gold: 201 168 76;        /* #C9A84C */
+
+    /* shadcn/ui semantic tokens */
+    --background: 0 0% 99%;
+    --foreground: 20 14.3% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 8%;
+
+    --primary: 308 49% 27%;          /* purple */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 43 51% 54%;         /* gold */
+    --secondary-foreground: 20 14.3% 8%;
+
+    --muted: 0 0% 95.1%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 43 51% 54%;
+    --accent-foreground: 20 14.3% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 308 49% 27%;
+
+    --radius: 0.25rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 6%;
+    --foreground: 0 0% 95%;
+
+    --card: 20 14.3% 9%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 20 14.3% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 308 49% 60%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 43 51% 54%;
+    --secondary-foreground: 20 14.3% 6%;
+
+    --muted: 20 14.3% 14%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 43 51% 54%;
+    --accent-foreground: 20 14.3% 6%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 20 14.3% 18%;
+    --input: 20 14.3% 18%;
+    --ring: 308 49% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-fraunces leading-tight;
+    letter-spacing: -0.01em;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+
+  p { @apply leading-relaxed; }
+
+  /* Editorial focus: generous line-height for long-form reading */
+  .prose-editorial {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    max-width: 72ch;
+  }
+
+  /* Pull quote style */
+  .pull-quote {
+    @apply font-fraunces text-2xl md:text-3xl text-purple leading-snug;
+    @apply border-l-4 border-gold pl-6 py-2 my-8;
+  }
+
+  .dark .pull-quote {
+    @apply text-gold border-gold/60;
+  }
+
+  /* Gold accent rule */
+  .accent-rule {
+    @apply border-t-2 border-gold;
+  }
+
+  /* Section dividers */
+  .section-rule {
+    @apply border-t border-border;
+  }
+
+  /* Discipline tags */
+  .discipline-tag {
+    @apply inline-flex items-center text-xs font-medium tracking-wide uppercase;
+    @apply text-purple px-2.5 py-1 rounded-sm;
+    background-color: rgba(74, 25, 66, 0.08);
+  }
+
+  .dark .discipline-tag {
+    @apply text-purple-300;
+    background-color: rgba(74, 25, 66, 0.20);
+  }
+
+  /* Skip to content (accessibility) */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4;
+    @apply bg-purple text-white px-4 py-2 rounded z-50;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+}
