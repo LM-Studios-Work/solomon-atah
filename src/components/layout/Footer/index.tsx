@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const FOOTER_COLUMNS = [
   {
@@ -49,20 +50,23 @@ export function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex flex-col leading-none mb-4">
-              <span className="font-fraunces text-2xl font-semibold text-foreground">
-                Solomon Atah
-              </span>
-              <span className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground mt-0.5">
-                Pty Ltd
-              </span>
+            <Link href="/" className="block mb-5">
+              <div className="relative w-40 h-24 rounded-sm overflow-hidden bg-black">
+                <Image
+                  src="/company%20resources/logo.jpeg"
+                  alt="Solomon Atah Pty Ltd"
+                  fill
+                  className="object-contain"
+                  sizes="160px"
+                />
+              </div>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-4">
+            <p className="text-xs text-muted-foreground italic mb-3">
+              Memoria Aedificat Futurum
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               A sovereign intellectual holding company building durable knowledge infrastructures
               across media, research, publishing, and cultural production.
-            </p>
-            <p className="text-xs text-muted-foreground italic">
-              &ldquo;Know Tomorrow Today.&rdquo;
             </p>
           </div>
 

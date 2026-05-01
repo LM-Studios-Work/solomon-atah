@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Film Projects — Solomon Atah Pty Ltd',
@@ -24,19 +25,36 @@ const NARRATIVE_PROJECTS: {
 ]
 
 export default function FilmPage() {
-  const hasProjects = DOCUMENTARY_PROJECTS.length > 0 || NARRATIVE_PROJECTS.length > 0
-
   return (
     <div>
-      {/* ── Page Header ───────────────────────────────────────────────────────── */}
+      {/* ── Hero image ────────────────────────────────────────────────────────── */}
       <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-            Solomon Atah Pty Ltd
-          </p>
-          <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6">
-            Film Projects
-          </h1>
+        <div className="relative w-full h-72 md:h-96 overflow-hidden">
+          <Image
+            src="/company%20resources/film_division.jpeg"
+            alt="Solomon Atah Film Division"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 flex items-end">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">
+                Solomon Atah Pty Ltd
+              </p>
+              <h1 className="font-fraunces text-5xl md:text-6xl font-light text-white leading-tight">
+                Film Projects
+              </h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Intro ─────────────────────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
             The film division develops documentary and narrative projects that translate intellectual
             inquiry into cinematic form — extending the work of research and scholarship into
@@ -96,7 +114,7 @@ export default function FilmPage() {
       {/* ── Production Partnerships ───────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
                 Production Partnerships
@@ -117,21 +135,32 @@ export default function FilmPage() {
                 Production enquiries
               </Link>
             </div>
-            <div className="border border-border rounded-sm p-8">
-              <h3 className="font-fraunces text-xl mb-4">Our Approach</h3>
-              <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-                <p>
-                  Our film work is an extension of the same intellectual commitments that drive
-                  our podcast, research, and publishing — rigour, long horizon thinking, and
-                  a commitment to ideas that endure.
-                </p>
-                <p>
-                  We develop projects that translate complex scholarship and lived experience
-                  into narrative and documentary form — building cultural infrastructure,
-                  not content.
-                </p>
-              </div>
+
+            <div className="relative w-full rounded-sm overflow-hidden">
+              <Image
+                src="/company%20resources/africa_film_division.jpeg"
+                alt="Africa Film Division"
+                width={600}
+                height={800}
+                className="w-full object-cover rounded-sm"
+              />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Approach ──────────────────────────────────────────────────────── */}
+      <section className="bg-purple text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-6">
+              Our Approach
+            </p>
+            <p className="font-fraunces text-2xl md:text-3xl font-light leading-relaxed">
+              Our film work is an extension of the same intellectual commitments that drive
+              our podcast, research, and publishing — rigour, long horizon thinking, and
+              a commitment to ideas that endure. We develop cultural infrastructure, not content.
+            </p>
           </div>
         </div>
       </section>

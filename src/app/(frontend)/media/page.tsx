@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getPayload } from '@/lib/payload/getPayload'
 import { ConversationCard } from '@/components/sections/ConversationCard'
 
@@ -50,6 +51,21 @@ export default async function MediaPage() {
         </div>
       </section>
 
+      {/* ── Podcast banner ────────────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="relative w-full h-48 md:h-64 overflow-hidden">
+          <Image
+            src="/company%20resources/podcast_image.jpeg"
+            alt="The Solomon Atah Podcast"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-purple/60" />
+        </div>
+      </section>
+
       {/* ── The Solomon Atah Podcast ──────────────────────────────────────────── */}
       <section className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -89,7 +105,19 @@ export default async function MediaPage() {
               </div>
             </div>
 
-            {/* Watch & Listen */}
+            {/* Podcast logo + Watch & Listen */}
+            <div className="space-y-6">
+              <div className="flex justify-center">
+                <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                  <Image
+                    src="/company%20resources/podcase_image_circle.jpeg"
+                    alt="The Solomon Atah Podcast"
+                    fill
+                    className="object-cover"
+                    sizes="192px"
+                  />
+                </div>
+              </div>
             <div className="border border-border rounded-sm p-8 bg-muted/20">
               <h3 className="font-fraunces text-xl mb-6">Watch &amp; Listen</h3>
               <div className="space-y-3">
@@ -115,6 +143,7 @@ export default async function MediaPage() {
                   </a>
                 ))}
               </div>
+            </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Academic Services — Solomon Atah Pty Ltd',
@@ -46,8 +47,16 @@ const SERVICES = [
   },
 ]
 
-const UPCOMING_EVENTS: { title: string; date: string; location: string; type: string }[] = [
-  // Static placeholder — add events here
+const UPCOMING_EVENTS = [
+  {
+    title: 'Academia in the Public Interest Conference',
+    subtitle: 'Where Scholarship Meets Society',
+    date: '5 September 2026',
+    location: 'Johannesburg, South Africa',
+    type: 'Conference',
+    hashtag: '#KnowTomorrowToday',
+    image: '/company%20resources/event_sep.jpeg',
+  },
 ]
 
 export default function AcademicServicesPage() {
@@ -151,18 +160,39 @@ export default function AcademicServicesPage() {
           </div>
 
           {UPCOMING_EVENTS.length > 0 ? (
-            <div className="divide-y divide-border">
+            <div className="space-y-10">
               {UPCOMING_EVENTS.map((event) => (
-                <div key={event.title} className="py-5 grid sm:grid-cols-4 gap-4 items-baseline">
-                  <div className="text-sm font-medium text-gold">{event.date}</div>
-                  <div className="sm:col-span-2">
-                    <p className="font-medium">{event.title}</p>
-                    <p className="text-sm text-muted-foreground">{event.location}</p>
+                <div key={event.title} className="grid md:grid-cols-2 gap-8 items-start">
+                  <div className="relative w-full max-w-xs aspect-[3/4] rounded-sm overflow-hidden shadow-md">
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 320px"
+                    />
                   </div>
-                  <div>
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground">
+                  <div className="flex flex-col justify-center py-4">
+                    <span className="text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground w-fit mb-4">
                       {event.type}
                     </span>
+                    <h3 className="font-fraunces text-3xl font-light mb-2">{event.title}</h3>
+                    {event.subtitle && (
+                      <p className="text-muted-foreground italic mb-5">{event.subtitle}</p>
+                    )}
+                    <div className="space-y-2 mb-6">
+                      <p className="text-sm font-semibold text-gold">{event.date}</p>
+                      <p className="text-sm text-muted-foreground">{event.location}</p>
+                      {event.hashtag && (
+                        <p className="text-sm text-purple font-medium">{event.hashtag}</p>
+                      )}
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors w-fit"
+                    >
+                      Register Interest
+                    </Link>
                   </div>
                 </div>
               ))}

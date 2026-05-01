@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { MobileMenu } from './MobileMenu'
 
@@ -18,13 +19,24 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Wordmark */}
-          <Link href="/" className="flex flex-col leading-none group shrink-0">
-            <span className="font-fraunces text-lg font-semibold text-foreground group-hover:text-purple transition-colors">
-              Solomon Atah
-            </span>
-            <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-muted-foreground">
-              Pty Ltd
-            </span>
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0">
+              <Image
+                src="/company%20resources/podcase_image_circle.jpeg"
+                alt="Solomon Atah"
+                fill
+                className="object-cover"
+                sizes="32px"
+              />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="font-fraunces text-lg font-semibold text-foreground group-hover:text-purple transition-colors">
+                Solomon Atah
+              </span>
+              <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-muted-foreground">
+                Pty Ltd
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav */}
