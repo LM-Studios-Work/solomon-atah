@@ -111,6 +111,31 @@ export default function FilmPage() {
         </div>
       </section>
 
+      {/* ── Concept Notes ────────────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Concept Notes
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <div className="max-w-2xl">
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Concept notes for projects in development are available to verified production
+              partners, broadcasters, and development funds on request. Each note outlines
+              the intellectual premise, proposed format, and target audience for the project.
+            </p>
+            <Link
+              href="/contact"
+              className="text-sm text-purple hover:underline font-medium"
+            >
+              Request concept notes →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Production Partnerships ───────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

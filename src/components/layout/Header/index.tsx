@@ -5,6 +5,7 @@ import { MobileMenu } from './MobileMenu'
 
 const NAV_LINKS = [
   { label: 'Media', href: '/media' },
+  { label: 'The Solomon Atah Podcast', href: '/conversations' },
   { label: 'Research & Publishing', href: '/research' },
   { label: 'Academic Services', href: '/academic-services' },
   { label: 'Film Projects', href: '/film' },
@@ -40,12 +41,12 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-5" aria-label="Main navigation">
+          <nav className="hidden xl:flex items-center gap-4" aria-label="Main navigation">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[13px] text-muted-foreground hover:text-foreground transition-colors font-medium whitespace-nowrap"
+                className="text-[12px] text-muted-foreground hover:text-foreground transition-colors font-medium whitespace-nowrap"
               >
                 {link.label}
               </Link>

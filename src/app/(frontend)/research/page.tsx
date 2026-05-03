@@ -36,7 +36,7 @@ const NINTA_RESEARCH_SERVICES = [
   },
 ]
 
-const BOOKS = [
+const BOOKS: { title: string; subtitle: string | null; image: string | null; status: string; description: string }[] = [
   {
     title: 'The Narrative Manifesto',
     subtitle: 'How Stories Harm, And What You Can Do About It',
@@ -60,6 +60,22 @@ const BOOKS = [
     status: 'Available',
     description:
       'A framework for navigating power, autonomy, and self-determination in an age of institutional overreach and social manipulation.',
+  },
+  {
+    title: '7 Quantum Humanomics',
+    subtitle: null,
+    image: null,
+    status: 'Available',
+    description:
+      'A theoretical framework integrating quantum principles with humanistic inquiry into economic and social systems.',
+  },
+  {
+    title: 'The University of Money',
+    subtitle: null,
+    image: null,
+    status: 'Available',
+    description:
+      'A critical examination of the financialisation of higher education and its consequences for knowledge production.',
   },
 ]
 
@@ -173,29 +189,37 @@ export default function ResearchPage() {
 
           {/* Books */}
           <div id="books">
-            <div className="grid sm:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {BOOKS.map((book) => (
-                <div key={book.title} className="group">
-                  <div className="relative w-full aspect-[2/3] rounded-sm overflow-hidden mb-4 shadow-md group-hover:shadow-lg transition-shadow">
-                    <Image
-                      src={book.image}
-                      alt={book.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 280px"
-                    />
-                  </div>
+                <div key={book.title} className="group border border-border rounded-sm p-6 hover:border-purple/30 transition-colors flex flex-col">
+                  {book.image ? (
+                    <div className="relative w-full aspect-[2/3] rounded-sm overflow-hidden mb-5 shadow-md group-hover:shadow-lg transition-shadow">
+                      <Image
+                        src={book.image}
+                        alt={book.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full aspect-[2/3] rounded-sm bg-muted/30 border border-border mb-5 flex items-center justify-center">
+                      <span className="text-xs text-muted-foreground">Cover coming soon</span>
+                    </div>
+                  )}
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <h3 className="font-fraunces text-lg leading-snug">{book.title}</h3>
                     <span className="shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground">
                       {book.status}
                     </span>
                   </div>
-                  <p className="text-xs text-gold mb-2 font-medium">{book.subtitle}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                  {book.subtitle && (
+                    <p className="text-xs text-gold mb-2 font-medium">{book.subtitle}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
                     {book.description}
                   </p>
-                  <a href="#" className="text-sm text-purple hover:underline font-medium">
+                  <a href="#" className="text-sm text-purple hover:underline font-medium mt-auto">
                     Order →
                   </a>
                 </div>

@@ -7,6 +7,23 @@ export const metadata: Metadata = {
     'Podcast merchandise, branded apparel, and books from Solomon Atah Pty Ltd.',
 }
 
+const PODCAST_MERCH = [
+  {
+    name: 'Know Tomorrow Today — Tote Bag',
+    tagline: 'Know Tomorrow Today',
+    description: 'Heavy canvas tote bag with the Solomon Atah Podcast wordmark and slogan.',
+    image: null as string | null,
+    status: 'Pre-Order' as const,
+  },
+  {
+    name: 'Know Tomorrow Today — Mug',
+    tagline: 'Know Tomorrow Today',
+    description: 'Ceramic mug. For the scholar who needs something to hold while thinking.',
+    image: null as string | null,
+    status: 'Pre-Order' as const,
+  },
+]
+
 const HOODIES = [
   {
     name: 'Epistemic Humility Hoodie',
@@ -88,9 +105,34 @@ export default function MerchandisePage() {
         </div>
       </section>
 
-      {/* ── Hoodies ───────────────────────────────────────────────────────────── */}
+      {/* ── Podcast Merchandise ───────────────────────────────────────────────── */}
       <section className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-10">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Podcast Merchandise
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {PODCAST_MERCH.map((item) => (
+              <div key={item.name} className="border border-border rounded-sm overflow-hidden hover:border-purple/30 transition-colors">
+                <div className="relative aspect-square bg-muted/20 flex items-center justify-center">
+                  <p className="text-xs text-muted-foreground">Image coming soon</p>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <p className="font-medium text-sm leading-snug">{item.name}</p>
+                    <span className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border ${STATUS_STYLES[item.status]}`}>
+                      {item.status}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-2">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className="flex items-center gap-4 mb-10">
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
               Branded Apparel
@@ -137,12 +179,12 @@ export default function MerchandisePage() {
         </div>
       </section>
 
-      {/* ── Books ─────────────────────────────────────────────────────────────── */}
+      {/* ── Special Edition Books ─────────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-4 mb-10">
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-              Books
+              Special Edition Books
             </span>
             <div className="flex-1 h-px bg-border" />
           </div>

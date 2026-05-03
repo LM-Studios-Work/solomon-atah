@@ -89,6 +89,20 @@ export default async function HomePage() {
       <section className="relative border-b border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl">
+            {/* Hero video — replace src when video asset is available */}
+            <div className="relative w-full max-w-2xl aspect-video rounded-sm overflow-hidden bg-black mb-10 hidden">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Solomon Atah Pty Ltd — brand video"
+              >
+                {/* <source src="/company%20resources/hero.mp4" type="video/mp4" /> */}
+              </video>
+            </div>
+
             {/* Company logo */}
             <div className="relative w-48 h-28 mb-8 rounded-sm overflow-hidden bg-black">
               <Image
