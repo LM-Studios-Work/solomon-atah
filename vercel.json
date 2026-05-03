@@ -1,7 +1,4 @@
 {
-  "npm": {
-    "args": ["--legacy-peer-deps"]
-  },
   "headers": [
     {
       "source": "/feed.xml",
