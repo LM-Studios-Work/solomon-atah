@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 // Collections
@@ -78,6 +79,13 @@ export default buildConfig({
   },
 
   plugins: [
+    vercelBlobStorage({
+      enabled: process.env.NODE_ENV === 'production',
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
     seoPlugin({
       collections: ['conversations', 'scholars', 'dispatches', 'pages'],
       generateTitle: ({ doc }) => {
