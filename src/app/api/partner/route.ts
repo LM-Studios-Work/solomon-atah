@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPayload } from '@/lib/payload/getPayload'
+
+const NOTIFICATION_EMAIL = 'suisyola44@gmail.com'
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,35 +14,33 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Required fields are missing.' }, { status: 400 })
     }
 
-    const payload = await getPayload()
-
-    await payload.create({
-      collection: 'partner-inquiries',
-      data: {
-        orgName: body.orgName,
-        contactName: body.contactName,
-        contactEmail: body.contactEmail,
-        contactTitle: body.contactTitle,
-        partnershipType: body.partnershipType,
-        budget: body.budget,
-        message: body.message,
-        honeypot: body.honeypot || '',
-        status: 'new',
-      },
-    })
-
-    if (process.env.RESEND_API_KEY && process.env.RESEND_TEAM_EMAIL) {
-      try {
-        const { sendEmail } = await import('@/lib/email/client')
-        await sendEmail({
-          to: process.env.RESEND_TEAM_EMAIL,
-          subject: `New partner inquiry: ${body.orgName}`,
-          html: `<p><strong>${body.contactName}</strong> from <strong>${body.orgName}</strong> sent a partner inquiry.<br/>Type: ${body.partnershipType}<br/>Email: ${body.contactEmail}</p><p>${body.message}</p>`,
-        })
-      } catch (e) {
-        console.error('Email error:', e)
-      }
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set')
+      return NextResponse.json({ message: 'Email service not configured.' }, { status: 500 })
     }
+
+    const { sendEmail } = await import('@/lib/email/client')
+
+    await sendEmail({
+      to: NOTIFICATION_EMAIL,
+      subject: `New partner inquiry: ${body.orgName}`,
+      html: `
+<!DOCTYPE html>
+<html>
+<body style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px;">
+  <h2>New Partner Inquiry: ${body.orgName}</h2>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600; width: 40%;">Organisation</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${body.orgName}</td></tr>
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Contact</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${body.contactName}${body.contactTitle ? ` (${body.contactTitle})` : ''}</td></tr>
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Email</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${body.contactEmail}</td></tr>
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Partnership Type</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${body.partnershipType || 'Not specified'}</td></tr>
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Budget</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${body.budget || 'Not specified'}</td></tr>
+  </table>
+  <h3>Message</h3>
+  <p>${body.message}</p>
+</body>
+</html>`,
+    })
 
     return NextResponse.json({ message: 'Inquiry submitted.' }, { status: 200 })
   } catch (err) {

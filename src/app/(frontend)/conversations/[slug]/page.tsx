@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getConversationBySlug, getPublishedConversations } from '@/lib/data'
 import { YouTubePlayer } from '@/components/sections/YouTubePlayer'
 import { CitationBlock } from '@/components/sections/CitationBlock'
 import { formatDate, formatDuration, getYouTubeThumbnail } from '@/lib/utils'
@@ -14,20 +14,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const payload = await getPayload()
-
-  const result = await payload.find({
-    collection: 'conversations',
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 1,
-  })
-
-  const conv = result.docs[0]
+  const conv = getConversationBySlug(slug)
   if (!conv) return { title: 'Conversation Not Found' }
 
-  const thumbnailUrl =
-    conv.youtubeThumbnailUrl || getYouTubeThumbnail(conv.youtubeId, 'maxres')
+  const thumbnailUrl = conv.youtubeThumbnailUrl || getYouTubeThumbnail(conv.youtubeId, 'maxres')
 
   return {
     title: conv.title,
@@ -41,58 +31,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({
-      collection: 'conversations',
-      where: { status: { equals: 'published' } },
-      limit: 200,
-    })
-    return result.docs.map((c) => ({ slug: c.slug }))
-  } catch {
-    return []
-  }
+export function generateStaticParams() {
+  return getPublishedConversations().map((c) => ({ slug: c.slug }))
 }
 
 export default async function ConversationPage({ params }: Props) {
   const { slug } = await params
-  const payload = await getPayload()
-
-  const result = await payload.find({
-    collection: 'conversations',
-    where: { and: [{ slug: { equals: slug } }, { status: { equals: 'published' } }] },
-    limit: 1,
-    depth: 3,
-  })
-
-  const conv = result.docs[0]
+  const conv = getConversationBySlug(slug)
   if (!conv) notFound()
 
-  const thumbnailUrl =
-    conv.youtubeThumbnailUrl || getYouTubeThumbnail(conv.youtubeId, 'hq')
-
-  const scholars = Array.isArray(conv.scholars)
-    ? conv.scholars.filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-    : []
-
-  const disciplines = Array.isArray(conv.disciplines)
-    ? conv.disciplines.filter((d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null)
-    : []
-
+  const thumbnailUrl = conv.youtubeThumbnailUrl || getYouTubeThumbnail(conv.youtubeId, 'hq')
   const pageUrl = `${SITE_URL}/conversations/${conv.slug}`
 
-  // Structured data: VideoObject
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
     name: conv.title,
     description: conv.excerpt || conv.title,
-    thumbnailUrl: thumbnailUrl,
+    thumbnailUrl,
     uploadDate: conv.publishedAt,
     embedUrl: `https://www.youtube.com/embed/${conv.youtubeId}`,
     url: pageUrl,
-    ...(conv.duration && { duration: `PT${Math.floor(conv.duration / 60)}M${conv.duration % 60}S` }),
+    ...(conv.duration && {
+      duration: `PT${Math.floor(conv.duration / 60)}M${conv.duration % 60}S`,
+    }),
   }
 
   return (
@@ -116,9 +78,9 @@ export default async function ConversationPage({ params }: Props) {
           {/* Main column */}
           <div className="lg:col-span-2">
             {/* Disciplines */}
-            {disciplines.length > 0 && (
+            {conv.disciplines.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-5">
-                {disciplines.map((d) => (
+                {conv.disciplines.map((d) => (
                   <Link key={d.id} href={`/disciplines/${d.slug}`} className="discipline-tag hover:bg-purple/10">
                     {d.name}
                   </Link>
@@ -144,11 +106,7 @@ export default async function ConversationPage({ params }: Props) {
 
             {/* Video player */}
             <div className="mb-10">
-              <YouTubePlayer
-                videoId={conv.youtubeId}
-                title={conv.title}
-                thumbnailUrl={thumbnailUrl}
-              />
+              <YouTubePlayer videoId={conv.youtubeId} title={conv.title} thumbnailUrl={thumbnailUrl} />
             </div>
 
             {/* Excerpt / lead */}
@@ -162,10 +120,9 @@ export default async function ConversationPage({ params }: Props) {
             {conv.editorialSummary && (
               <section className="mb-10">
                 <h2 className="font-fraunces text-2xl mb-4">About This Conversation</h2>
-                <div className="prose-editorial text-muted-foreground">
-                  {/* Payload rich text — simplified rendering */}
-                  <RichTextPlaceholder />
-                </div>
+                <p className="prose-editorial text-muted-foreground leading-relaxed">
+                  {conv.editorialSummary}
+                </p>
               </section>
             )}
 
@@ -174,7 +131,7 @@ export default async function ConversationPage({ params }: Props) {
               <section className="mb-10">
                 <h2 className="font-fraunces text-2xl mb-4">Chapter Markers</h2>
                 <ol className="space-y-2">
-                  {conv.timestamps.map((ts: { time: string; label: string }, i: number) => (
+                  {conv.timestamps.map((ts, i) => (
                     <li key={i} className="flex items-start gap-4 py-2 border-b border-border last:border-0">
                       <a
                         href={`https://www.youtube.com/watch?v=${conv.youtubeId}&t=${ts.time}`}
@@ -196,7 +153,7 @@ export default async function ConversationPage({ params }: Props) {
               <section className="mb-10">
                 <h2 className="font-fraunces text-2xl mb-4">Further Reading</h2>
                 <ul className="space-y-4">
-                  {conv.furtherReading.map((item: { type: string; title: string; author?: string; year?: number; url?: string }, i: number) => (
+                  {conv.furtherReading.map((item, i) => (
                     <li key={i} className="flex gap-3 py-3 border-b border-border last:border-0">
                       <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground flex-shrink-0 mt-0.5 w-16">
                         {item.type}
@@ -233,7 +190,7 @@ export default async function ConversationPage({ params }: Props) {
               <section className="mb-10">
                 <h2 className="font-fraunces text-2xl mb-4">Cite This Conversation</h2>
                 <CitationBlock
-                  guestName={scholars.map((s) => s.name).join(' & ') || 'Guest Scholar'}
+                  guestName={conv.scholars.map((s) => s.name).join(' & ') || 'Guest Scholar'}
                   title={conv.title}
                   publishedAt={conv.publishedAt}
                   url={pageUrl}
@@ -252,101 +209,70 @@ export default async function ConversationPage({ params }: Props) {
           <aside className="space-y-8">
             <div className="sticky top-24 space-y-8">
               {/* Scholar profiles */}
-              {scholars.map((scholar) => {
-                const institution =
-                  typeof scholar.institution === 'object' && scholar.institution !== null
-                    ? scholar.institution
-                    : null
-                const photo =
-                  typeof scholar.photo === 'object' && scholar.photo !== null
-                    ? scholar.photo
-                    : null
-
-                return (
-                  <div key={scholar.id} className="border border-border rounded-sm p-5">
-                    <div className="flex items-start gap-4 mb-4">
-                      {photo ? (
-                        <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-muted">
-                          <Image
-                            src={(photo as { url: string }).url}
-                            alt={(photo as { alt: string }).alt || scholar.name}
-                            fill
-                            className="object-cover"
-                            sizes="64px"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-16 h-16 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0">
-                          <span className="font-fraunces text-xl text-purple font-bold">
-                            {scholar.name.charAt(0)}
-                          </span>
-                        </div>
+              {conv.scholars.map((scholar) => (
+                <div key={scholar.id} className="border border-border rounded-sm p-5">
+                  <div className="flex items-start gap-4 mb-4">
+                    {scholar.photo ? (
+                      <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-muted">
+                        <Image
+                          src={scholar.photo.url}
+                          alt={scholar.photo.alt || scholar.name}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0">
+                        <span className="font-fraunces text-xl text-purple font-bold">
+                          {scholar.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="font-fraunces text-lg leading-tight">{scholar.name}</h3>
+                      {scholar.title && (
+                        <p className="text-xs text-muted-foreground mt-0.5">{scholar.title}</p>
                       )}
-                      <div>
-                        <h3 className="font-fraunces text-lg leading-tight">{scholar.name}</h3>
-                        {scholar.title && (
-                          <p className="text-xs text-muted-foreground mt-0.5">{scholar.title}</p>
-                        )}
-                        {institution && (
-                          <p className="text-xs text-muted-foreground">
-                            {(institution as { shortName?: string; name: string }).shortName ||
-                              (institution as { name: string }).name}
-                          </p>
-                        )}
-                      </div>
+                      {scholar.institution && (
+                        <p className="text-xs text-muted-foreground">
+                          {scholar.institution.shortName || scholar.institution.name}
+                        </p>
+                      )}
                     </div>
-
-                    {scholar.researchFocus && (
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                        {scholar.researchFocus}
-                      </p>
-                    )}
-
-                    {/* External links */}
-                    {scholar.links && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {scholar.links.googleScholar && (
-                          <a
-                            href={scholar.links.googleScholar}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-purple hover:underline"
-                          >
-                            Google Scholar
-                          </a>
-                        )}
-                        {scholar.links.orcid && (
-                          <a
-                            href={scholar.links.orcid}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-purple hover:underline"
-                          >
-                            ORCID
-                          </a>
-                        )}
-                        {scholar.links.website && (
-                          <a
-                            href={scholar.links.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-purple hover:underline"
-                          >
-                            Website
-                          </a>
-                        )}
-                      </div>
-                    )}
-
-                    <Link
-                      href={`/scholars/${scholar.slug}`}
-                      className="text-xs text-purple hover:underline font-medium"
-                    >
-                      Full profile →
-                    </Link>
                   </div>
-                )
-              })}
+
+                  {scholar.researchFocus && (
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                      {scholar.researchFocus}
+                    </p>
+                  )}
+
+                  {scholar.links && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {scholar.links.googleScholar && (
+                        <a href={scholar.links.googleScholar} target="_blank" rel="noopener noreferrer" className="text-xs text-purple hover:underline">
+                          Google Scholar
+                        </a>
+                      )}
+                      {scholar.links.orcid && (
+                        <a href={scholar.links.orcid} target="_blank" rel="noopener noreferrer" className="text-xs text-purple hover:underline">
+                          ORCID
+                        </a>
+                      )}
+                      {scholar.links.website && (
+                        <a href={scholar.links.website} target="_blank" rel="noopener noreferrer" className="text-xs text-purple hover:underline">
+                          Website
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  <Link href={`/scholars/${scholar.slug}`} className="text-xs text-purple hover:underline font-medium">
+                    Full profile →
+                  </Link>
+                </div>
+              ))}
 
               {/* Share */}
               <div className="border border-border rounded-sm p-5">
@@ -375,14 +301,5 @@ export default async function ConversationPage({ params }: Props) {
         </div>
       </div>
     </>
-  )
-}
-
-// Placeholder for rich text rendering — replace with actual Payload Lexical renderer
-function RichTextPlaceholder() {
-  return (
-    <p className="text-muted-foreground italic text-sm">
-      [Editorial summary — managed in Payload CMS]
-    </p>
   )
 }

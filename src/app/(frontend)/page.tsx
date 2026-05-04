@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getPublishedConversations } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
-import { formatDate } from '@/lib/utils'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Solomon Atah Pty Ltd — Know Tomorrow Today',
@@ -63,25 +60,9 @@ const FEATURED_PROPERTIES = [
   },
 ]
 
-export default async function HomePage() {
-  const payload = await getPayload()
-
-  const featuredResult = await payload.find({
-    collection: 'conversations',
-    where: { and: [{ status: { equals: 'published' } }, { featured: { equals: true } }] },
-    limit: 1,
-    depth: 2,
-  })
-
-  const latestResult = await payload.find({
-    collection: 'conversations',
-    where: { status: { equals: 'published' } },
-    sort: '-publishedAt',
-    limit: 1,
-    depth: 2,
-  })
-
-  const latestConversation = featuredResult.docs[0] || latestResult.docs[0] || null
+export default function HomePage() {
+  const conversations = getPublishedConversations()
+  const latestConversation = conversations.find((c) => c.featured) ?? conversations[0] ?? null
 
   return (
     <div>
@@ -116,24 +97,19 @@ export default async function HomePage() {
 
             {/* Primary Gateways */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/media"
-                className="inline-flex items-center justify-center px-6 py-3 bg-purple text-white font-medium rounded-sm hover:bg-purple/90 transition-colors"
-              >
-                Media
-              </Link>
-              <Link
-                href="/research"
-                className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-medium rounded-sm hover:border-purple/40 hover:bg-muted/50 transition-colors"
-              >
-                Research &amp; Publishing
-              </Link>
-              <Link
-                href="/academic-services"
-                className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-medium rounded-sm hover:border-purple/40 hover:bg-muted/50 transition-colors"
-              >
-                Academic Services
-              </Link>
+              {PRIMARY_GATEWAYS.map((gw) => (
+                <Link
+                  key={gw.label}
+                  href={gw.href}
+                  className={
+                    gw.label === 'Media'
+                      ? 'inline-flex items-center justify-center px-6 py-3 bg-purple text-white font-medium rounded-sm hover:bg-purple/90 transition-colors'
+                      : 'inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-medium rounded-sm hover:border-purple/40 hover:bg-muted/50 transition-colors'
+                  }
+                >
+                  {gw.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -195,37 +171,7 @@ export default async function HomePage() {
                 All episodes →
               </Link>
             </div>
-            <ConversationCard
-              conversation={{
-                id: String(latestConversation.id),
-                title: latestConversation.title,
-                slug: latestConversation.slug,
-                excerpt: latestConversation.excerpt,
-                youtubeId: latestConversation.youtubeId,
-                youtubeThumbnailUrl: latestConversation.youtubeThumbnailUrl,
-                duration: latestConversation.duration,
-                publishedAt: latestConversation.publishedAt,
-                scholars: Array.isArray(latestConversation.scholars)
-                  ? latestConversation.scholars
-                      .filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-                      .map((s) => ({
-                        id: String(s.id),
-                        name: s.name,
-                        title: s.title,
-                        institution:
-                          typeof s.institution === 'object' && s.institution !== null
-                            ? { name: s.institution.name, shortName: s.institution.shortName }
-                            : null,
-                      }))
-                  : [],
-                disciplines: Array.isArray(latestConversation.disciplines)
-                  ? latestConversation.disciplines
-                      .filter((d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null)
-                      .map((d) => ({ id: String(d.id), name: d.name, slug: d.slug }))
-                  : [],
-              }}
-              variant="featured"
-            />
+            <ConversationCard conversation={latestConversation} variant="featured" />
           </div>
         </section>
       )}

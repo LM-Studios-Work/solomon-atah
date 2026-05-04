@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import type { Where } from 'payload'
 import Link from 'next/link'
-import { getPayload } from '@/lib/payload/getPayload'
+import { queryScholars, getDisciplines } from '@/lib/data'
 import { ScholarCard } from '@/components/sections/ScholarCard'
 
 export const dynamic = 'force-dynamic'
@@ -24,32 +23,13 @@ export default async function ScholarsPage({
   searchParams: Promise<SearchParams>
 }) {
   const params = await searchParams
-  const payload = await getPayload()
-
-  const disciplinesResult = await payload.find({
-    collection: 'disciplines',
-    sort: 'order',
-    limit: 30,
-  })
-
-  const andConditions: Where[] = []
-  if (params.discipline) {
-    andConditions.push({ 'disciplines.slug': { equals: params.discipline } })
-  }
-  if (params.region) {
-    andConditions.push({ region: { equals: params.region } })
-  }
-  const where: Where | undefined =
-    andConditions.length > 0 ? { and: andConditions } : undefined
-
   const page = parseInt(params.page || '1', 10)
-  const result = await payload.find({
-    collection: 'scholars',
-    where,
-    sort: 'name',
-    limit: 24,
+
+  const allDisciplines = getDisciplines()
+  const result = queryScholars({
+    discipline: params.discipline,
+    region: params.region,
     page,
-    depth: 2,
   })
 
   return (
@@ -76,7 +56,7 @@ export default async function ScholarsPage({
               </h3>
               <div className="space-y-1">
                 <FilterLink href="/scholars" active={!params.discipline} label="All disciplines" />
-                {disciplinesResult.docs.map((d) => (
+                {allDisciplines.map((d) => (
                   <FilterLink
                     key={d.id}
                     href={`/scholars?discipline=${d.slug}`}
@@ -102,40 +82,7 @@ export default async function ScholarsPage({
             <>
               <div className="divide-y divide-border">
                 {result.docs.map((scholar) => (
-                  <ScholarCard
-                    key={scholar.id}
-                    scholar={{
-                      id: String(scholar.id),
-                      name: scholar.name,
-                      slug: scholar.slug,
-                      title: scholar.title,
-                      researchFocus: scholar.researchFocus,
-                      photo:
-                        typeof scholar.photo === 'object' && scholar.photo !== null
-                          ? {
-                              url: (scholar.photo as { url: string }).url,
-                              alt: (scholar.photo as { alt: string }).alt || scholar.name,
-                            }
-                          : null,
-                      institution:
-                        typeof scholar.institution === 'object' && scholar.institution !== null
-                          ? {
-                              name: (scholar.institution as { name: string }).name,
-                              shortName: (scholar.institution as { shortName?: string }).shortName,
-                              country: (scholar.institution as { country?: string }).country,
-                            }
-                          : null,
-                      disciplines: Array.isArray(scholar.disciplines)
-                        ? scholar.disciplines
-                            .filter(
-                              (d): d is NonNullable<typeof d> =>
-                                typeof d === 'object' && d !== null,
-                            )
-                            .map((d) => ({ id: String(d.id), name: d.name, slug: d.slug }))
-                        : [],
-                      country: scholar.country,
-                    }}
-                  />
+                  <ScholarCard key={scholar.id} scholar={scholar} />
                 ))}
               </div>
 

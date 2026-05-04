@@ -1,45 +1,29 @@
 import { NextResponse } from 'next/server'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getPublishedConversations } from '@/lib/data'
 import { SITE_URL, SITE_NAME } from '@/lib/seo/buildMetadata'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
-  let items = ''
+export function GET() {
+  const conversations = getPublishedConversations()
 
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({
-      collection: 'conversations',
-      where: { status: { equals: 'published' } },
-      sort: '-publishedAt',
-      limit: 50,
-      depth: 2,
-    })
+  const items = conversations
+    .slice(0, 50)
+    .map((conv) => {
+      const scholarNames = conv.scholars.map((s) => s.name).join(', ')
+      const pubDate = conv.publishedAt
+        ? new Date(conv.publishedAt).toUTCString()
+        : new Date().toUTCString()
+      const thumbnailUrl =
+        conv.youtubeThumbnailUrl || `https://i.ytimg.com/vi/${conv.youtubeId}/hqdefault.jpg`
 
-    items = result.docs
-      .map((conv) => {
-        const scholars = Array.isArray(conv.scholars)
-          ? conv.scholars
-              .filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-              .map((s) => s.name)
-              .join(', ')
-          : ''
-
-        const pubDate = conv.publishedAt
-          ? new Date(conv.publishedAt).toUTCString()
-          : new Date().toUTCString()
-
-        const thumbnailUrl =
-          conv.youtubeThumbnailUrl || `https://i.ytimg.com/vi/${conv.youtubeId}/hqdefault.jpg`
-
-        return `
+      return `
     <item>
       <title><![CDATA[${conv.title}]]></title>
       <link>${SITE_URL}/conversations/${conv.slug}</link>
       <guid isPermaLink="true">${SITE_URL}/conversations/${conv.slug}</guid>
       <pubDate>${pubDate}</pubDate>
-      ${scholars ? `<author><![CDATA[${scholars}]]></author>` : ''}
+      ${scholarNames ? `<author><![CDATA[${scholarNames}]]></author>` : ''}
       ${conv.excerpt ? `<description><![CDATA[${conv.excerpt}]]></description>` : ''}
       <enclosure url="https://www.youtube.com/watch?v=${conv.youtubeId}" type="video/youtube" length="0" />
       ${thumbnailUrl ? `<image><url>${thumbnailUrl}</url></image>` : ''}
@@ -49,11 +33,8 @@ export async function GET() {
           : ''
       }
     </item>`
-      })
-      .join('\n')
-  } catch {
-    // Return empty feed if DB unavailable
-  }
+    })
+    .join('\n')
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">
