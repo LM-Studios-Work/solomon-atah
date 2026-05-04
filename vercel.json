@@ -1,10 +1,4 @@
 {
-  "crons": [
-    {
-      "path": "/api/cron/sync-youtube",
-      "schedule": "0 */6 * * *"
-    }
-  ],
   "headers": [
     {
       "source": "/feed.xml",
