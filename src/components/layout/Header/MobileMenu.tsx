@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
@@ -11,6 +12,11 @@ interface NavLink {
 
 export function MobileMenu({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <div className="xl:hidden">
@@ -23,30 +29,34 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
         {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
-      {open && (
-        <div
-          className="fixed inset-0 top-16 bg-background z-40 px-6 py-8"
-          onClick={() => setOpen(false)}
-        >
-          <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-            {links.map((link) => (
+      {mounted &&
+        open &&
+        createPortal(
+          <div
+            className="fixed top-16 left-0 right-0 bottom-0 z-[9999] px-6 py-8 border-t border-border overflow-y-auto"
+            style={{ backgroundColor: 'hsl(var(--background))' }}
+            onClick={() => setOpen(false)}
+          >
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="py-3 text-lg font-medium text-foreground border-b border-border hover:text-purple transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
               <Link
-                key={link.href}
-                href={link.href}
-                className="py-3 text-lg font-medium text-foreground border-b border-border hover:text-purple transition-colors"
+                href="/support"
+                className="mt-6 inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-sm bg-purple text-white hover:bg-purple/90 transition-colors"
               >
-                {link.label}
+                Support Our Work
               </Link>
-            ))}
-            <Link
-              href="/support"
-              className="mt-6 inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-sm bg-purple text-white hover:bg-purple/90 transition-colors"
-            >
-              Support Our Work
-            </Link>
-          </nav>
-        </div>
-      )}
+            </nav>
+          </div>,
+          document.body,
+        )}
     </div>
   )
 }
