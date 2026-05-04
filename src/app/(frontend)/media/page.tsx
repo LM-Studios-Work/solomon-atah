@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getPublishedConversations } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Media — Solomon Atah Pty Ltd',
@@ -12,26 +9,10 @@ export const metadata: Metadata = {
     'The media division of Solomon Atah Pty Ltd — home of The Solomon Atah Podcast, video archive, and featured scholarly conversations.',
 }
 
-export default async function MediaPage() {
-  const payload = await getPayload()
-
-  const featuredResult = await payload.find({
-    collection: 'conversations',
-    where: { and: [{ status: { equals: 'published' } }, { featured: { equals: true } }] },
-    limit: 1,
-    depth: 2,
-  })
-
-  const latestResult = await payload.find({
-    collection: 'conversations',
-    where: { status: { equals: 'published' } },
-    sort: '-publishedAt',
-    limit: 6,
-    depth: 2,
-  })
-
-  const featured = featuredResult.docs[0] || latestResult.docs[0]
-  const latest = latestResult.docs.filter((c) => c.id !== featured?.id).slice(0, 6)
+export default function MediaPage() {
+  const all = getPublishedConversations()
+  const featured = all.find((c) => c.featured) ?? all[0] ?? null
+  const latest = all.filter((c) => c.id !== featured?.id).slice(0, 6)
 
   return (
     <div>
@@ -48,21 +29,6 @@ export default async function MediaPage() {
             The media arm of Solomon Atah Pty Ltd — producing scholarly conversations, archiving
             intellectual work, and making rigorous research visible to the public.
           </p>
-        </div>
-      </section>
-
-      {/* ── Podcast banner ────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="relative w-full h-48 md:h-64 overflow-hidden">
-          <Image
-            src="/company%20resources/podcast_image.jpeg"
-            alt="The Solomon Atah Podcast"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-purple/60" />
         </div>
       </section>
 
@@ -105,19 +71,7 @@ export default async function MediaPage() {
               </div>
             </div>
 
-            {/* Podcast logo + Watch & Listen */}
-            <div className="space-y-6">
-              <div className="flex justify-center">
-                <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-lg">
-                  <Image
-                    src="/company%20resources/podcase_image_circle.jpeg"
-                    alt="The Solomon Atah Podcast"
-                    fill
-                    className="object-cover"
-                    sizes="192px"
-                  />
-                </div>
-              </div>
+            {/* Watch & Listen */}
             <div className="border border-border rounded-sm p-8 bg-muted/20">
               <h3 className="font-fraunces text-xl mb-6">Watch &amp; Listen</h3>
               <div className="space-y-3">
@@ -144,7 +98,6 @@ export default async function MediaPage() {
                 ))}
               </div>
             </div>
-            </div>
           </div>
         </div>
       </section>
@@ -159,37 +112,7 @@ export default async function MediaPage() {
               </span>
               <div className="flex-1 h-px bg-border" />
             </div>
-            <ConversationCard
-              conversation={{
-                id: String(featured.id),
-                title: featured.title,
-                slug: featured.slug,
-                excerpt: featured.excerpt,
-                youtubeId: featured.youtubeId,
-                youtubeThumbnailUrl: featured.youtubeThumbnailUrl,
-                duration: featured.duration,
-                publishedAt: featured.publishedAt,
-                scholars: Array.isArray(featured.scholars)
-                  ? featured.scholars
-                      .filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-                      .map((s) => ({
-                        id: String(s.id),
-                        name: s.name,
-                        title: s.title,
-                        institution:
-                          typeof s.institution === 'object' && s.institution !== null
-                            ? { name: s.institution.name, shortName: s.institution.shortName }
-                            : null,
-                      }))
-                  : [],
-                disciplines: Array.isArray(featured.disciplines)
-                  ? featured.disciplines
-                      .filter((d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null)
-                      .map((d) => ({ id: String(d.id), name: d.name, slug: d.slug }))
-                  : [],
-              }}
-              variant="featured"
-            />
+            <ConversationCard conversation={featured} variant="featured" />
           </div>
         </section>
       )}
@@ -214,37 +137,7 @@ export default async function MediaPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {latest.map((conv) => (
-                <ConversationCard
-                  key={conv.id}
-                  conversation={{
-                    id: String(conv.id),
-                    title: conv.title,
-                    slug: conv.slug,
-                    excerpt: conv.excerpt,
-                    youtubeId: conv.youtubeId,
-                    youtubeThumbnailUrl: conv.youtubeThumbnailUrl,
-                    duration: conv.duration,
-                    publishedAt: conv.publishedAt,
-                    scholars: Array.isArray(conv.scholars)
-                      ? conv.scholars
-                          .filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-                          .map((s) => ({
-                            id: String(s.id),
-                            name: s.name,
-                            title: s.title,
-                            institution:
-                              typeof s.institution === 'object' && s.institution !== null
-                                ? { name: s.institution.name, shortName: s.institution.shortName }
-                                : null,
-                          }))
-                      : [],
-                    disciplines: Array.isArray(conv.disciplines)
-                      ? conv.disciplines
-                          .filter((d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null)
-                          .map((d) => ({ id: String(d.id), name: d.name, slug: d.slug }))
-                      : [],
-                  }}
-                />
+                <ConversationCard key={conv.id} conversation={conv} />
               ))}
             </div>
           </div>

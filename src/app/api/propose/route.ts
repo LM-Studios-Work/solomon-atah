@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPayload } from '@/lib/payload/getPayload'
+
+const NOTIFICATION_EMAIL = 'suisyola44@gmail.com'
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,50 +16,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Required fields are missing.' }, { status: 400 })
     }
 
-    const payload = await getPayload()
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set')
+      return NextResponse.json({ message: 'Email service not configured.' }, { status: 500 })
+    }
 
-    await payload.create({
-      collection: 'proposals',
-      data: {
-        proposerName: body.proposerName,
-        proposerEmail: body.proposerEmail,
-        proposerRelation: body.proposerRelation || 'self',
-        guestName: body.guestName,
-        guestEmail: body.guestEmail,
-        guestRole: body.guestRole,
-        guestInstitution: body.guestInstitution,
-        discipline: body.discipline,
-        topicTitle: body.topicTitle,
-        topicSummary: body.topicSummary,
-        publicRelevance: body.publicRelevance,
-        links: body.links,
-        availability: body.availability,
-        honeypot: body.honeypot || '',
-        status: 'new',
-      },
+    const { sendEmail } = await import('@/lib/email/client')
+
+    // Confirmation to proposer
+    await sendEmail({
+      to: body.proposerEmail,
+      subject: 'Proposal received — The Solomon Atah Podcast',
+      html: proposalConfirmationEmail(body.proposerName, body.topicTitle),
     })
 
-    // Send confirmation email (if Resend is configured)
-    if (process.env.RESEND_API_KEY) {
-      try {
-        const { sendEmail } = await import('@/lib/email/client')
-        await sendEmail({
-          to: body.proposerEmail,
-          subject: `Proposal received — The Solomon Atah Podcast`,
-          html: proposalConfirmationEmail(body.proposerName, body.topicTitle),
-        })
-        if (process.env.RESEND_TEAM_EMAIL) {
-          await sendEmail({
-            to: process.env.RESEND_TEAM_EMAIL,
-            subject: `New proposal: ${body.topicTitle}`,
-            html: proposalNotificationEmail(body),
-          })
-        }
-      } catch (emailErr) {
-        console.error('Failed to send confirmation email:', emailErr)
-        // Don't fail the submission if email fails
-      }
-    }
+    // Notification to team
+    await sendEmail({
+      to: NOTIFICATION_EMAIL,
+      subject: `New proposal: ${body.topicTitle}`,
+      html: proposalNotificationEmail(body),
+    })
 
     return NextResponse.json({ message: 'Proposal submitted successfully.' }, { status: 200 })
   } catch (err) {
@@ -97,7 +74,7 @@ function proposalNotificationEmail(data: Record<string, string>): string {
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600; width: 40%;">Proposer</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${data.proposerName} &lt;${data.proposerEmail}&gt;</td></tr>
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Position</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${data.guestRole || 'Not specified'}</td></tr>
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Institution</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${data.guestInstitution || 'Not specified'}</td></tr>
-    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Discipline</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${data.discipline}</td></tr>
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: 600;">Discipline</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${data.discipline || 'Not specified'}</td></tr>
   </table>
   <h3>Abstract</h3>
   <p>${data.topicSummary}</p>

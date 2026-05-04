@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getPayload } from '@/lib/payload/getPayload'
-
-export const dynamic = 'force-dynamic'
+import { getDisciplinesWithCounts } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Disciplines',
@@ -10,31 +8,8 @@ export const metadata: Metadata = {
     'Browse scholarly conversations by academic discipline. From economics to public health, law to philosophy.',
 }
 
-export default async function DisciplinesPage() {
-  const payload = await getPayload()
-
-  const result = await payload.find({
-    collection: 'disciplines',
-    sort: 'order',
-    limit: 50,
-  })
-
-  // Get conversation count per discipline
-  type DisciplineWithCount = (typeof result.docs)[number] & { count: number }
-  const disciplinesWithCounts: DisciplineWithCount[] = await Promise.all(
-    result.docs.map(async (discipline) => {
-      const count = await payload.count({
-        collection: 'conversations',
-        where: {
-          and: [
-            { 'disciplines.slug': { equals: discipline.slug } },
-            { status: { equals: 'published' } },
-          ],
-        },
-      })
-      return { ...discipline, count: count.totalDocs } as DisciplineWithCount
-    }),
-  )
+export default function DisciplinesPage() {
+  const disciplines = getDisciplinesWithCounts()
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -49,7 +24,7 @@ export default async function DisciplinesPage() {
       </header>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {disciplinesWithCounts.map((discipline) => (
+        {disciplines.map((discipline) => (
           <Link
             key={discipline.id}
             href={`/disciplines/${discipline.slug}`}
@@ -75,7 +50,7 @@ export default async function DisciplinesPage() {
         ))}
       </div>
 
-      {result.docs.length === 0 && (
+      {disciplines.length === 0 && (
         <div className="py-20 text-center">
           <p className="text-muted-foreground">
             Disciplines will appear here as the archive grows.

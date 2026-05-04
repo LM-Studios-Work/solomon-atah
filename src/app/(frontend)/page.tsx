@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getPublishedConversations } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Solomon Atah Pty Ltd — Know Tomorrow Today',
@@ -89,30 +86,11 @@ export default async function HomePage() {
       <section className="relative border-b border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl">
-            {/* Hero video — replace src when video asset is available */}
-            <div className="relative w-full max-w-2xl aspect-video rounded-sm overflow-hidden bg-black mb-10 hidden">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-                aria-label="Solomon Atah Pty Ltd — brand video"
-              >
-                {/* <source src="/company%20resources/hero.mp4" type="video/mp4" /> */}
-              </video>
-            </div>
-
-            {/* Company logo */}
-            <div className="relative w-48 h-28 mb-8 rounded-sm overflow-hidden bg-black">
-              <Image
-                src="/company%20resources/logo.jpeg"
-                alt="Solomon Atah Pty Ltd"
-                fill
-                className="object-contain"
-                sizes="192px"
-                priority
-              />
+            {/* Elephant emblem placeholder */}
+            <div className="inline-flex items-center justify-center w-14 h-14 border-2 border-gold/40 rounded-sm mb-8 bg-gold/5">
+              <span className="text-2xl" role="img" aria-label="Elephant emblem">
+                🐘
+              </span>
             </div>
 
             {/* Eyebrow */}
@@ -214,37 +192,7 @@ export default async function HomePage() {
                 All episodes →
               </Link>
             </div>
-            <ConversationCard
-              conversation={{
-                id: String(latestConversation.id),
-                title: latestConversation.title,
-                slug: latestConversation.slug,
-                excerpt: latestConversation.excerpt,
-                youtubeId: latestConversation.youtubeId,
-                youtubeThumbnailUrl: latestConversation.youtubeThumbnailUrl,
-                duration: latestConversation.duration,
-                publishedAt: latestConversation.publishedAt,
-                scholars: Array.isArray(latestConversation.scholars)
-                  ? latestConversation.scholars
-                      .filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-                      .map((s) => ({
-                        id: String(s.id),
-                        name: s.name,
-                        title: s.title,
-                        institution:
-                          typeof s.institution === 'object' && s.institution !== null
-                            ? { name: s.institution.name, shortName: s.institution.shortName }
-                            : null,
-                      }))
-                  : [],
-                disciplines: Array.isArray(latestConversation.disciplines)
-                  ? latestConversation.disciplines
-                      .filter((d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null)
-                      .map((d) => ({ id: String(d.id), name: d.name, slug: d.slug }))
-                  : [],
-              }}
-              variant="featured"
-            />
+            <ConversationCard conversation={latestConversation} variant="featured" />
           </div>
         </section>
       )}
@@ -302,45 +250,19 @@ export default async function HomePage() {
               <div className="h-px bg-border w-16" />
             </div>
             <Link
-              href="/academic-services"
+              href="/academic-services#events"
               className="text-sm text-purple hover:underline font-medium hidden sm:block"
             >
               Full calendar →
             </Link>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-6 items-start">
-            <Link href="/academic-services" className="group block">
-              <div className="relative w-full aspect-[3/4] max-w-xs rounded-sm overflow-hidden">
-                <Image
-                  src="/company%20resources/event_sep.jpeg"
-                  alt="Academia in the Public Interest Conference"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
-              </div>
-            </Link>
-            <div className="flex flex-col justify-center">
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">
-                The Solomon Atah Podcast Presents
-              </p>
-              <h3 className="font-fraunces text-3xl md:text-4xl font-light mb-2">
-                Academia in the Public Interest Conference
-              </h3>
-              <p className="text-muted-foreground mb-5 italic">Where Scholarship Meets Society</p>
-              <div className="space-y-2 mb-6">
-                <p className="text-sm font-medium">5 September 2026</p>
-                <p className="text-sm text-muted-foreground">Johannesburg, South Africa</p>
-              </div>
-              <Link
-                href="/academic-services"
-                className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors w-fit"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
+          <p className="text-sm text-muted-foreground">
+            No events currently scheduled.{' '}
+            <Link href="/contact" className="text-purple hover:underline">
+              Get in touch
+            </Link>{' '}
+            to book Solomon Atah for a speaking engagement or institutional event.
+          </p>
         </div>
       </section>
     </div>

@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getScholarBySlug, getConversationsByScholar, queryScholars } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
-import { getYouTubeThumbnail } from '@/lib/utils'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -12,81 +11,33 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const payload = await getPayload()
-
-  const result = await payload.find({
-    collection: 'scholars',
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 1,
-  })
-
-  const scholar = result.docs[0]
+  const scholar = getScholarBySlug(slug)
   if (!scholar) return { title: 'Scholar Not Found' }
-
   return {
     title: scholar.name,
     description: scholar.researchFocus || `${scholar.name} — ${scholar.title || 'Scholar'}`,
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({ collection: 'scholars', limit: 500 })
-    return result.docs.map((s) => ({ slug: s.slug }))
-  } catch {
-    return []
-  }
+export function generateStaticParams() {
+  return queryScholars({ limit: 1000 }).docs.map((s) => ({ slug: s.slug }))
 }
 
 export default async function ScholarPage({ params }: Props) {
   const { slug } = await params
-  const payload = await getPayload()
-
-  const scholarResult = await payload.find({
-    collection: 'scholars',
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 3,
-  })
-
-  const scholar = scholarResult.docs[0]
+  const scholar = getScholarBySlug(slug)
   if (!scholar) notFound()
 
-  // Fetch this scholar's conversations
-  const conversationsResult = await payload.find({
-    collection: 'conversations',
-    where: {
-      and: [
-        { 'scholars.slug': { equals: slug } },
-        { status: { equals: 'published' } },
-      ],
-    },
-    sort: '-publishedAt',
-    limit: 10,
-    depth: 2,
-  })
+  const conversations = getConversationsByScholar(slug)
 
-  const photo =
-    typeof scholar.photo === 'object' && scholar.photo !== null ? scholar.photo : null
-  const institution =
-    typeof scholar.institution === 'object' && scholar.institution !== null
-      ? scholar.institution
-      : null
-  const disciplines = Array.isArray(scholar.disciplines)
-    ? scholar.disciplines.filter(
-        (d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null,
-      )
-    : []
-
-  // Structured data: Person
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: scholar.name,
     jobTitle: scholar.title,
-    ...(institution && { affiliation: { '@type': 'Organization', name: (institution as { name: string }).name } }),
+    ...(scholar.institution && {
+      affiliation: { '@type': 'Organization', name: scholar.institution.name },
+    }),
     ...(scholar.links?.website && { url: scholar.links.website }),
     ...(scholar.links?.orcid && { identifier: scholar.links.orcid }),
   }
@@ -112,15 +63,14 @@ export default async function ScholarPage({ params }: Props) {
           {/* Sidebar — Scholar card */}
           <aside className="lg:order-last">
             <div className="sticky top-24 space-y-6">
-              {/* Profile */}
               <div className="border border-border rounded-sm p-6">
                 {/* Photo */}
                 <div className="mb-5">
-                  {photo ? (
+                  {scholar.photo ? (
                     <div className="relative w-24 h-24 rounded-full overflow-hidden bg-muted mx-auto">
                       <Image
-                        src={(photo as { url: string }).url}
-                        alt={(photo as { alt: string }).alt || scholar.name}
+                        src={scholar.photo.url}
+                        alt={scholar.photo.alt || scholar.name}
                         fill
                         className="object-cover"
                         sizes="96px"
@@ -140,16 +90,15 @@ export default async function ScholarPage({ params }: Props) {
                 {scholar.title && (
                   <p className="text-sm text-muted-foreground text-center mb-1">{scholar.title}</p>
                 )}
-                {institution && (
+                {scholar.institution && (
                   <p className="text-sm font-medium text-center mb-4">
-                    {(institution as { shortName?: string; name: string }).shortName ||
-                      (institution as { name: string }).name}
+                    {scholar.institution.shortName || scholar.institution.name}
                   </p>
                 )}
 
-                {disciplines.length > 0 && (
+                {scholar.disciplines.length > 0 && (
                   <div className="flex flex-wrap justify-center gap-1.5 mb-4">
-                    {disciplines.map((d) => (
+                    {scholar.disciplines.map((d) => (
                       <Link key={d.id} href={`/disciplines/${d.slug}`} className="discipline-tag">
                         {d.name}
                       </Link>
@@ -194,12 +143,7 @@ export default async function ScholarPage({ params }: Props) {
             {scholar.bio && (
               <section className="mb-12">
                 <h2 className="font-fraunces text-2xl mb-4">Biography</h2>
-                <div className="prose-editorial text-muted-foreground">
-                  {/* Payload rich text would be rendered here */}
-                  <p className="italic text-sm text-muted-foreground">
-                    [Full biography — managed in Payload CMS]
-                  </p>
-                </div>
+                <p className="prose-editorial text-muted-foreground leading-relaxed">{scholar.bio}</p>
               </section>
             )}
 
@@ -218,7 +162,7 @@ export default async function ScholarPage({ params }: Props) {
               <section className="mb-12">
                 <h2 className="font-fraunces text-2xl mb-4">Selected Publications</h2>
                 <ol className="space-y-4">
-                  {scholar.selectedPublications.map((pub: { citation: string; url?: string | null; year?: number | null }, i: number) => (
+                  {scholar.selectedPublications.map((pub, i) => (
                     <li key={i} className="flex gap-3 py-3 border-b border-border last:border-0">
                       <span className="text-sm text-muted-foreground flex-shrink-0 font-mono">
                         {pub.year}
@@ -244,29 +188,12 @@ export default async function ScholarPage({ params }: Props) {
             )}
 
             {/* Conversations */}
-            {conversationsResult.docs.length > 0 && (
+            {conversations.length > 0 && (
               <section>
-                <h2 className="font-fraunces text-2xl mb-6">
-                  Conversations on the Podcast
-                </h2>
+                <h2 className="font-fraunces text-2xl mb-6">Conversations on the Podcast</h2>
                 <div className="space-y-0 divide-y divide-border">
-                  {conversationsResult.docs.map((conv) => (
-                    <ConversationCard
-                      key={conv.id}
-                      variant="compact"
-                      conversation={{
-                        id: String(conv.id),
-                        title: conv.title,
-                        slug: conv.slug,
-                        excerpt: conv.excerpt,
-                        youtubeId: conv.youtubeId,
-                        youtubeThumbnailUrl: conv.youtubeThumbnailUrl,
-                        duration: conv.duration,
-                        publishedAt: conv.publishedAt,
-                        scholars: [],
-                        disciplines: [],
-                      }}
-                    />
+                  {conversations.map((conv) => (
+                    <ConversationCard key={conv.id} variant="compact" conversation={conv} />
                   ))}
                 </div>
               </section>

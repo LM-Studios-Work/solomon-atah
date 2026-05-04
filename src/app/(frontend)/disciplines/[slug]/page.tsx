@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getPayload } from '@/lib/payload/getPayload'
+import { getDisciplineBySlug, getDisciplines, getConversationsByDiscipline } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
 
 interface Props {
@@ -11,17 +11,8 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const payload = await getPayload()
-
-  const result = await payload.find({
-    collection: 'disciplines',
-    where: { slug: { equals: slug } },
-    limit: 1,
-  })
-
-  const discipline = result.docs[0]
+  const discipline = getDisciplineBySlug(slug)
   if (!discipline) return { title: 'Discipline Not Found' }
-
   return {
     title: discipline.name,
     description:
@@ -30,44 +21,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({ collection: 'disciplines', limit: 100 })
-    return result.docs.map((d) => ({ slug: d.slug }))
-  } catch {
-    return []
-  }
+export function generateStaticParams() {
+  return getDisciplines().map((d) => ({ slug: d.slug }))
 }
 
 export default async function DisciplinePage({ params, searchParams }: Props) {
   const { slug } = await params
   const { page: pageStr } = await searchParams
-  const payload = await getPayload()
 
-  const disciplineResult = await payload.find({
-    collection: 'disciplines',
-    where: { slug: { equals: slug } },
-    limit: 1,
-  })
-
-  const discipline = disciplineResult.docs[0]
+  const discipline = getDisciplineBySlug(slug)
   if (!discipline) notFound()
 
   const page = parseInt(pageStr || '1', 10)
-  const conversationsResult = await payload.find({
-    collection: 'conversations',
-    where: {
-      and: [
-        { 'disciplines.slug': { equals: slug } },
-        { status: { equals: 'published' } },
-      ],
-    },
-    sort: '-publishedAt',
-    limit: 12,
-    page,
-    depth: 2,
-  })
+  const result = getConversationsByDiscipline(slug, page)
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -94,12 +60,11 @@ export default async function DisciplinePage({ params, searchParams }: Props) {
           <p className="text-lg text-muted-foreground max-w-2xl">{discipline.description}</p>
         )}
         <p className="text-sm text-muted-foreground mt-4">
-          {conversationsResult.totalDocs} conversation
-          {conversationsResult.totalDocs !== 1 ? 's' : ''} in this discipline
+          {result.totalDocs} conversation{result.totalDocs !== 1 ? 's' : ''} in this discipline
         </p>
       </header>
 
-      {conversationsResult.docs.length === 0 ? (
+      {result.docs.length === 0 ? (
         <div className="py-20 text-center">
           <p className="text-muted-foreground mb-4">
             No conversations in this discipline yet. Check back soon.
@@ -111,43 +76,12 @@ export default async function DisciplinePage({ params, searchParams }: Props) {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {conversationsResult.docs.map((conv) => (
-              <ConversationCard
-                key={conv.id}
-                conversation={{
-                  id: String(conv.id),
-                  title: conv.title,
-                  slug: conv.slug,
-                  excerpt: conv.excerpt,
-                  youtubeId: conv.youtubeId,
-                  youtubeThumbnailUrl: conv.youtubeThumbnailUrl,
-                  duration: conv.duration,
-                  publishedAt: conv.publishedAt,
-                  scholars: Array.isArray(conv.scholars)
-                    ? conv.scholars
-                        .filter(
-                          (s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null,
-                        )
-                        .map((s) => ({
-                          id: String(s.id),
-                          name: s.name,
-                          title: s.title,
-                          institution:
-                            typeof s.institution === 'object' && s.institution !== null
-                              ? {
-                                  name: (s.institution as { name: string }).name,
-                                  shortName: (s.institution as { shortName?: string }).shortName,
-                                }
-                              : null,
-                        }))
-                    : [],
-                  disciplines: [],
-                }}
-              />
+            {result.docs.map((conv) => (
+              <ConversationCard key={conv.id} conversation={conv} />
             ))}
           </div>
 
-          {conversationsResult.totalPages > 1 && (
+          {result.totalPages > 1 && (
             <div className="mt-12 flex items-center justify-center gap-2">
               {page > 1 && (
                 <Link
@@ -158,9 +92,9 @@ export default async function DisciplinePage({ params, searchParams }: Props) {
                 </Link>
               )}
               <span className="text-sm text-muted-foreground px-4">
-                Page {page} of {conversationsResult.totalPages}
+                Page {page} of {result.totalPages}
               </span>
-              {page < conversationsResult.totalPages && (
+              {page < result.totalPages && (
                 <Link
                   href={`/disciplines/${slug}?page=${page + 1}`}
                   className="px-4 py-2 text-sm border border-border rounded-sm hover:border-purple/40 transition-colors"

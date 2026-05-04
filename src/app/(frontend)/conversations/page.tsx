@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
-import type { Where } from 'payload'
-import { getPayload } from '@/lib/payload/getPayload'
-import { ConversationCard } from '@/components/sections/ConversationCard'
 import Link from 'next/link'
+import { queryConversations, getDisciplines } from '@/lib/data'
+import { ConversationCard } from '@/components/sections/ConversationCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,7 +15,6 @@ interface SearchParams {
   discipline?: string
   region?: string
   page?: string
-  q?: string
 }
 
 const REGIONS = [
@@ -35,33 +33,13 @@ export default async function ConversationsPage({
   searchParams: Promise<SearchParams>
 }) {
   const params = await searchParams
-  const payload = await getPayload()
-
-  // Fetch disciplines for filter
-  const disciplinesResult = await payload.find({
-    collection: 'disciplines',
-    sort: 'order',
-    limit: 30,
-  })
-
-  // Build where clause
-  const andConditions: Where[] = [{ status: { equals: 'published' } }]
-  if (params.discipline) {
-    andConditions.push({ 'disciplines.slug': { equals: params.discipline } })
-  }
-  if (params.region) {
-    andConditions.push({ region: { equals: params.region } })
-  }
-  const where: Where = { and: andConditions }
-
   const page = parseInt(params.page || '1', 10)
-  const result = await payload.find({
-    collection: 'conversations',
-    where,
-    sort: '-publishedAt',
-    limit: 12,
+
+  const allDisciplines = getDisciplines()
+  const result = queryConversations({
+    discipline: params.discipline,
+    region: params.region,
     page,
-    depth: 2,
   })
 
   return (
@@ -86,12 +64,8 @@ export default async function ConversationsPage({
                 Discipline
               </h3>
               <div className="space-y-1">
-                <FilterLink
-                  href="/conversations"
-                  active={!params.discipline}
-                  label="All disciplines"
-                />
-                {disciplinesResult.docs.map((d) => (
+                <FilterLink href="/conversations" active={!params.discipline} label="All disciplines" />
+                {allDisciplines.map((d) => (
                   <FilterLink
                     key={d.id}
                     href={`/conversations?discipline=${d.slug}${params.region ? `&region=${params.region}` : ''}`}
@@ -139,37 +113,7 @@ export default async function ConversationsPage({
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {result.docs.map((conv) => (
-                  <ConversationCard
-                    key={conv.id}
-                    conversation={{
-                      id: String(conv.id),
-                      title: conv.title,
-                      slug: conv.slug,
-                      excerpt: conv.excerpt,
-                      youtubeId: conv.youtubeId,
-                      youtubeThumbnailUrl: conv.youtubeThumbnailUrl,
-                      duration: conv.duration,
-                      publishedAt: conv.publishedAt,
-                      scholars: Array.isArray(conv.scholars)
-                        ? conv.scholars
-                            .filter((s): s is NonNullable<typeof s> => typeof s === 'object' && s !== null)
-                            .map((s) => ({
-                              id: String(s.id),
-                              name: s.name,
-                              title: s.title,
-                              institution:
-                                typeof s.institution === 'object' && s.institution !== null
-                                  ? { name: s.institution.name, shortName: s.institution.shortName }
-                                  : null,
-                            }))
-                        : [],
-                      disciplines: Array.isArray(conv.disciplines)
-                        ? conv.disciplines
-                            .filter((d): d is NonNullable<typeof d> => typeof d === 'object' && d !== null)
-                            .map((d) => ({ id: String(d.id), name: d.name, slug: d.slug }))
-                        : [],
-                    }}
-                  />
+                  <ConversationCard key={conv.id} conversation={conv} />
                 ))}
               </div>
 
