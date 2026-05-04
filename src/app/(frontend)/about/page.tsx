@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'About — Solomon Atah Pty Ltd',
@@ -55,6 +56,17 @@ export default function AboutPage() {
           {/* The host */}
           <section id="host">
             <h2 className="font-fraunces text-3xl mb-6">The Host</h2>
+            <div className="mb-8">
+              <div className="relative w-48 h-64 rounded-sm overflow-hidden shadow-md">
+                <Image
+                  src="/company%20resources/owner.jpeg"
+                  alt="Solomon Atah"
+                  fill
+                  className="object-cover object-top"
+                  sizes="192px"
+                />
+              </div>
+            </div>
             <div className="prose-editorial space-y-5 text-muted-foreground">
               <p>
                 <strong className="text-foreground">Solomon Atah</strong> is the founder and host of

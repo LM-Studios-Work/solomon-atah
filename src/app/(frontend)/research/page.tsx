@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Research & Publishing — Solomon Atah Pty Ltd',
   description:
-    'Ninta Research and Ninta Publishing — building narrative intelligence, institutional critique, and publishing intellectual infrastructure.',
+    'NinTA Research and Ninta Publishing — building narrative intelligence, institutional critique, and publishing intellectual infrastructure.',
 }
 
 const NINTA_RESEARCH_SERVICES = [
@@ -35,27 +36,43 @@ const NINTA_RESEARCH_SERVICES = [
   },
 ]
 
-const BOOKS = [
+const BOOKS: { title: string; subtitle: string | null; image: string | null; status: string; description: string }[] = [
   {
-    title: 'The Narrative Manifesto: How Stories Harm And What You Can Do About It',
+    title: 'The Narrative Manifesto',
+    subtitle: 'How Stories Harm, And What You Can Do About It',
+    image: '/company%20resources/book.jpeg',
     status: 'Available',
     description:
       'A systematic account of how stories operate as instruments of harm — and a practical framework for resistance and reconstruction.',
   },
   {
-    title: 'The Marriage Stock Exchange: Why Marriage Was Never about Love',
+    title: 'The Marriage Stock Exchange',
+    subtitle: 'Why Marriage Was Never About Love',
+    image: '/company%20resources/book_2_cover.jpeg',
     status: 'Available',
     description:
       'An institutional and economic reading of marriage as a system of exchange, stripped of its romantic mythology.',
   },
   {
+    title: 'The 48 Laws of Personal Sovereignty',
+    subtitle: 'Self Preservation Intelligence',
+    image: '/company%20resources/book_3.jpeg',
+    status: 'Available',
+    description:
+      'A framework for navigating power, autonomy, and self-determination in an age of institutional overreach and social manipulation.',
+  },
+  {
     title: '7 Quantum Humanomics',
+    subtitle: null,
+    image: null,
     status: 'Available',
     description:
       'A theoretical framework integrating quantum principles with humanistic inquiry into economic and social systems.',
   },
   {
     title: 'The University of Money',
+    subtitle: null,
+    image: null,
     status: 'Available',
     description:
       'A critical examination of the financialisation of higher education and its consequences for knowledge production.',
@@ -84,17 +101,45 @@ export default function ResearchPage() {
       {/* ── Ninta Research ────────────────────────────────────────────────────── */}
       <section id="ninta-research" className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-              Research Division
-            </p>
-            <h2 className="font-fraunces text-4xl font-light mb-6">Ninta Research</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Ninta Research is the analytical engine of Solomon Atah Pty Ltd. We conduct
-              narrative-focused research for institutions, governments, and organisations seeking
-              to understand and reshape the stories that govern them. Our work bridges academic
-              rigour and strategic application.
-            </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+                Research Division
+              </p>
+              <h2 className="font-fraunces text-4xl font-light mb-6">NinTA Research</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                NinTA — Narrative Intelligence Africa — is the analytical engine of Solomon Atah
+                Pty Ltd. We conduct narrative-focused research for institutions, governments, and
+                organisations seeking to understand and reshape the stories that govern them.
+                Our work bridges academic rigour and strategic application.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
+              >
+                Enquire about research collaboration →
+              </Link>
+            </div>
+            <div className="space-y-4">
+              <div className="relative w-full rounded-sm overflow-hidden">
+                <Image
+                  src="/company%20resources/ninta.jpeg"
+                  alt="NinTA — Narrative Intelligence Africa"
+                  width={640}
+                  height={360}
+                  className="w-full object-cover rounded-sm"
+                />
+              </div>
+              <div className="relative w-full rounded-sm overflow-hidden">
+                <Image
+                  src="/company%20resources/africa.jpeg"
+                  alt="Narrative Intelligence Africa"
+                  width={640}
+                  height={360}
+                  className="w-full object-cover rounded-sm"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -110,22 +155,13 @@ export default function ResearchPage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-10">
-            <Link
-              href="/contact"
-              className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
-            >
-              Enquire about research collaboration →
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* ── Ninta Publishing ──────────────────────────────────────────────────── */}
       <section id="ninta-publishing" className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-3xl mb-12">
+          <div className="max-w-3xl mb-10">
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
               Publishing Division
             </p>
@@ -133,60 +169,74 @@ export default function ResearchPage() {
             <p className="text-muted-foreground leading-relaxed">
               Ninta Publishing produces books that function as intellectual infrastructure —
               ideas built to last, arguments designed to be returned to, frameworks intended
-              for institutional use. We offer publishing services to academics alongside our
-              own titles.
+              for institutional use. We also offer publishing services to academics.
             </p>
           </div>
 
-          {/* Publishing Services */}
-          <div className="mb-12 p-6 border border-border rounded-sm bg-muted/20">
-            <h3 className="font-fraunces text-xl mb-4">Publishing Services</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl mb-4">
-              We work with academics and scholars to develop, edit, design, and publish works
-              that translate complex scholarship into durable public documents. Enquiries
-              welcome.
-            </p>
-            <Link
-              href="/contact"
-              className="text-sm text-purple hover:underline font-medium"
-            >
-              Publishing enquiries →
-            </Link>
+          {/* Books museum banner */}
+          <div className="relative w-full h-56 md:h-72 rounded-sm overflow-hidden mb-12">
+            <Image
+              src="/company%20resources/books_museum.jpeg"
+              alt="Solomon Atah — Published Works"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-black/40 flex items-end p-6">
+              <p className="text-white font-fraunces text-2xl font-light">Our Titles</p>
+            </div>
           </div>
 
           {/* Books */}
           <div id="books">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-                Our Titles
-              </span>
-              <div className="flex-1 h-px bg-border" />
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {BOOKS.map((book) => (
-                <div
-                  key={book.title}
-                  className="border border-border rounded-sm p-6 hover:border-purple/30 transition-colors"
-                >
-                  <div className="flex items-start justify-between gap-4 mb-3">
+                <div key={book.title} className="group border border-border rounded-sm p-6 hover:border-purple/30 transition-colors flex flex-col">
+                  {book.image ? (
+                    <div className="relative w-full aspect-[2/3] rounded-sm overflow-hidden mb-5 shadow-md group-hover:shadow-lg transition-shadow">
+                      <Image
+                        src={book.image}
+                        alt={book.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full aspect-[2/3] rounded-sm bg-muted/30 border border-border mb-5 flex items-center justify-center">
+                      <span className="text-xs text-muted-foreground">Cover coming soon</span>
+                    </div>
+                  )}
+                  <div className="flex items-start justify-between gap-2 mb-1">
                     <h3 className="font-fraunces text-lg leading-snug">{book.title}</h3>
                     <span className="shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground">
                       {book.status}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {book.subtitle && (
+                    <p className="text-xs text-gold mb-2 font-medium">{book.subtitle}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
                     {book.description}
                   </p>
-                  <a
-                    href="#"
-                    className="text-sm text-purple hover:underline font-medium"
-                  >
+                  <a href="#" className="text-sm text-purple hover:underline font-medium mt-auto">
                     Order →
                   </a>
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Publishing Services */}
+          <div className="mt-14 p-8 border border-border rounded-sm bg-muted/20">
+            <h3 className="font-fraunces text-2xl mb-4">Publishing Services</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl mb-4">
+              We work with academics and scholars to develop, edit, design, and publish works
+              that translate complex scholarship into durable public documents. Enquiries welcome.
+            </p>
+            <Link href="/contact" className="text-sm text-purple hover:underline font-medium">
+              Publishing enquiries →
+            </Link>
           </div>
         </div>
       </section>

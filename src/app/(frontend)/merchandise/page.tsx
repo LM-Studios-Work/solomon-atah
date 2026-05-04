@@ -1,51 +1,82 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Merchandise & Books — Solomon Atah Pty Ltd',
   description:
-    'Podcast merchandise, branded apparel, special edition books, and pre-orders from Solomon Atah Pty Ltd.',
+    'Podcast merchandise, branded apparel, and books from Solomon Atah Pty Ltd.',
 }
 
-const MERCHANDISE_CATEGORIES = [
+const PODCAST_MERCH = [
   {
-    category: 'Podcast Merchandise',
-    items: [
-      {
-        name: 'Know Tomorrow Today — Tote Bag',
-        description: 'Heavy canvas tote bag with the Solomon Atah Podcast wordmark and slogan.',
-        status: 'Coming Soon' as const,
-        price: null,
-      },
-      {
-        name: 'Know Tomorrow Today — Mug',
-        description: 'Ceramic mug for the scholar who needs something to hold while thinking.',
-        status: 'Coming Soon' as const,
-        price: null,
-      },
-    ],
+    name: 'Know Tomorrow Today — Tote Bag',
+    tagline: 'Know Tomorrow Today',
+    description: 'Heavy canvas tote bag with the Solomon Atah Podcast wordmark and slogan.',
+    image: null as string | null,
+    status: 'Pre-Order' as const,
   },
   {
-    category: 'Branded Apparel',
-    items: [
-      {
-        name: 'Solomon Atah Podcast — T-Shirt',
-        description: 'Premium cotton t-shirt with the elephant emblem.',
-        status: 'Coming Soon' as const,
-        price: null,
-      },
-    ],
+    name: 'Know Tomorrow Today — Mug',
+    tagline: 'Know Tomorrow Today',
+    description: 'Ceramic mug. For the scholar who needs something to hold while thinking.',
+    image: null as string | null,
+    status: 'Pre-Order' as const,
+  },
+]
+
+const HOODIES = [
+  {
+    name: 'Epistemic Humility Hoodie',
+    tagline: 'Epistemic Humility',
+    description:
+      'Premium pullover hoodie with purple lining. "Epistemic Humility — The Solomon Atah Podcast."',
+    image: '/company%20resources/hoodie_1.jpeg',
+    status: 'Available' as const,
   },
   {
-    category: 'Special Edition Books',
-    items: [
-      {
-        name: 'The Narrative Manifesto — Special Edition',
-        description:
-          'Signed hardcover edition of The Narrative Manifesto: How Stories Harm And What You Can Do About It.',
-        status: 'Pre-Order' as const,
-        price: null,
-      },
-    ],
+    name: 'Academic Valour Hoodie',
+    tagline: 'Academic Valour',
+    description:
+      'Premium pullover hoodie with purple lining. "Academic Valour — The Solomon Atah Podcast."',
+    image: '/company%20resources/hoodie_2.jpeg',
+    status: 'Available' as const,
+  },
+  {
+    name: 'Academic Researcher Hoodie',
+    tagline: 'Academic Researcher',
+    description:
+      'Premium pullover hoodie with purple lining. "Academic Researcher — The Solomon Atah Podcast."',
+    image: '/company%20resources/hoodie_3.jpeg',
+    status: 'Available' as const,
+  },
+  {
+    name: 'Academic Personality Hoodie',
+    tagline: 'Academic Personality',
+    description:
+      'Premium pullover hoodie with purple lining. "Academic Personality — The Solomon Atah Podcast."',
+    image: '/company%20resources/hoodie_4.jpeg',
+    status: 'Available' as const,
+  },
+]
+
+const BOOKS = [
+  {
+    name: 'The Narrative Manifesto',
+    description: 'How Stories Harm, And What You Can Do About It — by Solomon Atah.',
+    image: '/company%20resources/book.jpeg',
+    status: 'Available' as const,
+  },
+  {
+    name: 'The Marriage Stock Exchange',
+    description: 'Why Marriage Was Never About Love — by Solomon Atah.',
+    image: '/company%20resources/book_2_cover.jpeg',
+    status: 'Available' as const,
+  },
+  {
+    name: 'The 48 Laws of Personal Sovereignty',
+    description: 'Self Preservation Intelligence — by Solomon Atah.',
+    image: '/company%20resources/book_3.jpeg',
+    status: 'Available' as const,
   },
 ]
 
@@ -68,39 +99,68 @@ export default function MerchandisePage() {
             Merchandise &amp; Books
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Podcast merchandise, branded apparel, special edition books, and pre-orders.
-            Every item is an extension of the intellectual identity of Solomon Atah Pty Ltd.
+            Branded apparel and books from The Solomon Atah Podcast and Solomon Atah Pty Ltd.
+            Every item is an extension of the intellectual identity of the brand.
           </p>
         </div>
       </section>
 
-      {/* ── Product Categories ────────────────────────────────────────────────── */}
-      {MERCHANDISE_CATEGORIES.map((category) => (
-        <section key={category.category} className="border-b border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-                {category.category}
-              </span>
-              <div className="flex-1 h-px bg-border" />
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {category.items.map((item) => (
-                <div
-                  key={item.name}
-                  className="border border-border rounded-sm p-6 hover:border-purple/30 transition-colors"
-                >
-                  {/* Placeholder image area */}
-                  <div className="aspect-square bg-muted/30 rounded-sm mb-5 flex items-center justify-center border border-border">
-                    <span className="text-xs text-muted-foreground">Image coming soon</span>
+      {/* ── Podcast Merchandise ───────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-10">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Podcast Merchandise
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {PODCAST_MERCH.map((item) => (
+              <div key={item.name} className="border border-border rounded-sm overflow-hidden hover:border-purple/30 transition-colors">
+                <div className="relative aspect-square bg-muted/20 flex items-center justify-center">
+                  <p className="text-xs text-muted-foreground">Image coming soon</p>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <p className="font-medium text-sm leading-snug">{item.name}</p>
+                    <span className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border ${STATUS_STYLES[item.status]}`}>
+                      {item.status}
+                    </span>
                   </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-2">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
 
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <h3 className="font-medium text-sm leading-snug">{item.name}</h3>
+          <div className="flex items-center gap-4 mb-10">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Branded Apparel
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {HOODIES.map((item) => (
+              <div
+                key={item.name}
+                className="border border-border rounded-sm overflow-hidden hover:border-purple/30 transition-colors group"
+              >
+                <div className="relative aspect-[3/4] bg-muted/10">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <p className="font-fraunces text-base leading-snug">{item.tagline}</p>
                     <span
                       className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border ${
-                        STATUS_STYLES[item.status] || 'text-muted-foreground border-border'
+                        STATUS_STYLES[item.status]
                       }`}
                     >
                       {item.status}
@@ -109,23 +169,59 @@ export default function MerchandisePage() {
                   <p className="text-xs text-muted-foreground leading-relaxed mb-4">
                     {item.description}
                   </p>
-
-                  {item.price ? (
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">{item.price}</span>
-                      <button className="text-sm text-purple hover:underline font-medium">
-                        Add to cart
-                      </button>
-                    </div>
-                  ) : (
-                    <p className="text-xs text-muted-foreground italic">Price TBC</p>
-                  )}
+                  <a href="#" className="text-sm text-purple hover:underline font-medium">
+                    Order →
+                  </a>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
+
+      {/* ── Special Edition Books ─────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-10">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Special Edition Books
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-8">
+            {BOOKS.map((book) => (
+              <div key={book.name} className="group">
+                <div className="relative w-full aspect-[2/3] rounded-sm overflow-hidden mb-4 shadow-md group-hover:shadow-lg transition-shadow">
+                  <Image
+                    src={book.image}
+                    alt={book.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 280px"
+                  />
+                </div>
+                <div className="flex items-start justify-between gap-2 mb-1">
+                  <h3 className="font-fraunces text-lg leading-snug">{book.name}</h3>
+                  <span
+                    className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border ${
+                      STATUS_STYLES[book.status]
+                    }`}
+                  >
+                    {book.status}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                  {book.description}
+                </p>
+                <a href="#" className="text-sm text-purple hover:underline font-medium">
+                  Order →
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Notify Banner ─────────────────────────────────────────────────────── */}
       <section className="bg-purple text-white">
@@ -135,11 +231,10 @@ export default function MerchandisePage() {
               Stay Updated
             </p>
             <h2 className="font-fraunces text-3xl font-light mb-4">
-              Be first to know when items launch
+              New titles and drops incoming
             </h2>
             <p className="text-white/70 mb-6 text-sm leading-relaxed">
-              The store is launching soon. Leave your email and we will notify you when
-              merchandise and books become available.
+              Leave your email to be notified when new merchandise and book editions launch.
             </p>
             <form className="flex flex-col sm:flex-row gap-3" action="#" method="post">
               <input

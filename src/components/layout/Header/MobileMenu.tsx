@@ -13,7 +13,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="md:hidden">
+    <div className="xl:hidden">
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center justify-center w-8 h-8 text-muted-foreground hover:text-foreground transition-colors"
