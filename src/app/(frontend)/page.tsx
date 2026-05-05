@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 const PRIMARY_GATEWAYS = [
   {
-    label: 'Media',
-    href: '/media',
+    label: 'The Solomon Atah Podcast',
+    href: '/solomon-atah-podcast',
     description:
       'The Solomon Atah Podcast, scholarly conversations, video archive, and featured episodes.',
   },
@@ -36,11 +36,11 @@ const FEATURED_PROPERTIES = [
     name: 'The Solomon Atah Podcast',
     division: 'Media',
     category: 'Audio & Video',
-    href: '/media',
+    href: '/solomon-atah-podcast',
     description:
       'A public-facing academic media institution commissioning scholarly conversations with PhD holders and PhD candidates. Archiving African and Africa-focused scholarship for the public record.',
     cta: '',
-    ctaHref: '/media',
+    ctaHref: '/solomon-atah-podcast',
   },
   {
     name: 'Ninta Research',
@@ -76,15 +76,7 @@ const DIVISION_PROPERTIES = [
     description:
       'Long-form intellectual conversations at the frontier of ideas. Exploring scholarship, culture, and public intelligence through one rigorous dialogue at a time.',
     cta: '',
-    ctaHref: '/media',
-  },
-  {
-    name: 'Atah Global Media',
-    category: 'Publishing & Broadcast',
-    description:
-      'A media operation built for institutional reach. We produce content that does not chase trends. It sets the terms of discourse.',
-    cta: '',
-    ctaHref: '/media',
+    ctaHref: '/solomon-atah-podcast',
   },
   {
     name: 'Ninta Research and Publishing',
@@ -228,7 +220,7 @@ export default function HomePage() {
                 <div className="h-px bg-border w-16" />
               </div>
               <Link
-                href="/media"
+                href="/solomon-atah-podcast"
                 className="text-sm text-purple hover:underline font-medium hidden sm:block"
               >
                 All episodes →
@@ -252,9 +244,8 @@ export default function HomePage() {
               than merely respond to them.
             </h2>
             <p className="text-white/70 leading-relaxed mb-8">
-              Through The Solomon Atah Podcast, Atah Global Media, Ninta Research and Publishing,
-              academic services, and film development, we operate at the intersection of thought
-              and execution.
+              Through The Solomon Atah Podcast, Ninta Research and Publishing, academic services,
+              and film development, we operate at the intersection of thought and execution.
             </p>
             <Link
               href="/about"
@@ -292,7 +283,7 @@ export default function HomePage() {
               <div className="h-px bg-border w-16" />
             </div>
             <Link
-              href="/academic-services"
+              href="/events"
               className="text-sm text-purple hover:underline font-medium hidden sm:block"
             >
               Full calendar →
@@ -300,7 +291,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 items-start">
-            <Link href="/academic-services" className="group block">
+            <Link href="/events" className="group block">
               <div className="relative w-full aspect-[3/4] max-w-xs rounded-sm overflow-hidden">
                 <Image
                   src="/company%20resources/event_sep.jpeg"
@@ -324,7 +315,7 @@ export default function HomePage() {
                 <p className="text-sm text-muted-foreground">Johannesburg, South Africa</p>
               </div>
               <Link
-                href="/academic-services"
+                href="/events"
                 className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors w-fit"
               >
                 Learn More

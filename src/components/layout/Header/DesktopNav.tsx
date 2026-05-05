@@ -28,7 +28,7 @@ export function DesktopNav({ links }: { links: NavLink[] }) {
             key={link.href}
             href={link.href}
             aria-current={active ? "page" : undefined}
-            className={`relative flex items-center px-3.5 text-[12px] font-semibold tracking-[0.01em] whitespace-nowrap transition-colors ${
+            className={`relative flex items-center px-2.5 text-[11px] font-semibold tracking-[0.01em] whitespace-nowrap transition-colors ${
               active
                 ? "text-gold"
                 : "text-white/82 hover:text-white"

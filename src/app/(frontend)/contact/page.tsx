@@ -3,23 +3,16 @@
 export const metadata: Metadata = {
   title: 'Contact, Solomon Atah Pty Ltd',
   description:
-    'Get in touch with Solomon Atah Pty Ltd, general enquiries, media inquiries, speaking bookings, and research collaborations.',
+    'Get in touch with Solomon Atah Pty Ltd for podcast, research, and general information enquiries.',
 }
 
 const CONTACT_CATEGORIES = [
   {
-    title: 'Media Inquiries',
+    title: 'Podcast Enquiries',
     description:
-      'Interview requests, press coverage, podcast appearances, and press kit downloads.',
-    email: 'press@solomonatah.com',
-    formType: 'media',
-  },
-  {
-    title: 'Speaking Bookings',
-    description:
-      'Keynote engagements, conference appearances, institutional talks, and panel invitations.',
-    email: 'speaking@solomonatah.com',
-    formType: 'speaking',
+      'Podcast appearances, episode enquiries, interview requests, and archive questions.',
+    email: 'podcast@solomonatah.com',
+    formType: 'podcast',
   },
   {
     title: 'Research Collaborations',
@@ -29,11 +22,11 @@ const CONTACT_CATEGORIES = [
     formType: 'research',
   },
   {
-    title: 'General Enquiries',
+    title: 'Information Enquiries',
     description:
       'Questions about the podcast, the archive, Ninta Publishing, film projects, or anything else.',
-    email: 'hello@solomonatah.com',
-    formType: 'general',
+    email: 'info@solomonatah.com',
+    formType: 'info',
   },
 ]
 
@@ -142,11 +135,9 @@ export default function ContactPage() {
                 className="w-full px-4 py-2.5 text-sm border border-border rounded-sm bg-background focus:outline-none focus:ring-2 focus:ring-purple/30 focus:border-purple"
               >
                 <option value="">Select a category</option>
-                <option value="media">Media Inquiry</option>
-                <option value="speaking">Speaking Booking</option>
+                <option value="podcast">Podcast Enquiry</option>
                 <option value="research">Research Collaboration</option>
-                <option value="partnership">Partnership</option>
-                <option value="general">General Enquiry</option>
+                <option value="info">Information Enquiry</option>
               </select>
             </div>
 

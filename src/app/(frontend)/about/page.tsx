@@ -45,7 +45,7 @@ export default function AboutPage() {
                 &ldquo;Know Tomorrow Today.&rdquo;
               </blockquote>
               <p>
-                Through The Solomon Atah Podcast, Atah Global Media, Ninta Research and Publishing,
+                Through The Solomon Atah Podcast, Ninta Research and Publishing,
                 academic services, and film development, we operate at the intersection of thought
                 and execution. Our work is deliberate, structurally grounded, and future-facing -
                 designed not for momentary visibility but for generational continuity.

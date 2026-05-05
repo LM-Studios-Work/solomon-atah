@@ -63,9 +63,9 @@ const subscribeUrl =
   "https://www.youtube.com/@TheSolomonAtahPod?sub_confirmation=1";
 
 export const metadata: Metadata = {
-  title: "Media, Solomon Atah Pty Ltd",
+  title: "The Solomon Atah Podcast, Solomon Atah Pty Ltd",
   description:
-    "The media division of Solomon Atah Pty Ltd, home of The Solomon Atah Podcast, video archive, and featured scholarly conversations.",
+    "The Solomon Atah Podcast, video archive, and featured scholarly conversations from Solomon Atah Pty Ltd.",
 };
 
 export default function MediaPage() {

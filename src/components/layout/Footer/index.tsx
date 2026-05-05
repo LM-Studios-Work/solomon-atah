@@ -3,8 +3,9 @@ import Image from "next/image";
 
 const FOOTER_COLUMNS = [
   {
-    heading: "Media",
+    heading: "Solomon Atah Podcast",
     links: [
+      { label: "Podcast", href: "/solomon-atah-podcast" },
       { label: "Scholars", href: "/scholars" },
       { label: "Dispatches", href: "/dispatches" },
     ],
@@ -21,6 +22,7 @@ const FOOTER_COLUMNS = [
     heading: "Company",
     links: [
       { label: "Academic Services", href: "/academic-services" },
+      { label: "Events", href: "/events" },
       { label: "Film Projects", href: "/film" },
       { label: "Merchandise & Books", href: "/merchandise" },
       { label: "About", href: "/about" },

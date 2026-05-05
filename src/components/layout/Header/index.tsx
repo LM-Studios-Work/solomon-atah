@@ -5,9 +5,10 @@ import { DesktopNav } from "./DesktopNav";
 import { MobileMenu } from "./MobileMenu";
 
 const NAV_LINKS = [
-  { label: "Media", href: "/media" },
+  { label: "Solomon Atah Podcast", href: "/solomon-atah-podcast" },
   { label: "Research & Publishing", href: "/research" },
   { label: "Academic Services", href: "/academic-services" },
+  { label: "Events", href: "/events" },
   { label: "Film Projects", href: "/film" },
   { label: "Merchandise & Books", href: "/merchandise" },
   { label: "Support", href: "/support" },

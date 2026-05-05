@@ -19,6 +19,7 @@ export function PodcastEpisodeGrid({
 }: PodcastEpisodeGridProps) {
   const [expanded, setExpanded] = useState(false);
   const [autoplayFirstEpisode, setAutoplayFirstEpisode] = useState(false);
+  const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const visibleEpisodes = expanded ? episodes : episodes.slice(0, initialCount);
   const canToggle = episodes.length > initialCount;
 
@@ -26,6 +27,7 @@ export function PodcastEpisodeGrid({
     const playLatestEpisode = () => {
       if (window.location.hash === "#latest-episode") {
         setAutoplayFirstEpisode(true);
+        setPlayingVideoId(episodes[0]?.videoId ?? null);
       }
     };
 
@@ -33,7 +35,7 @@ export function PodcastEpisodeGrid({
     window.addEventListener("hashchange", playLatestEpisode);
 
     return () => window.removeEventListener("hashchange", playLatestEpisode);
-  }, []);
+  }, [episodes]);
 
   return (
     <>
@@ -44,17 +46,37 @@ export function PodcastEpisodeGrid({
             id={index === 0 ? "latest-episode" : undefined}
             className="space-y-4 scroll-mt-24"
           >
-            <div className="relative aspect-video w-full overflow-hidden bg-black">
-              <iframe
-                src={`https://www.youtube.com/embed/${episode.videoId}${
-                  index === 0 && autoplayFirstEpisode ? "?autoplay=1" : ""
-                }`}
-                title={`${episode.title} Episode ${episode.episodeNumber}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
+            <div className="relative aspect-[3/2] w-full overflow-hidden bg-black">
+              {playingVideoId === episode.videoId ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${episode.videoId}?autoplay=${
+                    index === 0 && autoplayFirstEpisode ? "1" : "0"
+                  }`}
+                  title={`${episode.title} Episode ${episode.episodeNumber}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPlayingVideoId(episode.videoId)}
+                  className="group absolute inset-0 block h-full w-full"
+                  aria-label={`Play ${episode.title}`}
+                >
+                  <img
+                    src={`https://i.ytimg.com/vi/${episode.videoId}/maxresdefault.jpg`}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span className="absolute inset-0 bg-black/15 transition-colors group-hover:bg-black/5" />
+                  <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition-transform group-hover:scale-105">
+                    <span className="ml-1 h-0 w-0 border-y-[12px] border-l-[18px] border-y-transparent border-l-white" />
+                  </span>
+                </button>
+              )}
             </div>
             <div>
               <p className="text-xs font-semibold tracking-[0.15em] uppercase text-gold mb-2">

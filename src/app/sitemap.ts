@@ -11,11 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
     { url: `${SITE_URL}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE_URL}/solomon-atah-podcast`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE_URL}/scholars`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITE_URL}/disciplines`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/dispatches`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
     { url: `${SITE_URL}/propose`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/partner`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${SITE_URL}/academic-services`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE_URL}/events`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.4 },
   ]
 

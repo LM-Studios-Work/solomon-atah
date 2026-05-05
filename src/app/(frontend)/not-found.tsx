@@ -19,10 +19,10 @@ export default function NotFound() {
             Return Home
           </Link>
           <Link
-            href="/media"
+            href="/solomon-atah-podcast"
             className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-medium rounded-sm hover:border-purple/40 transition-colors"
           >
-            Browse Media
+            Browse Podcast
           </Link>
         </div>
       </div>

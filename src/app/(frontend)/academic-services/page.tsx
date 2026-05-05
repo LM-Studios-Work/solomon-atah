@@ -5,7 +5,7 @@ import Image from 'next/image'
 export const metadata: Metadata = {
   title: 'Academic Services, Solomon Atah Pty Ltd',
   description:
-    'Speaking, keynotes, academic consulting, research advisory, institutional workshops, and website services for academics.',
+    'Speaking, keynotes, academic consultation access, research advisory, institutional workshops, and website services for academics.',
 }
 
 const SERVICES = [
@@ -24,7 +24,7 @@ const SERVICES = [
   {
     title: 'Academic Consulting',
     description:
-      'Strategic consulting for academic institutions, research centres, and universities seeking to position their intellectual work for broader public impact, including media strategy, knowledge translation, and public engagement frameworks.',
+      'A consultation pathway for students, researchers, professionals, and others who want to speak with academics in our space. We help route serious enquiries to suitable scholars for field-specific guidance, research direction, and intellectual engagement.',
     themes: [],
   },
   {
@@ -72,8 +72,8 @@ export default function AcademicServicesPage() {
             Academic Services
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Institutional engagement, scholarly consulting, and professional services at the
-            intersection of academic rigour and public practice.
+            Institutional engagement, academic consultation access, and professional services at
+            the intersection of academic rigour and public practice.
           </p>
         </div>
       </section>
@@ -128,7 +128,7 @@ export default function AcademicServicesPage() {
               href="/contact"
               className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
             >
-              Academic Consulting Enquiry
+              Request Academic Consultation
             </Link>
           </div>
         </div>
