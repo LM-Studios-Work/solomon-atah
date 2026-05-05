@@ -7,6 +7,7 @@
     /* Brand colors */
     --color-purple: 74 25 66;        /* #4A1942 */
     --color-gold: 201 168 76;        /* #C9A84C */
+    --site-max-width: 112rem;
 
     /* shadcn/ui semantic tokens */
     --background: 0 0% 99%;
@@ -81,11 +82,13 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
     line-height: 1.65;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -149,4 +152,8 @@
 @layer utilities {
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
+
+  .max-w-7xl {
+    max-width: min(var(--site-max-width), calc(100vw - 2rem));
+  }
 }

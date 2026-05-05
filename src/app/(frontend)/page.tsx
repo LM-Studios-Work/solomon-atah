@@ -35,28 +35,79 @@ const FEATURED_PROPERTIES = [
   {
     name: 'The Solomon Atah Podcast',
     division: 'Media',
+    category: 'Audio & Video',
     href: '/media',
     description:
       'A public-facing academic media institution commissioning scholarly conversations with PhD holders and PhD candidates. Archiving African and Africa-focused scholarship for the public record.',
-    cta: 'Browse Archive',
+    cta: '',
     ctaHref: '/conversations',
   },
   {
     name: 'Ninta Research',
     division: 'Research & Publishing',
+    category: 'Scholarship',
     href: '/research#ninta-research',
     description:
       'Narrative analysis, institutional critique, cultural diagnostics, and narrative intelligence. Research anchored in how stories construct knowledge, identity, and social reality.',
-    cta: 'Learn More',
+    cta: '',
     ctaHref: '/research',
   },
   {
     name: 'Film Projects',
     division: 'Film Division',
+    category: 'Cultural Production',
     href: '/film',
     description:
       'Documentary and narrative film projects translating intellectual inquiry into cinematic form. Building cultural infrastructure across African and global contexts.',
-    cta: 'Film Division',
+    cta: '',
+    ctaHref: '/film',
+  },
+]
+
+const HERO_LINKS = [
+  { label: 'Our Divisions', href: '#featured-properties' },
+  { label: 'Who We Are', href: '/about' },
+]
+
+const DIVISION_PROPERTIES = [
+  {
+    name: 'The Solomon Atah Podcast',
+    category: 'Audio & Video',
+    description:
+      'Long-form intellectual conversations at the frontier of ideas. Exploring scholarship, culture, and public intelligence - one rigorous dialogue at a time.',
+    cta: '',
+    ctaHref: '/media',
+  },
+  {
+    name: 'Atah Global Media',
+    category: 'Publishing & Broadcast',
+    description:
+      'A media operation built for institutional reach. We produce content that does not chase trends - it sets the terms of discourse.',
+    cta: '',
+    ctaHref: '/media',
+  },
+  {
+    name: 'Ninta Research and Publishing',
+    category: 'Scholarship',
+    description:
+      'Original scholarship, policy analysis, and knowledge production. Translating complex academic work into accessible, actionable public intelligence.',
+    cta: '',
+    ctaHref: '/research',
+  },
+  {
+    name: 'Academic Services',
+    category: 'Consultancy',
+    description:
+      'Structured support for researchers, institutions, and scholars. We provide the infrastructure for serious intellectual work to find its fullest expression.',
+    cta: '',
+    ctaHref: '/academic-services',
+  },
+  {
+    name: 'Film Development',
+    category: 'Narrative & Screen',
+    description:
+      'Narrative systems for the screen. Story projects grounded in historical depth, cultural specificity, and intentionality that builds lasting resonance.',
+    cta: '',
     ctaHref: '/film',
   },
 ]
@@ -105,12 +156,12 @@ export default function HomePage() {
 
             {/* Primary Gateways */}
             <div className="flex flex-col sm:flex-row gap-4">
-              {PRIMARY_GATEWAYS.map((gw) => (
+              {HERO_LINKS.map((gw) => (
                 <Link
                   key={gw.label}
                   href={gw.href}
                   className={
-                    gw.label === 'Media'
+                    gw.label === 'Our Divisions'
                       ? 'inline-flex items-center justify-center px-6 py-3 bg-purple text-white font-medium rounded-sm hover:bg-purple/90 transition-colors'
                       : 'inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-medium rounded-sm hover:border-purple/40 hover:bg-muted/50 transition-colors'
                   }
@@ -127,7 +178,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Featured Properties ───────────────────────────────────────────────── */}
-      <section className="border-b border-border">
+      <section id="featured-properties" className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-4 mb-10">
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
@@ -136,22 +187,26 @@ export default function HomePage() {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {FEATURED_PROPERTIES.map((property) => (
+          <div className="border-t border-border">
+            {DIVISION_PROPERTIES.map((property, index) => (
               <div
                 key={property.name}
-                className="border border-border rounded-sm p-7 hover:border-purple/30 transition-colors flex flex-col"
+                className="grid gap-5 border-b border-border py-8 transition-colors hover:bg-muted/25 sm:grid-cols-[4rem_13rem_1fr] lg:grid-cols-[5rem_15rem_minmax(18rem,1fr)_minmax(22rem,0.9fr)_4rem] lg:items-center"
               >
-                <p className="text-xs font-semibold tracking-[0.15em] uppercase text-gold mb-3">
-                  {property.division}
-                </p>
-                <h2 className="font-fraunces text-xl mb-4">{property.name}</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-6">
+                <span className="font-mono text-sm tracking-[0.18em] text-gold">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="w-fit border border-border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                  {property.category}
+                </span>
+                <h2 className="font-fraunces text-2xl font-light leading-tight md:text-3xl">{property.name}</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground lg:max-w-xl">
                   {property.description}
                 </p>
                 <Link
                   href={property.ctaHref}
-                  className="text-sm text-purple hover:underline font-medium"
+                  aria-label={`View ${property.name}`}
+                  className="text-2xl leading-none text-gold transition-transform hover:translate-x-1 lg:justify-self-end"
                 >
                   {property.cta} →
                 </Link>

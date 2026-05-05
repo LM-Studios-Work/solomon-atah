@@ -23,7 +23,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0">
               <Image
-                src="/company%20resources/navbar%20logo.jpeg"
+                src="/company%20resources/logo%20solomon%20atah%20main%20company.jpeg"
                 alt="Solomon Atah Pty Ltd"
                 fill
                 className="object-cover"
