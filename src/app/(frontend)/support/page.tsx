@@ -1,10 +1,10 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Support — Solomon Atah Pty Ltd',
+  title: 'Support, Solomon Atah Pty Ltd',
   description:
-    'Support the work of Solomon Atah Pty Ltd — donate, become a patron, or partner with us.',
+    'Support the work of Solomon Atah Pty Ltd, donate, become a patron, or partner with us.',
 }
 
 const PATRON_TIERS = [
@@ -22,7 +22,7 @@ const PATRON_TIERS = [
     name: 'Scholar',
     amount: 'R200 / month',
     description:
-      'Support the academic translation work — the research, editorial summaries, further reading lists, and citation infrastructure.',
+      'Support the academic translation work, the research, editorial summaries, further reading lists, and citation infrastructure.',
     perks: [
       'Everything in Reader',
       'Early access to new conversations',
@@ -82,7 +82,7 @@ export default function SupportPage() {
             {PATRON_TIERS.map((tier) => (
               <div
                 key={tier.name}
-                className={`border rounded-sm p-8 relative ${
+                className={`border rounded-sm p-8 relative flex h-full flex-col ${
                   tier.featured
                     ? 'border-purple bg-purple/5'
                     : 'border-border hover:border-purple/30'
@@ -112,7 +112,7 @@ export default function SupportPage() {
                 </ul>
                 <a
                   href="#"
-                  className={`inline-flex w-full items-center justify-center px-4 py-2.5 text-sm font-medium rounded-sm transition-colors ${
+                  className={`mt-auto inline-flex w-full items-center justify-center px-4 py-2.5 text-sm font-medium rounded-sm transition-colors ${
                     tier.featured
                       ? 'bg-purple text-white hover:bg-purple/90'
                       : 'border border-border hover:border-purple/40 hover:bg-muted/40'
@@ -129,7 +129,7 @@ export default function SupportPage() {
       {/* ── One-time Donation ─────────────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
             <div>
               <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
                 One-Time Support
@@ -141,7 +141,7 @@ export default function SupportPage() {
                 translation work.
               </p>
             </div>
-            <div className="border border-border rounded-sm p-8">
+            <div className="border border-border rounded-sm p-8 h-full">
               <p className="text-sm text-muted-foreground mb-6">
                 One-time donation processing is being set up. In the meantime, contact us
                 directly to arrange a contribution.
@@ -168,8 +168,8 @@ export default function SupportPage() {
               Support Academic Translation Work
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              The editorial work — transcripts, summaries, citation infrastructure, further
-              reading lists, scholar profiles — is expensive and time-consuming. Targeted
+              The editorial work, transcripts, summaries, citation infrastructure, further
+              reading lists, scholar profiles, is expensive and time-consuming. Targeted
               contributions to this work ensure that the archive remains a serious intellectual
               resource, not just a content library.
             </p>
@@ -195,7 +195,7 @@ export default function SupportPage() {
             </h2>
             <p className="text-white/70 leading-relaxed mb-6">
               Universities, foundations, cultural organisations, and mission-aligned institutions
-              are invited to explore formal partnership — co-production, research collaboration,
+              are invited to explore formal partnership, co-production, research collaboration,
               media sponsorship, and strategic alliances.
             </p>
             <Link

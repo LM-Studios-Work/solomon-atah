@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { ProposalForm } from '@/components/sections/ProposalForm'
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function ProposePage() {
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 We are looking for PhD holders and PhD candidates whose research speaks to
-                questions of broad public significance — particularly (but not exclusively)
+                questions of broad public significance, particularly (but not exclusively)
                 scholars working on Africa and the Global South.
               </p>
               <p>
@@ -43,13 +43,13 @@ export default function ProposePage() {
               <ul className="space-y-3 text-sm text-muted-foreground">
                 {[
                   'Original research with a clear, defensible argument',
-                  'Public significance — the work speaks to real questions',
+                  'Public significance, the work speaks to real questions',
                   'Africa or Global South focus (preferred, not required)',
                   'Willingness to engage a non-specialist audience seriously',
                   'A PhD, or enrolment in a doctoral programme',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-gold mt-0.5 flex-shrink-0">—</span>
+                    <span className="text-gold mt-0.5 flex-shrink-0">-</span>
                     <span>{item}</span>
                   </li>
                 ))}

@@ -5,8 +5,6 @@ const FOOTER_COLUMNS = [
   {
     heading: "Media",
     links: [
-      { label: "The Solomon Atah Podcast", href: "/media" },
-      { label: "Video Archive", href: "/conversations" },
       { label: "Scholars", href: "/scholars" },
       { label: "Dispatches", href: "/dispatches" },
     ],

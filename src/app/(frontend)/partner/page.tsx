@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { PartnerForm } from '@/components/sections/PartnerForm'
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export default function PartnerPage() {
                   'Academic collaboration agreements',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-gold mt-0.5 flex-shrink-0">—</span>
+                    <span className="text-gold mt-0.5 flex-shrink-0">-</span>
                     <span>{item}</span>
                   </li>
                 ))}

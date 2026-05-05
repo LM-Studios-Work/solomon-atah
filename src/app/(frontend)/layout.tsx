@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { fraunces, inter } from "@/lib/fonts";
 import { Providers } from "@/components/layout/Providers";
 import { Header } from "@/components/layout/Header";
@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "The Solomon Atah Podcast — Know Tomorrow Today",
+    default: "The Solomon Atah Podcast, Know Tomorrow Today",
     template: "%s | Solomon Atah Podcast",
   },
   description:

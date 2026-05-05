@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact — Solomon Atah Pty Ltd',
+  title: 'Contact, Solomon Atah Pty Ltd',
   description:
-    'Get in touch with Solomon Atah Pty Ltd — general enquiries, media inquiries, speaking bookings, and research collaborations.',
+    'Get in touch with Solomon Atah Pty Ltd, general enquiries, media inquiries, speaking bookings, and research collaborations.',
 }
 
 const CONTACT_CATEGORIES = [

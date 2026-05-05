@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 
 const NOTIFICATION_EMAIL = 'suisyola44@gmail.com'
 
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     // Confirmation to proposer
     await sendEmail({
       to: body.proposerEmail,
-      subject: 'Proposal received — The Solomon Atah Podcast',
+      subject: 'Proposal received, The Solomon Atah Podcast',
       html: proposalConfirmationEmail(body.proposerName, body.topicTitle),
     })
 

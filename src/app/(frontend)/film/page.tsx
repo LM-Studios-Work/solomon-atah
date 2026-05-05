@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Film Projects — Solomon Atah Pty Ltd',
+  title: 'Film Projects, Solomon Atah Pty Ltd',
   description:
-    'The film division of Solomon Atah Pty Ltd — documentary projects, narrative film, and productions in development.',
+    'The film division of Solomon Atah Pty Ltd, documentary projects, narrative film, and productions in development.',
 }
 
 const DOCUMENTARY_PROJECTS: {
@@ -57,7 +57,7 @@ export default function FilmPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
             The film division develops documentary and narrative projects that translate intellectual
-            inquiry into cinematic form — extending the work of research and scholarship into
+            inquiry into cinematic form, extending the work of research and scholarship into
             moving image.
           </p>
         </div>
@@ -183,7 +183,7 @@ export default function FilmPage() {
             </p>
             <p className="font-fraunces text-2xl md:text-3xl font-light leading-relaxed">
               Our film work is an extension of the same intellectual commitments that drive
-              our podcast, research, and publishing — rigour, long horizon thinking, and
+              our podcast, research, and publishing, rigour, long horizon thinking, and
               a commitment to ideas that endure. We develop cultural infrastructure, not content.
             </p>
           </div>

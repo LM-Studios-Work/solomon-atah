@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!scholar) return { title: 'Scholar Not Found' }
   return {
     title: scholar.name,
-    description: scholar.researchFocus || `${scholar.name} — ${scholar.title || 'Scholar'}`,
+    description: scholar.researchFocus || `${scholar.name}, ${scholar.title || 'Scholar'}`,
   }
 }
 
@@ -60,7 +60,7 @@ export default async function ScholarPage({ params }: Props) {
         </nav>
 
         <div className="grid lg:grid-cols-3 gap-10 lg:gap-16">
-          {/* Sidebar — Scholar card */}
+          {/* Sidebar, Scholar card */}
           <aside className="lg:order-last">
             <div className="sticky top-24 space-y-6">
               <div className="border border-border rounded-sm p-6">

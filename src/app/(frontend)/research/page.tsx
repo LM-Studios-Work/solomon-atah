@@ -1,23 +1,23 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Research & Publishing — Solomon Atah Pty Ltd',
+  title: 'Research & Publishing, Solomon Atah Pty Ltd',
   description:
-    'NinTA Research and Ninta Publishing — building narrative intelligence, institutional critique, and publishing intellectual infrastructure.',
+    'NinTA Research and Ninta Publishing, building narrative intelligence, institutional critique, and publishing intellectual infrastructure.',
 }
 
 const NINTA_RESEARCH_SERVICES = [
   {
     name: 'Narrative Analysis',
     description:
-      'Systematic examination of the stories institutions, governments, and media use to frame reality — identifying structure, intent, and consequence.',
+      'Systematic examination of the stories institutions, governments, and media use to frame reality, identifying structure, intent, and consequence.',
   },
   {
     name: 'Institutional Critique',
     description:
-      'Rigorous evaluation of how institutions construct and maintain power through narrative — and where those narratives fracture under scrutiny.',
+      'Rigorous evaluation of how institutions construct and maintain power through narrative, and where those narratives fracture under scrutiny.',
   },
   {
     name: 'Cultural Diagnostics',
@@ -27,7 +27,7 @@ const NINTA_RESEARCH_SERVICES = [
   {
     name: 'Narrative Intelligence',
     description:
-      'Strategic insight derived from the analysis of competing narratives — applied to communications, policy, and institutional positioning.',
+      'Strategic insight derived from the analysis of competing narratives, applied to communications, policy, and institutional positioning.',
   },
   {
     name: 'Narrative Research',
@@ -43,7 +43,7 @@ const BOOKS: { title: string; subtitle: string | null; image: string | null; sta
     image: '/company%20resources/book.jpeg',
     status: 'Available',
     description:
-      'A systematic account of how stories operate as instruments of harm — and a practical framework for resistance and reconstruction.',
+      'A systematic account of how stories operate as instruments of harm, and a practical framework for resistance and reconstruction.',
   },
   {
     title: 'The Marriage Stock Exchange',
@@ -108,7 +108,7 @@ export default function ResearchPage() {
               </p>
               <h2 className="font-fraunces text-4xl font-light mb-6">NinTA Research</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                NinTA — Narrative Intelligence Africa — is the analytical engine of Solomon Atah
+                NinTA, Narrative Intelligence Africa, is the analytical engine of Solomon Atah
                 Pty Ltd. We conduct narrative-focused research for institutions, governments, and
                 organisations seeking to understand and reshape the stories that govern them.
                 Our work bridges academic rigour and strategic application.
@@ -124,7 +124,7 @@ export default function ResearchPage() {
               <div className="relative w-full rounded-sm overflow-hidden">
                 <Image
                   src="/company%20resources/ninta.jpeg"
-                  alt="NinTA — Narrative Intelligence Africa"
+                  alt="NinTA, Narrative Intelligence Africa"
                   width={640}
                   height={360}
                   className="w-full object-cover rounded-sm"
@@ -167,7 +167,7 @@ export default function ResearchPage() {
             </p>
             <h2 className="font-fraunces text-4xl font-light mb-6">Ninta Publishing</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Ninta Publishing produces books that function as intellectual infrastructure —
+              Ninta Publishing produces books that function as intellectual infrastructure -
               ideas built to last, arguments designed to be returned to, frameworks intended
               for institutional use. We also offer publishing services to academics.
             </p>
@@ -177,7 +177,7 @@ export default function ResearchPage() {
           <div className="relative w-full h-56 md:h-72 rounded-sm overflow-hidden mb-12">
             <Image
               src="/company%20resources/books_museum.jpeg"
-              alt="Solomon Atah — Published Works"
+              alt="Solomon Atah, Published Works"
               fill
               className="object-cover"
               sizes="100vw"

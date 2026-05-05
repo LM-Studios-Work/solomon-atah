@@ -19,10 +19,10 @@ export default function NotFound() {
             Return Home
           </Link>
           <Link
-            href="/conversations"
+            href="/media"
             className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground font-medium rounded-sm hover:border-purple/40 transition-colors"
           >
-            Browse Conversations
+            Browse Media
           </Link>
         </div>
       </div>

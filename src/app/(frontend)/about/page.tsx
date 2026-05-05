@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'About — Solomon Atah Pty Ltd',
+  title: 'About, Solomon Atah Pty Ltd',
   description:
     'Solomon Atah Pty Ltd is a sovereign intellectual holding company committed to building durable knowledge infrastructures across media, research, publishing, and cultural production.',
 }
@@ -47,7 +47,7 @@ export default function AboutPage() {
               <p>
                 Through The Solomon Atah Podcast, Atah Global Media, Ninta Research and Publishing,
                 academic services, and film development, we operate at the intersection of thought
-                and execution. Our work is deliberate, structurally grounded, and future-facing —
+                and execution. Our work is deliberate, structurally grounded, and future-facing -
                 designed not for momentary visibility but for generational continuity.
               </p>
             </div>
@@ -77,12 +77,12 @@ export default function AboutPage() {
               <p>
                 His approach to interviewing is rooted in preparation. Solomon reads the work before
                 he records the conversation. He is interested not just in what scholars argue but in
-                how they think — the methodological choices, the intellectual debts, the unresolved
+                how they think, the methodological choices, the intellectual debts, the unresolved
                 tensions in their research.
               </p>
               <p>
                 He is not a journalist seeking conflict. He is a host seeking clarity. The result is
-                a conversation that feels closer to an extended tutorial than to a debate — rigorous,
+                a conversation that feels closer to an extended tutorial than to a debate, rigorous,
                 curious, and hospitable.
               </p>
             </div>

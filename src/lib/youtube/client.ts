@@ -1,4 +1,4 @@
-const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3'
+﻿const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3'
 
 export interface YouTubeVideoSnippet {
   title: string
@@ -37,7 +37,7 @@ export function parseISO8601Duration(duration: string): number {
 export async function fetchVideoMetadata(videoId: string): Promise<YouTubeVideoItem | null> {
   const apiKey = process.env.YOUTUBE_API_KEY
   if (!apiKey) {
-    console.warn('YOUTUBE_API_KEY not set — skipping video metadata fetch.')
+    console.warn('YOUTUBE_API_KEY not set, skipping video metadata fetch.')
     return null
   }
 
@@ -66,7 +66,7 @@ export async function fetchVideoMetadata(videoId: string): Promise<YouTubeVideoI
 export async function fetchChannelVideos(channelId: string): Promise<YouTubeVideoItem[]> {
   const apiKey = process.env.YOUTUBE_API_KEY
   if (!apiKey) {
-    console.warn('YOUTUBE_API_KEY not set — skipping channel sync.')
+    console.warn('YOUTUBE_API_KEY not set, skipping channel sync.')
     return []
   }
 

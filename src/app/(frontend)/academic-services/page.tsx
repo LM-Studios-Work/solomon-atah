@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Academic Services — Solomon Atah Pty Ltd',
+  title: 'Academic Services, Solomon Atah Pty Ltd',
   description:
     'Speaking, keynotes, academic consulting, research advisory, institutional workshops, and website services for academics.',
 }
@@ -24,13 +24,13 @@ const SERVICES = [
   {
     title: 'Academic Consulting',
     description:
-      'Strategic consulting for academic institutions, research centres, and universities seeking to position their intellectual work for broader public impact — including media strategy, knowledge translation, and public engagement frameworks.',
+      'Strategic consulting for academic institutions, research centres, and universities seeking to position their intellectual work for broader public impact, including media strategy, knowledge translation, and public engagement frameworks.',
     themes: [],
   },
   {
     title: 'Research Advisory',
     description:
-      'Advisory support for research projects, doctoral candidates, and academic programmes — with particular expertise in narrative methodology, qualitative research design, and knowledge dissemination.',
+      'Advisory support for research projects, doctoral candidates, and academic programmes, with particular expertise in narrative methodology, qualitative research design, and knowledge dissemination.',
     themes: [],
   },
   {
@@ -42,7 +42,7 @@ const SERVICES = [
   {
     title: 'Website Services for Academics',
     description:
-      'Design and development of professional academic websites — helping scholars establish a durable digital presence that reflects the quality of their intellectual work. Includes portfolio sites, research pages, and speaking profiles.',
+      'Design and development of professional academic websites, helping scholars establish a durable digital presence that reflects the quality of their intellectual work. Includes portfolio sites, research pages, and speaking profiles.',
     themes: [],
   },
 ]
@@ -106,7 +106,7 @@ export default function AcademicServicesPage() {
                     <ul className="space-y-1">
                       {service.themes.map((theme) => (
                         <li key={theme} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="text-gold mt-1">—</span>
+                          <span className="text-gold mt-1">-</span>
                           {theme}
                         </li>
                       ))}

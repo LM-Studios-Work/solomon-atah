@@ -1,4 +1,4 @@
-# The Solomon Atah Podcast — Website
+﻿# The Solomon Atah Podcast, Website
 
 > *Know Tomorrow Today.*
 
@@ -49,7 +49,7 @@ NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 DATABASE_URI=file:./sqlite.db
 ```
 
-The site will work without YouTube API or Resend keys — those features will gracefully degrade.
+The site will work without YouTube API or Resend keys, those features will gracefully degrade.
 
 ### Step 3: Run the development server
 
@@ -133,7 +133,7 @@ YOUTUBE_CHANNEL_ID=UC...
 
 ### How sync works
 
-- **Manual sync:** `GET /api/cron/sync-youtube?secret=<CRON_SECRET>` — fetches all channel videos and creates draft conversations for any that don't exist yet.
+- **Manual sync:** `GET /api/cron/sync-youtube?secret=<CRON_SECRET>`, fetches all channel videos and creates draft conversations for any that don't exist yet.
 - **Automatic sync:** Vercel runs the cron every 6 hours (configured in `vercel.json`).
 - **After sync:** New conversations appear in the Payload admin as **drafts**. You must enrich them (add scholars, editorial summary, disciplines) and then **publish** them.
 
@@ -175,7 +175,7 @@ Subsequent pushes to `main` will trigger automatic redeployment.
 
 SQLite is fine for local development but not suitable for production (multiple serverless instances can't write to the same file).
 
-### Option A: Neon (recommended — free tier available)
+### Option A: Neon (recommended, free tier available)
 
 1. Create an account at [neon.tech](https://neon.tech)
 2. Create a new project
@@ -235,15 +235,15 @@ Conversations are the core content type. Each one corresponds to a recorded epis
 
 1. In the admin, go to **Conversations → Create New**
 2. Fill in:
-   - **Title** — the editorial title (can differ from YouTube title)
-   - **Slug** — URL path, e.g. `dr-jane-smith-on-structural-adjustment` (auto-generated from title)
-   - **YouTube ID** — the part after `?v=` in the YouTube URL
-   - **Scholars** — link to the scholar(s) (create their profile first if needed)
-   - **Disciplines** — tag with relevant disciplines
-   - **Excerpt** — 1–2 sentences for cards and meta descriptions
-   - **Editorial Summary** — 200–400 word abstract (written like a journal abstract)
-   - **Timestamps** — key chapter markers
-   - **Further Reading** — guest papers, related books
+   - **Title**, the editorial title (can differ from YouTube title)
+   - **Slug**, URL path, e.g. `dr-jane-smith-on-structural-adjustment` (auto-generated from title)
+   - **YouTube ID**, the part after `?v=` in the YouTube URL
+   - **Scholars**, link to the scholar(s) (create their profile first if needed)
+   - **Disciplines**, tag with relevant disciplines
+   - **Excerpt**, 1–2 sentences for cards and meta descriptions
+   - **Editorial Summary**, 200–400 word abstract (written like a journal abstract)
+   - **Timestamps**, key chapter markers
+   - **Further Reading**, guest papers, related books
 3. Set **Status** to `Published` when ready
 
 #### Publishing vs Draft
@@ -291,7 +291,7 @@ When someone submits a proposal via `/propose`:
    - **Declined** → not a fit (send a kind reply)
    - **Archived** → long-term parking
 
-Add **Internal Notes** at any stage — these are not visible to the proposer.
+Add **Internal Notes** at any stage, these are not visible to the proposer.
 
 ---
 
@@ -417,23 +417,23 @@ solomon-atah/
 ## Design System
 
 **Colors:**
-- Deep purple: `#4A1942` — primary brand, headers, CTAs
-- Gold: `#C9A84C` — accent, section labels, pull quotes
+- Deep purple: `#4A1942`, primary brand, headers, CTAs
+- Gold: `#C9A84C`, accent, section labels, pull quotes
 
 **Fonts:**
 - Headlines: Fraunces (variable serif, loaded via `next/font/google`)
 - Body: Inter (grotesque, loaded via `next/font/google`)
 
 **Tailwind utilities:**
-- `.pull-quote` — editorial blockquote style
-- `.discipline-tag` — small uppercase tag for disciplines
-- `.prose-editorial` — long-form reading styles
+- `.pull-quote`, editorial blockquote style
+- `.discipline-tag`, small uppercase tag for disciplines
+- `.prose-editorial`, long-form reading styles
 
 ---
 
 ## Citation System
 
-Every published conversation includes a "How to cite this conversation" block at the bottom of the page, with one-click copy in APA, MLA, and Chicago formats. This is a genuine differentiator — it allows academics to reference podcast conversations in their published work.
+Every published conversation includes a "How to cite this conversation" block at the bottom of the page, with one-click copy in APA, MLA, and Chicago formats. This is a genuine differentiator, it allows academics to reference podcast conversations in their published work.
 
 The citation is auto-generated from the conversation's metadata (guest name, title, publication date, URL).
 

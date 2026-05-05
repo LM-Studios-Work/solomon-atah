@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getPublishedConversations } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
 
 export const metadata: Metadata = {
-  title: 'Solomon Atah Pty Ltd — Know Tomorrow Today',
+  title: 'Solomon Atah Pty Ltd, Know Tomorrow Today',
   description:
     'A sovereign intellectual holding company committed to building durable knowledge infrastructures across media, research, publishing, and cultural production.',
 }
@@ -15,13 +15,13 @@ const PRIMARY_GATEWAYS = [
     label: 'Media',
     href: '/media',
     description:
-      'The Solomon Atah Podcast — scholarly conversations, video archive, and featured episodes.',
+      'The Solomon Atah Podcast, scholarly conversations, video archive, and featured episodes.',
   },
   {
     label: 'Research & Publishing',
     href: '/research',
     description:
-      'Ninta Research and Ninta Publishing — narrative intelligence, institutional critique, and books built to last.',
+      'Ninta Research and Ninta Publishing, narrative intelligence, institutional critique, and books built to last.',
   },
   {
     label: 'Academic Services',
@@ -40,7 +40,7 @@ const FEATURED_PROPERTIES = [
     description:
       'A public-facing academic media institution commissioning scholarly conversations with PhD holders and PhD candidates. Archiving African and Africa-focused scholarship for the public record.',
     cta: '',
-    ctaHref: '/conversations',
+    ctaHref: '/media',
   },
   {
     name: 'Ninta Research',
@@ -74,7 +74,7 @@ const DIVISION_PROPERTIES = [
     name: 'The Solomon Atah Podcast',
     category: 'Audio & Video',
     description:
-      'Long-form intellectual conversations at the frontier of ideas. Exploring scholarship, culture, and public intelligence - one rigorous dialogue at a time.',
+      'Long-form intellectual conversations at the frontier of ideas. Exploring scholarship, culture, and public intelligence through one rigorous dialogue at a time.',
     cta: '',
     ctaHref: '/media',
   },
@@ -82,7 +82,7 @@ const DIVISION_PROPERTIES = [
     name: 'Atah Global Media',
     category: 'Publishing & Broadcast',
     description:
-      'A media operation built for institutional reach. We produce content that does not chase trends - it sets the terms of discourse.',
+      'A media operation built for institutional reach. We produce content that does not chase trends. It sets the terms of discourse.',
     cta: '',
     ctaHref: '/media',
   },
@@ -122,7 +122,7 @@ export default function HomePage() {
       <section className="relative border-b border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl">
-            {/* Hero video — replace src when video asset is available */}
+            {/* Hero video, replace src when video asset is available */}
             <div className="relative w-full max-w-2xl aspect-video rounded-sm overflow-hidden bg-black mb-10 hidden">
               <video
                 autoPlay
@@ -130,7 +130,7 @@ export default function HomePage() {
                 loop
                 playsInline
                 className="w-full h-full object-cover"
-                aria-label="Solomon Atah Pty Ltd — brand video"
+                aria-label="Solomon Atah Pty Ltd, brand video"
               >
                 {/* <source src="/company%20resources/hero.mp4" type="video/mp4" /> */}
               </video>
@@ -151,7 +151,7 @@ export default function HomePage() {
             {/* Positioning statement */}
             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-10 max-w-2xl font-light text-pretty">
               A sovereign intellectual holding company operating at the intersection of thought
-              and execution — across media, research, publishing, and cultural production.
+              and execution, across media, research, publishing, and cultural production.
             </p>
 
             {/* Primary Gateways */}

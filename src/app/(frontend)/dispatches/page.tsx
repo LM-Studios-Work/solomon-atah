@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getPublishedDispatches } from '@/lib/data'
@@ -18,7 +18,7 @@ export default function DispatchesPage() {
         <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">Field Notes</p>
         <h1 className="font-fraunces text-5xl md:text-6xl font-light mb-4">Dispatches</h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          Essays, reading lists, and reflections — delivered when we have something worth saying.
+          Essays, reading lists, and reflections, delivered when we have something worth saying.
         </p>
       </header>
 

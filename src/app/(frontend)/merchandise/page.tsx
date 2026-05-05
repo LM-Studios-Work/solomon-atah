@@ -1,22 +1,22 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Merchandise & Books — Solomon Atah Pty Ltd',
+  title: 'Merchandise & Books, Solomon Atah Pty Ltd',
   description:
     'Podcast merchandise, branded apparel, and books from Solomon Atah Pty Ltd.',
 }
 
 const PODCAST_MERCH = [
   {
-    name: 'Know Tomorrow Today — Tote Bag',
+    name: 'Know Tomorrow Today, Tote Bag',
     tagline: 'Know Tomorrow Today',
     description: 'Heavy canvas tote bag with the Solomon Atah Podcast wordmark and slogan.',
     image: null as string | null,
     status: 'Pre-Order' as const,
   },
   {
-    name: 'Know Tomorrow Today — Mug',
+    name: 'Know Tomorrow Today, Mug',
     tagline: 'Know Tomorrow Today',
     description: 'Ceramic mug. For the scholar who needs something to hold while thinking.',
     image: null as string | null,
@@ -29,7 +29,7 @@ const HOODIES = [
     name: 'Epistemic Humility Hoodie',
     tagline: 'Epistemic Humility',
     description:
-      'Premium pullover hoodie with purple lining. "Epistemic Humility — The Solomon Atah Podcast."',
+      'Premium pullover hoodie with purple lining. "Epistemic Humility, The Solomon Atah Podcast."',
     image: '/company%20resources/hoodie_1.jpeg',
     status: 'Available' as const,
   },
@@ -37,7 +37,7 @@ const HOODIES = [
     name: 'Academic Valour Hoodie',
     tagline: 'Academic Valour',
     description:
-      'Premium pullover hoodie with purple lining. "Academic Valour — The Solomon Atah Podcast."',
+      'Premium pullover hoodie with purple lining. "Academic Valour, The Solomon Atah Podcast."',
     image: '/company%20resources/hoodie_2.jpeg',
     status: 'Available' as const,
   },
@@ -45,7 +45,7 @@ const HOODIES = [
     name: 'Academic Researcher Hoodie',
     tagline: 'Academic Researcher',
     description:
-      'Premium pullover hoodie with purple lining. "Academic Researcher — The Solomon Atah Podcast."',
+      'Premium pullover hoodie with purple lining. "Academic Researcher, The Solomon Atah Podcast."',
     image: '/company%20resources/hoodie_3.jpeg',
     status: 'Available' as const,
   },
@@ -53,7 +53,7 @@ const HOODIES = [
     name: 'Academic Personality Hoodie',
     tagline: 'Academic Personality',
     description:
-      'Premium pullover hoodie with purple lining. "Academic Personality — The Solomon Atah Podcast."',
+      'Premium pullover hoodie with purple lining. "Academic Personality, The Solomon Atah Podcast."',
     image: '/company%20resources/hoodie_4.jpeg',
     status: 'Available' as const,
   },
@@ -62,19 +62,19 @@ const HOODIES = [
 const BOOKS = [
   {
     name: 'The Narrative Manifesto',
-    description: 'How Stories Harm, And What You Can Do About It — by Solomon Atah.',
+    description: 'How Stories Harm, And What You Can Do About It, by Solomon Atah.',
     image: '/company%20resources/book.jpeg',
     status: 'Available' as const,
   },
   {
     name: 'The Marriage Stock Exchange',
-    description: 'Why Marriage Was Never About Love — by Solomon Atah.',
+    description: 'Why Marriage Was Never About Love, by Solomon Atah.',
     image: '/company%20resources/book_2_cover.jpeg',
     status: 'Available' as const,
   },
   {
     name: 'The 48 Laws of Personal Sovereignty',
-    description: 'Self Preservation Intelligence — by Solomon Atah.',
+    description: 'Self Preservation Intelligence, by Solomon Atah.',
     image: '/company%20resources/book_3.jpeg',
     status: 'Available' as const,
   },

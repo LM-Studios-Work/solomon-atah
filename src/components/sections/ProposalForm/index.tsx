@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -103,7 +103,7 @@ export function ProposalForm() {
           research is a strong fit, we will be in touch within a few weeks.
         </p>
         <p className="text-sm text-muted-foreground mt-6 italic">
-          — The Solomon Atah Podcast Editorial Team
+         , The Solomon Atah Podcast Editorial Team
         </p>
       </div>
     )
@@ -289,7 +289,7 @@ export function ProposalForm() {
         <Field
           label="Published work / Google Scholar / ORCID"
           error={errors.links?.message}
-          hint="Paste links one per line — papers, ORCID profile, Google Scholar page."
+          hint="Paste links one per line, papers, ORCID profile, Google Scholar page."
         >
           <textarea
             {...register('links')}

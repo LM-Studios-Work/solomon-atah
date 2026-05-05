@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 
 const SITE_NAME = 'The Solomon Atah Podcast'
 const SITE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://solomonatah.com'
@@ -18,7 +18,7 @@ export function buildMetadata({
   path?: string
   type?: 'website' | 'article'
 }): Metadata {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Know Tomorrow Today`
+  const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME}, Know Tomorrow Today`
   const metaDescription = description || SITE_DESCRIPTION
   const ogImage = image || `${SITE_URL}/og-default.png`
   const url = path ? `${SITE_URL}${path}` : SITE_URL
