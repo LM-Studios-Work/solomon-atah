@@ -1,30 +1,41 @@
-import type { Metadata } from 'next'
-import { fraunces, inter } from '@/lib/fonts'
-import { Providers } from '@/components/layout/Providers'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
-import './globals.css'
+import type { Metadata } from "next";
+import { fraunces, inter } from "@/lib/fonts";
+import { Providers } from "@/components/layout/Providers";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: 'The Solomon Atah Podcast — Know Tomorrow Today',
-    template: '%s | Solomon Atah Podcast',
+    default: "The Solomon Atah Podcast — Know Tomorrow Today",
+    template: "%s | Solomon Atah Podcast",
   },
   description:
-    'Scholarly conversations with PhD holders and PhD candidates. A public-facing academic media institution elevating African and Africa-focused scholarship.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://solomonatah.com'),
+    "Scholarly conversations with PhD holders and PhD candidates. A public-facing academic media institution elevating African and Africa-focused scholarship.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SERVER_URL || "https://solomonatah.com"
+  ),
   openGraph: {
-    siteName: 'The Solomon Atah Podcast',
-    type: 'website',
-    locale: 'en_ZA',
+    siteName: "The Solomon Atah Podcast",
+    type: "website",
+    locale: "en_ZA",
+  },
+  icons: {
+    icon: "/company%20resources/logo%20solomon%20atah%20main%20company.jpeg",
+    shortcut:
+      "/company%20resources/logo%20solomon%20atah%20main%20company.jpeg",
   },
   robots: {
     index: true,
     follow: true,
   },
-}
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en-ZA"
@@ -42,5 +53,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -1,47 +1,47 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from "next/link";
+import Image from "next/image";
 
 const FOOTER_COLUMNS = [
   {
-    heading: 'Media',
+    heading: "Media",
     links: [
-      { label: 'The Solomon Atah Podcast', href: '/media' },
-      { label: 'Video Archive', href: '/conversations' },
-      { label: 'Scholars', href: '/scholars' },
-      { label: 'Dispatches', href: '/dispatches' },
+      { label: "The Solomon Atah Podcast", href: "/media" },
+      { label: "Video Archive", href: "/conversations" },
+      { label: "Scholars", href: "/scholars" },
+      { label: "Dispatches", href: "/dispatches" },
     ],
   },
   {
-    heading: 'Research & Publishing',
+    heading: "Research & Publishing",
     links: [
-      { label: 'Ninta Research', href: '/research#ninta-research' },
-      { label: 'Ninta Publishing', href: '/research#ninta-publishing' },
-      { label: 'Books', href: '/research#books' },
+      { label: "Ninta Research", href: "/research#ninta-research" },
+      { label: "Ninta Publishing", href: "/research#ninta-publishing" },
+      { label: "Books", href: "/research#books" },
     ],
   },
   {
-    heading: 'Company',
+    heading: "Company",
     links: [
-      { label: 'Academic Services', href: '/academic-services' },
-      { label: 'Film Projects', href: '/film' },
-      { label: 'Merchandise & Books', href: '/merchandise' },
-      { label: 'About', href: '/about' },
+      { label: "Academic Services", href: "/academic-services" },
+      { label: "Film Projects", href: "/film" },
+      { label: "Merchandise & Books", href: "/merchandise" },
+      { label: "About", href: "/about" },
     ],
   },
   {
-    heading: 'Support',
+    heading: "Support",
     links: [
-      { label: 'Support Our Work', href: '/support' },
-      { label: 'Partner With Us', href: '/partner' },
-      { label: 'Propose a Conversation', href: '/propose' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'RSS Feed', href: '/feed.xml', isExternal: true },
+      { label: "Support Our Work", href: "/support" },
+      { label: "Partner With Us", href: "/partner" },
+      { label: "Propose a Conversation", href: "/propose" },
+      { label: "Contact", href: "/contact" },
+      { label: "RSS Feed", href: "/feed.xml", isExternal: true },
     ],
   },
-]
+];
 
 export function Footer() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <footer className="mt-24 border-t border-border bg-background">
@@ -53,7 +53,7 @@ export function Footer() {
             <Link href="/" className="block mb-5">
               <div className="relative w-40 h-24 rounded-sm overflow-hidden bg-black">
                 <Image
-                  src="/company%20resources/logo.jpeg"
+                  src="/company%20resources/logo%20solomon%20atah%20main%20company.jpeg"
                   alt="Solomon Atah Pty Ltd"
                   fill
                   className="object-contain"
@@ -65,8 +65,9 @@ export function Footer() {
               Memoria Aedificat Futurum
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              A sovereign intellectual holding company building durable knowledge infrastructures
-              across media, research, publishing, and cultural production.
+              A sovereign intellectual holding company building durable
+              knowledge infrastructures across media, research, publishing, and
+              cultural production.
             </p>
           </div>
 
@@ -79,7 +80,7 @@ export function Footer() {
               <ul className="space-y-2">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {'isExternal' in link && link.isExternal ? (
+                    {"isExternal" in link && link.isExternal ? (
                       <a
                         href={link.href}
                         target="_blank"
@@ -114,5 +115,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

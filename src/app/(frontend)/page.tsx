@@ -85,18 +85,6 @@ export default function HomePage() {
               </video>
             </div>
 
-            {/* Company logo */}
-            <div className="relative w-48 h-28 mb-8 rounded-sm overflow-hidden bg-black">
-              <Image
-                src="/company%20resources/logo.jpeg"
-                alt="Solomon Atah Pty Ltd"
-                fill
-                className="object-contain"
-                sizes="192px"
-                priority
-              />
-            </div>
-
             {/* Eyebrow */}
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-5">
               Solomon Atah Pty Ltd

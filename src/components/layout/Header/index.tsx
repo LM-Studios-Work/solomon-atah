@@ -1,18 +1,18 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { MobileMenu } from './MobileMenu'
+import Link from "next/link";
+import Image from "next/image";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { MobileMenu } from "./MobileMenu";
 
 const NAV_LINKS = [
-  { label: 'Media', href: '/media' },
-  { label: 'The Solomon Atah Podcast', href: '/conversations' },
-  { label: 'Research & Publishing', href: '/research' },
-  { label: 'Academic Services', href: '/academic-services' },
-  { label: 'Film Projects', href: '/film' },
-  { label: 'Merchandise & Books', href: '/merchandise' },
-  { label: 'Support', href: '/support' },
-  { label: 'Contact', href: '/contact' },
-]
+  { label: "Media", href: "/media" },
+  { label: "The Solomon Atah Podcast", href: "/conversations" },
+  { label: "Research & Publishing", href: "/research" },
+  { label: "Academic Services", href: "/academic-services" },
+  { label: "Film Projects", href: "/film" },
+  { label: "Merchandise & Books", href: "/merchandise" },
+  { label: "Support", href: "/support" },
+  { label: "Contact", href: "/contact" },
+];
 
 export function Header() {
   return (
@@ -23,8 +23,8 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0">
               <Image
-                src="/company%20resources/podcase_image_circle.jpeg"
-                alt="Solomon Atah"
+                src="/company%20resources/navbar%20logo.jpeg"
+                alt="Solomon Atah Pty Ltd"
                 fill
                 className="object-cover"
                 sizes="32px"
@@ -41,7 +41,10 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden xl:flex items-center gap-4" aria-label="Main navigation">
+          <nav
+            className="hidden xl:flex items-center gap-4"
+            aria-label="Main navigation"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -61,5 +64,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
