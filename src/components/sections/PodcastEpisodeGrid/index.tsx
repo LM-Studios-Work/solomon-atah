@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PodcastEpisode {
   videoId: string;
@@ -18,17 +18,37 @@ export function PodcastEpisodeGrid({
   initialCount = 3,
 }: PodcastEpisodeGridProps) {
   const [expanded, setExpanded] = useState(false);
+  const [autoplayFirstEpisode, setAutoplayFirstEpisode] = useState(false);
   const visibleEpisodes = expanded ? episodes : episodes.slice(0, initialCount);
   const canToggle = episodes.length > initialCount;
+
+  useEffect(() => {
+    const playLatestEpisode = () => {
+      if (window.location.hash === "#latest-episode") {
+        setAutoplayFirstEpisode(true);
+      }
+    };
+
+    playLatestEpisode();
+    window.addEventListener("hashchange", playLatestEpisode);
+
+    return () => window.removeEventListener("hashchange", playLatestEpisode);
+  }, []);
 
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {visibleEpisodes.map((episode) => (
-          <article key={episode.videoId} className="space-y-4">
+        {visibleEpisodes.map((episode, index) => (
+          <article
+            key={episode.videoId}
+            id={index === 0 ? "latest-episode" : undefined}
+            className="space-y-4 scroll-mt-24"
+          >
             <div className="relative aspect-video w-full overflow-hidden bg-black">
               <iframe
-                src={`https://www.youtube.com/embed/${episode.videoId}`}
+                src={`https://www.youtube.com/embed/${episode.videoId}${
+                  index === 0 && autoplayFirstEpisode ? "?autoplay=1" : ""
+                }`}
                 title={`${episode.title} Episode ${episode.episodeNumber}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"

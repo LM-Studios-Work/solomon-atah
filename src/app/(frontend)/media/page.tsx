@@ -1,11 +1,8 @@
 ﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { getPublishedConversations } from "@/lib/data";
-import { getLatestYouTubeVideo } from "@/lib/youtube";
-import { YouTubePlayer } from "@/components/sections/YouTubePlayer";
 import { ConversationCard } from "@/components/sections/ConversationCard";
 import { PodcastEpisodeGrid } from "@/components/sections/PodcastEpisodeGrid";
-import { formatDate } from "@/lib/utils";
 
 const podcastEpisodes = [
   {
@@ -43,7 +40,7 @@ const podcastEpisodes = [
 const mediaPlatforms = [
   {
     label: "YouTube",
-    href: "https://youtube.com/@solomonatah",
+    href: "https://www.youtube.com/@TheSolomonAtahPod",
     iconUrl: "https://cdn.simpleicons.org/youtube/FF0000",
     name: "YouTube",
   },
@@ -61,7 +58,9 @@ const mediaPlatforms = [
   },
 ];
 
-const subscribeUrl = "https://youtube.com/@solomonatah?sub_confirmation=1";
+const podcastChannelUrl = "https://www.youtube.com/@TheSolomonAtahPod";
+const subscribeUrl =
+  "https://www.youtube.com/@TheSolomonAtahPod?sub_confirmation=1";
 
 export const metadata: Metadata = {
   title: "Media, Solomon Atah Pty Ltd",
@@ -69,11 +68,8 @@ export const metadata: Metadata = {
     "The media division of Solomon Atah Pty Ltd, home of The Solomon Atah Podcast, video archive, and featured scholarly conversations.",
 };
 
-export default async function MediaPage() {
-  const [latestVideo, conversations] = await Promise.all([
-    getLatestYouTubeVideo(),
-    Promise.resolve(getPublishedConversations()),
-  ]);
+export default function MediaPage() {
+  const conversations = getPublishedConversations();
 
   const featured =
     conversations.find((c) => c.featured) ?? conversations[0] ?? null;
@@ -81,58 +77,16 @@ export default async function MediaPage() {
 
   return (
     <div>
-      {latestVideo && (
-        <section className="border-b border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-semibold tracking-[0.15em] uppercase text-gold">
-                  Latest Episode
-                </span>
-                <div className="h-px bg-border w-16" />
-              </div>
-              <time className="text-xs text-muted-foreground hidden sm:block">
-                {formatDate(latestVideo.publishedAt)}
-              </time>
-            </div>
-
-            <div className="grid lg:grid-cols-3 gap-10 items-start">
-              <div className="lg:col-span-2">
-                <YouTubePlayer
-                  videoId={latestVideo.videoId}
-                  title={latestVideo.title}
-                  thumbnailUrl={latestVideo.thumbnailUrl}
-                />
-              </div>
-              <div className="flex flex-col justify-start pt-2">
-                <p className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-3">
-                  Now Playing
-                </p>
-                <h2 className="font-fraunces text-2xl font-light leading-snug mb-4">
-                  {latestVideo.title}
-                </h2>
-                <time className="text-sm text-muted-foreground mb-6 block">
-                  {formatDate(latestVideo.publishedAt)}
-                </time>
-                <a
-                  href={`https://www.youtube.com/watch?v=${latestVideo.videoId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors w-fit"
-                >
-                  Watch on YouTube
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       <section className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-3xl">
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+              <a
+                href={podcastChannelUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col sm:flex-row sm:items-center sm:gap-6 group"
+              >
                 <div className="relative w-28 h-28 rounded-full overflow-hidden border border-border bg-white/90">
                   <Image
                     src="/company%20resources/podcase_image_circle-removebg-preview.png"
@@ -149,7 +103,7 @@ export default async function MediaPage() {
                     The Solomon Atah Podcast
                   </h2>
                 </div>
-              </div>
+              </a>
 
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
@@ -168,9 +122,7 @@ export default async function MediaPage() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href={`https://www.youtube.com/watch?v=${podcastEpisodes[0].videoId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#latest-episode"
                   className="inline-flex items-center justify-center px-5 py-2.5 bg-purple text-white text-sm font-semibold rounded-sm hover:bg-purple/90 transition-colors"
                 >
                   Watch the latest episode
