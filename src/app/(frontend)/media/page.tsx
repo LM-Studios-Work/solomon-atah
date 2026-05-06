@@ -1,41 +1,9 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getPublishedConversations } from "@/lib/data";
+import { getRecentYouTubeVideos } from "@/lib/youtube";
 import { ConversationCard } from "@/components/sections/ConversationCard";
 import { PodcastEpisodeGrid } from "@/components/sections/PodcastEpisodeGrid";
-
-const podcastEpisodes = [
-  {
-    videoId: "deOyZlBmuPE",
-    episodeNumber: 45,
-    title:
-      "Cardio-Metabolic Frontiers: Stress, Disease, and the Making of Holistic Science.",
-  },
-  {
-    videoId: "eQmkGKEBRbo",
-    episodeNumber: 44,
-    title:
-      "Decolonising Business Education: Entrepreneurial Ecosystems at the Margins",
-  },
-  {
-    videoId: "1eKjYerssaU",
-    episodeNumber: 43,
-    title:
-      "From Agenda 2063 To Global Health Diplomacy: Rethinking Africa's Health Future.",
-  },
-  {
-    videoId: "9MB4WOBQE30",
-    episodeNumber: 42,
-    title:
-      "Apartheid Beyond 1994: Universities, Epistemic Violence And The Persistence Of Apartheid.",
-  },
-  {
-    videoId: "F9gwHRCwNjU",
-    episodeNumber: 41,
-    title:
-      "Language, Power, And Leadership: Who Gets To Speak And Who Gets To Govern In Africa",
-  },
-];
 
 const mediaPlatforms = [
   {
@@ -68,8 +36,18 @@ export const metadata: Metadata = {
     "The Solomon Atah Podcast, video archive, and featured scholarly conversations from Solomon Atah Pty Ltd.",
 };
 
-export default function MediaPage() {
-  const conversations = getPublishedConversations();
+export default async function MediaPage() {
+  const [videos, conversations] = await Promise.all([
+    getRecentYouTubeVideos(15),
+    Promise.resolve(getPublishedConversations()),
+  ]);
+
+  const episodes = videos.map((v, i) => ({
+    videoId: v.videoId,
+    episodeNumber: videos.length - i,
+    title: v.title,
+    publishedAt: v.publishedAt,
+  }));
 
   const featured =
     conversations.find((c) => c.featured) ?? conversations[0] ?? null;
@@ -168,7 +146,13 @@ export default function MediaPage() {
               <div className="flex-1 h-px bg-border" />
             </div>
 
-            <PodcastEpisodeGrid episodes={podcastEpisodes} />
+            {episodes.length > 0 ? (
+              <PodcastEpisodeGrid episodes={episodes} initialCount={3} />
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                Episodes will appear here once the channel feed is available.
+              </p>
+            )}
           </div>
         </div>
       </section>

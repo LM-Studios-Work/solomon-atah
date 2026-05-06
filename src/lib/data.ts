@@ -3,6 +3,7 @@ import scholarsRaw from '@/data/scholars.json'
 import disciplinesRaw from '@/data/disciplines.json'
 import dispatchesRaw from '@/data/dispatches.json'
 import institutionsRaw from '@/data/institutions.json'
+import achievementsRaw from '@/data/achievements.json'
 
 // ─── Raw shapes (match the JSON file structure) ────────────────────────────────
 
@@ -302,4 +303,21 @@ export function getDispatchBySlug(slug: string): Dispatch | null {
   const d = dispatchBySlug.get(slug)
   if (!d || d.status !== 'published') return null
   return resolveDispatch(d)
+}
+
+// ─── Achievements ───────────────────────────────────────────────────────────────
+
+export interface Achievement {
+  id: string
+  title: string
+  issuer?: string | null
+  year: string
+  category: 'award' | 'milestone' | 'recognition' | 'media'
+  description?: string | null
+}
+
+const achievements = achievementsRaw as Achievement[]
+
+export function getAchievements(): Achievement[] {
+  return [...achievements].sort((a, b) => Number(b.year) - Number(a.year))
 }
