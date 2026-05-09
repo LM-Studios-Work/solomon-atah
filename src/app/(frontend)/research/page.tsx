@@ -98,66 +98,6 @@ export default function ResearchPage() {
         </div>
       </section>
 
-      {/* ── Ninta Research ────────────────────────────────────────────────────── */}
-      <section id="ninta-research" className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-                Research Division
-              </p>
-              <h2 className="font-fraunces text-4xl font-light mb-6">NinTA Research</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                NinTA, Narrative Intelligence Africa, is the analytical engine of Solomon Atah
-                Pty Ltd. We conduct narrative-focused research for institutions, governments, and
-                organisations seeking to understand and reshape the stories that govern them.
-                Our work bridges academic rigour and strategic application.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
-              >
-                Enquire about research collaboration →
-              </Link>
-            </div>
-            <div className="space-y-4">
-              <div className="relative w-full rounded-sm overflow-hidden">
-                <Image
-                  src="/company%20resources/ninta.jpeg"
-                  alt="NinTA, Narrative Intelligence Africa"
-                  width={640}
-                  height={360}
-                  className="w-full object-cover rounded-sm"
-                />
-              </div>
-              <div className="relative w-full rounded-sm overflow-hidden">
-                <Image
-                  src="/company%20resources/africa.jpeg"
-                  alt="Narrative Intelligence Africa"
-                  width={640}
-                  height={360}
-                  className="w-full object-cover rounded-sm"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {NINTA_RESEARCH_SERVICES.map((service) => (
-              <div
-                key={service.name}
-                className="border border-border rounded-sm p-6 hover:border-purple/30 transition-colors"
-              >
-                <h3 className="font-fraunces text-lg mb-3">{service.name}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Ninta Publishing ──────────────────────────────────────────────────── */}
       <section id="ninta-publishing" className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -237,6 +177,57 @@ export default function ResearchPage() {
             <Link href="/contact" className="text-sm text-purple hover:underline font-medium">
               Publishing enquiries →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Ninta Research ────────────────────────────────────────────────────── */}
+      <section id="ninta-research" className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+                Research Division
+              </p>
+              <h2 className="font-fraunces text-4xl font-light mb-6">NinTA Research</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                NinTA, Narrative Intelligence Africa, is the analytical engine of Solomon Atah
+                Pty Ltd. We conduct narrative-focused research for institutions, governments, and
+                organisations seeking to understand and reshape the stories that govern them.
+                Our work bridges academic rigour and strategic application.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
+              >
+                Enquire about research collaboration →
+              </Link>
+            </div>
+            <div>
+              <div className="relative w-full rounded-sm overflow-hidden">
+                <Image
+                  src="/company%20resources/ninta.jpeg"
+                  alt="NinTA, Narrative Intelligence Africa"
+                  width={640}
+                  height={400}
+                  className="w-full object-cover rounded-sm"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {NINTA_RESEARCH_SERVICES.map((service) => (
+              <div
+                key={service.name}
+                className="border border-border rounded-sm p-6 hover:border-purple/30 transition-colors"
+              >
+                <h3 className="font-fraunces text-lg mb-3">{service.name}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

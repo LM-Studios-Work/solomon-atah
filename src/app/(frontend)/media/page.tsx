@@ -55,53 +55,38 @@ export default async function MediaPage() {
 
   return (
     <div>
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-3xl">
+      {/* ── Podcast Hero ──────────────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-purple text-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+          <div className="grid lg:grid-cols-[1fr_340px] gap-12 lg:gap-16 items-center">
             <div className="flex flex-col gap-8">
-              <a
-                href={podcastChannelUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col sm:flex-row sm:items-center sm:gap-6 group"
-              >
-                <div className="relative w-28 h-28 rounded-full overflow-hidden border border-border bg-white/90">
-                  <Image
-                    src="/company%20resources/podcase_image_circle-removebg-preview.png"
-                    alt="The Solomon Atah Podcast logo"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="sm:max-w-xl">
-                  <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-                    Flagship Property
+              <div>
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-5">
+                  Flagship Property
+                </p>
+                <h1 className="font-fraunces text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] mb-5">
+                  The Solomon Atah Podcast
+                </h1>
+                <div className="space-y-3 text-white/70 leading-relaxed max-w-2xl">
+                  <p>
+                    A public-facing academic media institution that commissions,
+                    curates, and archives scholarly conversations with PhD holders
+                    and PhD candidates. We elevate African and Africa-focused
+                    scholarship within global intellectual discourse.
                   </p>
-                  <h2 className="font-fraunces text-4xl font-light mb-0">
-                    The Solomon Atah Podcast
-                  </h2>
+                  <p>
+                    Every conversation is archived, given an editorial summary,
+                    and made freely accessible. We complement academic journals —
+                    surfacing not just arguments, but the thinkers and methods
+                    behind them.
+                  </p>
                 </div>
-              </a>
-
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  A public-facing academic media institution that commissions,
-                  curates, and archives scholarly conversations with PhD holders
-                  and PhD candidates. We elevate African and Africa-focused
-                  scholarship within global intellectual discourse.
-                </p>
-                <p>
-                  Every conversation is archived, given an editorial summary,
-                  and made freely accessible. We complement academic journals -
-                  surfacing not just arguments, but the thinkers and methods
-                  behind them.
-                </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
                   href="#latest-episode"
-                  className="inline-flex items-center justify-center px-5 py-2.5 bg-purple text-white text-sm font-semibold rounded-sm hover:bg-purple/90 transition-colors"
+                  className="inline-flex items-center justify-center px-5 py-2.5 bg-white text-purple text-sm font-semibold rounded-sm hover:bg-white/90 transition-colors"
                 >
                   Watch the latest episode
                 </a>
@@ -109,7 +94,7 @@ export default async function MediaPage() {
                   href={subscribeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-5 py-2.5 border border-purple/30 text-purple text-sm font-semibold rounded-sm hover:border-purple hover:bg-purple/5 transition-colors"
+                  className="inline-flex items-center justify-center px-5 py-2.5 border border-white/30 text-white text-sm font-semibold rounded-sm hover:border-white/60 hover:bg-white/10 transition-colors"
                 >
                   Subscribe
                 </a>
@@ -123,37 +108,57 @@ export default async function MediaPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={platform.label}
-                    className="inline-flex items-center gap-2 text-xl font-semibold tracking-tight transition-opacity hover:opacity-75"
+                    className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-white/80 transition-opacity hover:opacity-100 hover:text-white"
                   >
                     <img
                       src={platform.iconUrl}
                       alt=""
                       aria-hidden="true"
-                      className="h-8 w-8 shrink-0"
+                      className="h-6 w-6 shrink-0"
                     />
                     <span>{platform.name}</span>
                   </a>
                 ))}
               </div>
             </div>
-          </div>
 
-          <div className="mt-14">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-                Solomon Atah Podcast
-              </span>
-              <div className="flex-1 h-px bg-border" />
+            <div className="hidden lg:flex justify-center items-center">
+              <a
+                href={podcastChannelUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative w-72 h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl hover:border-white/40 transition-colors block"
+              >
+                <Image
+                  src="/company%20resources/podcase_image_circle-removebg-preview.png"
+                  alt="The Solomon Atah Podcast"
+                  fill
+                  className="object-cover"
+                />
+              </a>
             </div>
-
-            {episodes.length > 0 ? (
-              <PodcastEpisodeGrid episodes={episodes} initialCount={3} />
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                Episodes will appear here once the channel feed is available.
-              </p>
-            )}
           </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-gold via-gold/40 to-transparent" />
+      </section>
+
+      {/* ── Episodes ──────────────────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+              Solomon Atah Podcast
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          {episodes.length > 0 ? (
+            <PodcastEpisodeGrid episodes={episodes} initialCount={3} />
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Episodes will appear here once the channel feed is available.
+            </p>
+          )}
         </div>
       </section>
 

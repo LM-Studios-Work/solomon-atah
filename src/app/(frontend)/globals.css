@@ -5,7 +5,7 @@
 @layer base {
   :root {
     /* Brand colors */
-    --color-purple: 74 25 66;        /* #4A1942 */
+    --color-purple: 59 37 133;       /* #3B2585 */
     --color-gold: 201 168 76;        /* #C9A84C */
     --site-max-width: 112rem;
 
@@ -19,7 +19,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 8%;
 
-    --primary: 308 49% 27%;          /* purple */
+    --primary: 254 56% 33%;          /* purple */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 43 51% 54%;         /* gold */
@@ -36,7 +36,7 @@
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 308 49% 27%;
+    --ring: 254 56% 33%;
 
     --radius: 0.25rem;
   }
@@ -51,7 +51,7 @@
     --popover: 20 14.3% 9%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 308 49% 60%;
+    --primary: 254 56% 65%;
     --primary-foreground: 0 0% 4%;
 
     --secondary: 43 51% 54%;
@@ -68,7 +68,7 @@
 
     --border: 20 14.3% 18%;
     --input: 20 14.3% 18%;
-    --ring: 308 49% 60%;
+    --ring: 254 56% 65%;
   }
 }
 
@@ -134,12 +134,12 @@
   .discipline-tag {
     @apply inline-flex items-center text-xs font-medium tracking-wide uppercase;
     @apply text-purple px-2.5 py-1 rounded-sm;
-    background-color: rgba(74, 25, 66, 0.08);
+    background-color: rgba(59, 37, 133, 0.08);
   }
 
   .dark .discipline-tag {
     @apply text-purple-300;
-    background-color: rgba(74, 25, 66, 0.20);
+    background-color: rgba(59, 37, 133, 0.20);
   }
 
   /* Skip to content (accessibility) */
