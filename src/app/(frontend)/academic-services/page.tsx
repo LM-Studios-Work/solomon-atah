@@ -62,19 +62,30 @@ const UPCOMING_EVENTS = [
 export default function AcademicServicesPage() {
   return (
     <div>
-      {/* ── Page Header ───────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-            Solomon Atah Pty Ltd
-          </p>
-          <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6">
-            Academic Services
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Institutional engagement, academic consultation access, and professional services at
-            the intersection of academic rigour and public practice.
-          </p>
+      {/* ── Hero ──────────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-[62vh] overflow-hidden border-b border-border flex items-end">
+        <Image
+          src="/company%20resources/academic%20hero.webp"
+          alt="Academic Services"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 pt-32 md:pb-18 md:pt-40">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+              Solomon Atah Pty Ltd
+            </p>
+            <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6 text-white">
+              Academic Services
+            </h1>
+            <p className="text-xl text-white/82 leading-relaxed max-w-2xl">
+              Institutional engagement, academic consultation access, and professional services at
+              the intersection of academic rigour and public practice.
+            </p>
+          </div>
         </div>
       </section>
 
