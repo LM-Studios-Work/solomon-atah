@@ -164,7 +164,7 @@ export default function AcademicServicesPage() {
         />
         {/* layered overlays: darkening + warm tint toward bottom */}
         <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2d1229]/80 via-transparent to-transparent" />
 
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-36 md:pb-20">
@@ -220,7 +220,7 @@ export default function AcademicServicesPage() {
       </section>
 
       {/* ── Awards & Recognitions ────────────────────────────────────────── */}
-      <section className="border-b border-border bg-muted/20">
+      <section className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="flex items-center gap-4 mb-8">
             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-muted-foreground whitespace-nowrap">
@@ -271,23 +271,16 @@ type ServiceData = (typeof SERVICES)[number]
 
 function ServiceCard({ service }: { service: ServiceData }) {
   return (
-    <article className="flex flex-col rounded-sm border border-border overflow-hidden">
-      {/* card header strip — dark olive/charcoal background */}
-      <div
-        className="flex items-start gap-5 px-7 py-7"
-        style={{ backgroundColor: '#2e3028' }}
-      >
+    <article className="flex flex-col rounded-sm border border-border overflow-hidden hover:border-purple/40 hover:shadow-sm transition-all group">
+      {/* card header strip — site purple-maroon */}
+      <div className="flex items-start gap-5 px-7 py-7 bg-[#2d1229]">
         <span className="text-gold mt-0.5 shrink-0">{service.icon}</span>
-        <div>
-          <h2
-            className="font-fraunces text-xl font-light leading-snug text-white"
-          >
-            {service.title}
-          </h2>
-        </div>
+        <h2 className="font-fraunces text-xl font-light leading-snug text-white">
+          {service.title}
+        </h2>
       </div>
 
-      {/* card body — light */}
+      {/* card body — site card background */}
       <div className="flex flex-col flex-1 px-7 py-7 gap-5 bg-card">
         <p className="text-sm text-muted-foreground leading-relaxed">
           {service.description}
