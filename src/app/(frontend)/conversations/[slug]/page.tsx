@@ -40,7 +40,7 @@ export default async function ConversationPage({ params }: Props) {
   const conv = getConversationBySlug(slug)
   if (!conv) notFound()
 
-  const thumbnailUrl = conv.youtubeThumbnailUrl || getYouTubeThumbnail(conv.youtubeId, 'hq')
+  const thumbnailUrl = conv.youtubeThumbnailUrl || getYouTubeThumbnail(conv.youtubeId, 'maxres')
   const pageUrl = `${SITE_URL}/conversations/${conv.slug}`
 
   const structuredData = {

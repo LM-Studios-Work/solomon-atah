@@ -30,7 +30,7 @@ export function ConversationCard({ conversation, variant = 'default' }: Conversa
   const thumbnailUrl =
     conversation.thumbnail?.url ||
     conversation.youtubeThumbnailUrl ||
-    getYouTubeThumbnail(conversation.youtubeId, 'hq')
+    getYouTubeThumbnail(conversation.youtubeId, 'maxres')
 
   const primaryScholar = conversation.scholars?.[0]
 
