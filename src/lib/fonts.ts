@@ -4,7 +4,7 @@ export const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-fraunces',
   display: 'swap',
-  // Optical sizing gives beautiful large headline rendering
+  // Optical sizing keeps large headline rendering refined
   axes: ['opsz', 'SOFT', 'WONK'],
 })
 
