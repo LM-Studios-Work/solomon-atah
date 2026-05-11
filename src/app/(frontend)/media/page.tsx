@@ -42,9 +42,8 @@ export default async function MediaPage() {
     Promise.resolve(getPublishedConversations()),
   ]);
 
-  const episodes = videos.map((v, i) => ({
+  const episodes = videos.map((v) => ({
     videoId: v.videoId,
-    episodeNumber: videos.length - i,
     title: v.title,
     publishedAt: v.publishedAt,
   }));

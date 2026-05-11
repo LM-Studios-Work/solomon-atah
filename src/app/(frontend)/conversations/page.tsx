@@ -1,37 +1,36 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { getAchievements } from '@/lib/data'
-import { getRecentYouTubeVideos } from '@/lib/youtube'
-import { PodcastEpisodeGrid } from '@/components/sections/PodcastEpisodeGrid'
-import { formatDate } from '@/lib/utils'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { getAchievements } from "@/lib/data";
+import { getRecentYouTubeVideos } from "@/lib/youtube";
+import { PodcastEpisodeGrid } from "@/components/sections/PodcastEpisodeGrid";
+import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: 'The Solomon Atah Podcast — Solomon Atah Pty Ltd',
+  title: "The Solomon Atah Podcast — Solomon Atah Pty Ltd",
   description:
-    'Scholarly conversations with PhD holders and PhD candidates — elevating African and Africa-focused research within global intellectual discourse.',
-}
+    "Scholarly conversations with PhD holders and PhD candidates — elevating African and Africa-focused research within global intellectual discourse.",
+};
 
 const CATEGORY_LABEL: Record<string, string> = {
-  award: 'Award',
-  milestone: 'Milestone',
-  recognition: 'Recognition',
-  media: 'Media',
-}
+  award: "Award",
+  milestone: "Milestone",
+  recognition: "Recognition",
+  media: "Media",
+};
 
 export default async function ConversationsPage() {
   const [videos, achievements] = await Promise.all([
     getRecentYouTubeVideos(15),
     Promise.resolve(getAchievements()),
-  ])
+  ]);
 
-  const episodes = videos.map((v, i) => ({
+  const episodes = videos.map((v) => ({
     videoId: v.videoId,
-    episodeNumber: videos.length - i,
     title: v.title,
     publishedAt: v.publishedAt,
-  }))
+  }));
 
-  const latest = videos[0] ?? null
+  const latest = videos[0] ?? null;
 
   return (
     <div>
@@ -45,15 +44,15 @@ export default async function ConversationsPage() {
             The Solomon Atah Podcast
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Commissioning, curating, and archiving scholarly conversations with PhD holders and PhD
-            candidates — elevating African and Africa-focused research within global intellectual
-            discourse.
+            Commissioning, curating, and archiving scholarly conversations with
+            PhD holders and PhD candidates — elevating African and
+            Africa-focused research within global intellectual discourse.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             {[
-              { label: 'YouTube', href: 'https://youtube.com/@solomonatah' },
-              { label: 'Spotify', href: '#' },
-              { label: 'Apple Podcasts', href: '#' },
+              { label: "YouTube", href: "https://youtube.com/@solomonatah" },
+              { label: "Spotify", href: "#" },
+              { label: "Apple Podcasts", href: "#" },
             ].map((p) => (
               <a
                 key={p.label}
@@ -77,7 +76,9 @@ export default async function ConversationsPage() {
               <span className="text-xs font-semibold tracking-[0.15em] uppercase text-gold">
                 Latest
               </span>
-              <span className="text-sm font-medium line-clamp-1">{latest.title}</span>
+              <span className="text-sm font-medium line-clamp-1">
+                {latest.title}
+              </span>
             </div>
             <time className="text-xs text-muted-foreground shrink-0 hidden sm:block">
               {formatDate(latest.publishedAt)}
@@ -109,9 +110,11 @@ export default async function ConversationsPage() {
             </>
           ) : (
             <p className="text-muted-foreground text-sm py-8 text-center">
-              Episodes are loading. Make sure{' '}
-              <code className="text-xs bg-muted px-1 py-0.5 rounded">YOUTUBE_CHANNEL_ID</code> is
-              set in your environment.
+              Episodes are loading. Make sure{" "}
+              <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                YOUTUBE_CHANNEL_ID
+              </code>{" "}
+              is set in your environment.
             </p>
           )}
         </div>
@@ -138,21 +141,33 @@ export default async function ConversationsPage() {
                     <span className="text-xs font-semibold tracking-[0.15em] uppercase text-gold">
                       {CATEGORY_LABEL[a.category] ?? a.category}
                     </span>
-                    <span className="text-xs text-muted-foreground font-mono shrink-0">{a.year}</span>
+                    <span className="text-xs text-muted-foreground font-mono shrink-0">
+                      {a.year}
+                    </span>
                   </div>
-                  <h3 className="font-fraunces text-lg font-light leading-snug mb-2">{a.title}</h3>
-                  {a.issuer && <p className="text-sm text-muted-foreground mb-2">{a.issuer}</p>}
+                  <h3 className="font-fraunces text-lg font-light leading-snug mb-2">
+                    {a.title}
+                  </h3>
+                  {a.issuer && (
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {a.issuer}
+                    </p>
+                  )}
                   {a.description && (
-                    <p className="text-sm text-muted-foreground leading-relaxed">{a.description}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {a.description}
+                    </p>
                   )}
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-muted-foreground text-sm">Achievements will be listed here.</p>
+            <p className="text-muted-foreground text-sm">
+              Achievements will be listed here.
+            </p>
           )}
         </div>
       </section>
     </div>
-  )
+  );
 }
