@@ -300,12 +300,13 @@ export function MerchandisePageContent() {
               Leave your email to be notified when new merchandise and book editions launch.
             </p>
             <form className="flex flex-col sm:flex-row gap-3" action={FORM_ENDPOINT} method="POST">
-              <input type="hidden" name="_subject" value="Merchandise and books launch notification request" />
+              <input type="hidden" name="_subject" value="New newsletter signup enquiry from solomonatah.com" />
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_next" value="https://solomonatah.com/merchandise" />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} aria-hidden="true" />
-              <input type="hidden" name="request_type" value="Notify me about merchandise and book launches" />
+              <input type="hidden" name="enquiry_type" value="Newsletter Signup" />
+              <input type="hidden" name="message" value="Please add this email to newsletter and launch updates." />
               <input
                 type="email"
                 name="email"
