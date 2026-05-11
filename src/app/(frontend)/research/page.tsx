@@ -461,9 +461,7 @@ export default function ResearchPage() {
                 Research &amp; Publishing
               </h1>
               <p className="text-lg text-white/75 leading-relaxed max-w-xl">
-                Frounti and nunoc wie provides nkitin to bter ffoe of ssorb ofono. We
-                neofe prevtoir wide flauliting cultures for one meevary addibility can for
-                get on orcaise into the citv.
+                Books and research positioned as intellectual infrastructure. We produce knowledge designed not for momentary visibility but for generational continuity.
               </p>
             </div>
             <div className="hidden lg:flex flex-col justify-end pb-16 pt-36 gap-4 items-end">
@@ -504,18 +502,16 @@ export default function ResearchPage() {
               </p>
               <h2 className="font-fraunces text-4xl font-light mb-6">NinTA Research</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                NinTA&apos;s research / dtaerosed is new or kere ati ama mause of Solomon Adar Fs, Ld.
-                stte ot fut fractibes aba wie kners dm o moavest ry you ai&apos;ti stbac, and
-                algmors and pablity ot audit alsot areat borners barexys oe may as jolie ments.
+                NinTA, Narrative Intelligence Africa, is the analytical engine of Solomon Atah Pty Ltd. We conduct narrative-focused research for institutions, governments, and organisations seeking to understand and reshape the stories that govern them. Our work bridges academic rigour and strategic application.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Pre with global in temas, guts, and at grope agr angtore.
+                Enquire about research collaboration
               </p>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
               >
-                Ensure measurement of narrate →
+                Enquire about research collaboration →
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -603,9 +599,7 @@ export default function ResearchPage() {
             </p>
             <h2 className="font-fraunces text-4xl font-light mb-4">Ninta Publishing</h2>
             <p className="text-muted-foreground leading-relaxed max-w-2xl">
-              Ninka flie biling is a meita c nuka cad, storetds as sand adseural sazas are —
-              wnie, saed tn say, and imports of capen followed srice itv is usecarfhat then
-              sot its meost areas, ure and curiosty ansewly gtibs me to got mecifulty.
+              Ninta Publishing produces books that function as intellectual infrastructure - ideas built to last, arguments designed to be returned to, frameworks intended for institutional use. We also offer publishing services to academics.
             </p>
           </div>
 
@@ -679,8 +673,7 @@ export default function ResearchPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <h2 className="font-fraunces text-4xl font-light mb-3">Publishing Services</h2>
           <p className="text-muted-foreground leading-relaxed max-w-2xl mb-12">
-            News the help and provide a with nisar consela an plest eursen is a pozararie, —
-            eneer ales to you, and nassar ta ensure is barsta grom by publishsigas.
+            We work with academics and scholars to develop, edit, design, and publish works that translate complex scholarship into durable public documents. Enquiries welcome.
           </p>
 
           <div className="grid lg:grid-cols-3 gap-8">
@@ -704,11 +697,10 @@ export default function ResearchPage() {
               <div className="border border-border rounded-sm p-8 sticky top-24">
                 <h3 className="font-fraunces text-xl mb-4">Publishing Services</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  We work with academics and scholars to develop, edit, design, and publish works
-                  that the most solutions do floss else for pasts main.
+                  We work with academics and scholars to develop, edit, design, and publish works that translate complex scholarship into durable public documents.
                 </p>
                 <Link href="/contact" className="text-sm text-purple hover:underline block mb-6">
-                  Publishing us →
+                  Publishing enquiries →
                 </Link>
                 <Link
                   href="/contact"
@@ -727,12 +719,10 @@ export default function ResearchPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
           <div className="max-w-4xl">
             <p className="text-xs font-semibold tracking-[0.22em] uppercase text-gold mb-8">
-              Our Proufe
+              Our Approach
             </p>
             <p className="font-fraunces text-3xl md:text-4xl font-light leading-relaxed text-white/90 text-pretty">
-              We build ideas that enclose Inceolate complex scholarship innecatable intelligence,
-              and consemnot natworks revrems that shape institutions mather has morely respond to
-              them.
+              We build ideas that endure, translate complex scholarship into public intelligence, and construct narrative systems that shape institutions rather than merely respond to them.
             </p>
           </div>
         </div>
