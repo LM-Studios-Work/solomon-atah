@@ -1,6 +1,15 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import {
+  BriefcaseBusiness,
+  GraduationCap,
+  Mic2,
+  Monitor,
+  UsersRound,
+} from 'lucide-react'
+import { EventCard } from '@/components/sections/EventCard'
+import { UPCOMING_EVENTS } from '@/lib/events'
 
 export const metadata: Metadata = {
   title: 'Academic Services, Solomon Atah Pty Ltd',
@@ -20,50 +29,42 @@ const SERVICES = [
       'Media, knowledge, and accountability',
       'Storytelling as strategy',
     ],
+    icon: Mic2,
   },
   {
     title: 'Academic Consulting',
     description:
       'A consultation pathway for students, researchers, professionals, and others who want to speak with academics in our space. We help route serious enquiries to suitable scholars for field-specific guidance, research direction, and intellectual engagement.',
     themes: [],
+    icon: UsersRound,
   },
   {
     title: 'Research Advisory',
     description:
       'Advisory support for research projects, doctoral candidates, and academic programmes, with particular expertise in narrative methodology, qualitative research design, and knowledge dissemination.',
     themes: [],
+    icon: GraduationCap,
   },
   {
     title: 'Institutional Workshops',
     description:
       'Structured workshops delivered to academic departments, research institutes, and professional organisations on narrative analysis, public communication of research, and institutional storytelling.',
     themes: [],
+    icon: Monitor,
   },
   {
     title: 'Website Services for Academics',
     description:
       'Design and development of professional academic websites, helping scholars establish a durable digital presence that reflects the quality of their intellectual work. Includes portfolio sites, research pages, and speaking profiles.',
     themes: [],
-  },
-]
-
-const UPCOMING_EVENTS = [
-  {
-    title: 'Academia in the Public Interest Conference',
-    subtitle: 'Where Scholarship Meets Society',
-    date: '5 September 2026',
-    location: 'Johannesburg, South Africa',
-    type: 'Conference',
-    hashtag: '#KnowTomorrowToday',
-    image: '/company%20resources/event_sep.jpeg',
+    icon: BriefcaseBusiness,
   },
 ]
 
 export default function AcademicServicesPage() {
   return (
-    <div>
-      {/* ── Hero ──────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[62vh] overflow-hidden border-b border-border flex items-end">
+    <div className="bg-background text-foreground">
+      <section className="relative min-h-[430px] overflow-hidden border-b border-border bg-purple text-white md:min-h-[500px]">
         <Image
           src="/company%20resources/academic%20hero.webp"
           alt="Academic Services"
@@ -72,72 +73,91 @@ export default function AcademicServicesPage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="relative z-10 w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 pt-32 md:pb-18 md:pt-40">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+        <div className="absolute inset-0 bg-purple/68" />
+        <div className="relative z-10 mx-auto flex min-h-[430px] max-w-7xl items-end px-4 pb-16 pt-24 sm:px-6 md:min-h-[500px] md:pb-20 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
               Solomon Atah Pty Ltd
             </p>
-            <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6 text-white">
+            <h1 className="mb-6 font-fraunces text-5xl font-light leading-tight text-white md:text-7xl">
               Academic Services
             </h1>
-            <p className="text-xl text-white/82 leading-relaxed max-w-2xl">
-              Institutional engagement, academic consultation access, and professional services at
-              the intersection of academic rigour and public practice.
+            <p className="max-w-2xl text-base leading-relaxed text-white/84 md:text-lg">
+              Institutional engagement, academic consultation access, and professional services
+              at the intersection of academic rigour and public practice.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Services ──────────────────────────────────────────────────────────── */}
       <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-10">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               What We Offer
             </span>
-            <div className="flex-1 h-px bg-border" />
+            <div className="h-px flex-1 bg-border" />
           </div>
 
-          <div className="space-y-8">
-            {SERVICES.map((service) => (
-              <div
-                key={service.title}
-                className="border border-border rounded-sm p-8 hover:border-purple/30 transition-colors"
-              >
-                <h2 className="font-fraunces text-2xl mb-4">{service.title}</h2>
-                <p className="text-muted-foreground leading-relaxed mb-4 max-w-3xl">
-                  {service.description}
-                </p>
-                {service.themes.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                      Keynote Themes
-                    </p>
-                    <ul className="space-y-1">
-                      {service.themes.map((theme) => (
-                        <li key={theme} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="text-gold mt-1">-</span>
-                          {theme}
-                        </li>
-                      ))}
-                    </ul>
+          <div className="grid gap-5 md:grid-cols-2">
+            {SERVICES.slice(0, 4).map((service) => {
+              const Icon = service.icon
+
+              return (
+                <article
+                  key={service.title}
+                  className="flex min-h-[310px] flex-col border border-border bg-card shadow-[0_12px_28px_rgba(0,0,0,0.04)]"
+                >
+                  <div className="flex items-center gap-3 border-b border-purple/20 bg-purple px-6 py-4 text-white">
+                    <Icon className="h-5 w-5 text-gold" strokeWidth={1.45} />
+                    <h2 className="font-fraunces text-xl font-light">{service.title}</h2>
                   </div>
-                )}
-              </div>
-            ))}
+                  <div className="flex flex-1 flex-col p-6">
+                    <div>
+                      <p className="mb-5 text-sm leading-7 text-muted-foreground">
+                        {service.description}
+                      </p>
+                      {service.themes.length > 0 && (
+                        <div>
+                          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                            Keynote Themes
+                          </p>
+                          <ul className="space-y-1.5">
+                            {service.themes.map((theme) => (
+                              <li
+                                key={theme}
+                                className="flex items-start gap-2 text-sm text-muted-foreground"
+                              >
+                                <span className="mt-1.5 h-px w-3 shrink-0 bg-gold" />
+                                <span>{theme}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="mt-auto inline-flex w-fit items-center border-b border-gold/45 pt-7 text-sm font-semibold text-gold transition-colors hover:border-purple hover:text-purple"
+                    >
+                      Learn More
+                    </Link>
+                  </div>
+                </article>
+              )
+            })}
           </div>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
+              className="inline-flex items-center rounded-sm bg-purple px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-purple-800"
             >
               Book a Speaking Engagement
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
+              className="inline-flex items-center rounded-sm border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-purple/40"
             >
               Request Academic Consultation
             </Link>
@@ -145,14 +165,13 @@ export default function AcademicServicesPage() {
         </div>
       </section>
 
-      {/* ── Awards & Recognitions ─────────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mb-8 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               Awards &amp; Recognitions
             </span>
-            <div className="flex-1 h-px bg-border" />
+            <div className="h-px flex-1 bg-border" />
           </div>
           <p className="text-sm text-muted-foreground">
             Awards and institutional recognitions will be listed here.
@@ -160,52 +179,23 @@ export default function AcademicServicesPage() {
         </div>
       </section>
 
-      {/* ── Event Calendar ────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+      <section className="border-b border-border bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-8 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               Upcoming Events
             </span>
-            <div className="flex-1 h-px bg-border" />
+            <div className="h-px flex-1 bg-border" />
           </div>
 
           {UPCOMING_EVENTS.length > 0 ? (
             <div className="space-y-10">
               {UPCOMING_EVENTS.map((event) => (
-                <div key={event.title} className="grid md:grid-cols-2 gap-8 items-start">
-                  <div className="relative w-full max-w-xs aspect-[3/4] rounded-sm overflow-hidden shadow-md">
-                    <Image
-                      src={event.image}
-                      alt={event.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center py-4">
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground w-fit mb-4">
-                      {event.type}
-                    </span>
-                    <h3 className="font-fraunces text-3xl font-light mb-2">{event.title}</h3>
-                    {event.subtitle && (
-                      <p className="text-muted-foreground italic mb-5">{event.subtitle}</p>
-                    )}
-                    <div className="space-y-2 mb-6">
-                      <p className="text-sm font-semibold text-gold">{event.date}</p>
-                      <p className="text-sm text-muted-foreground">{event.location}</p>
-                      {event.hashtag && (
-                        <p className="text-sm text-purple font-medium">{event.hashtag}</p>
-                      )}
-                    </div>
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors w-fit"
-                    >
-                      Register Interest
-                    </Link>
-                  </div>
-                </div>
+                <EventCard
+                  key={event.title}
+                  event={event}
+                  showMap
+                />
               ))}
             </div>
           ) : (
@@ -222,3 +212,4 @@ export default function AcademicServicesPage() {
     </div>
   )
 }
+

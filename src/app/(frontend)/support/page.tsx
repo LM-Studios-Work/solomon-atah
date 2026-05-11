@@ -1,5 +1,6 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Building2, HeartHandshake, Landmark, LibraryBig } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Support, Solomon Atah Pty Ltd',
@@ -7,204 +8,123 @@ export const metadata: Metadata = {
     'Support the work of Solomon Atah Pty Ltd, donate, become a patron, or partner with us.',
 }
 
-const PATRON_TIERS = [
+const SUPPORT_OPTIONS = [
   {
-    name: 'Reader',
-    amount: 'R50 / month',
+    title: 'Patron Support',
     description:
-      'Support the archive and keep conversations freely accessible to everyone. Named acknowledgement in our annual report.',
-    perks: [
-      'Named patron acknowledgement',
-      'Access to Dispatches newsletter',
-    ],
+      'Sustain the archive, editorial work, scholar profiles, reading lists, and public scholarship infrastructure.',
+    action: 'Become a patron',
+    href: '/contact',
+    icon: HeartHandshake,
   },
   {
-    name: 'Scholar',
-    amount: 'R200 / month',
+    title: 'Institutional Partnership',
     description:
-      'Support the academic translation work, the research, editorial summaries, further reading lists, and citation infrastructure.',
-    perks: [
-      'Everything in Reader',
-      'Early access to new conversations',
-      'Quarterly supporter update',
-    ],
-    featured: true,
+      'For universities, foundations, cultural organisations, and aligned institutions supporting serious public knowledge.',
+    action: 'Discuss partnership',
+    href: '/partner',
+    icon: Building2,
   },
   {
-    name: 'Institutional',
-    amount: 'R1 000 / month',
+    title: 'Academic Translation',
     description:
-      'Institutional-level support for universities, foundations, and organisations that value the existence of rigorous public scholarship.',
-    perks: [
-      'Everything in Scholar',
-      'Institutional acknowledgement on website',
-      'Direct line to research and partnership discussions',
-    ],
+      'Fund transcripts, summaries, citations, research notes, and materials that make scholarship easier to use.',
+    action: 'Support translation',
+    href: '/partner',
+    icon: LibraryBig,
   },
 ]
 
 export default function SupportPage() {
   return (
-    <div>
-      {/* ── Page Header ───────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-            Solomon Atah Pty Ltd
+    <div className="bg-background text-foreground">
+      <section className="border-b border-border bg-purple text-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+            Support
           </p>
-          <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6">
+          <h1 className="mb-6 max-w-3xl font-fraunces text-5xl font-light leading-tight md:text-7xl">
             Support Our Work
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            The archive is free. The scholarship is rigorous. The work is ongoing. Your support
-            makes it possible to sustain and expand the intellectual infrastructure we are
-            building.
+          <p className="max-w-2xl text-base leading-relaxed text-white/78 md:text-lg">
+            The archive is free. The scholarship is rigorous. The work is ongoing. Support helps
+            sustain the intellectual infrastructure being built across media, research, and public
+            scholarship.
           </p>
         </div>
       </section>
 
-      {/* ── Patron Tiers ──────────────────────────────────────────────────────── */}
       <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-3xl mb-10">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-              Patron Programme
-            </p>
-            <h2 className="font-fraunces text-4xl font-light mb-4">Become a Patron</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Patrons sustain the archive, the research, and the editorial work that makes
-              scholarly conversations accessible to everyone. Choose the level of support
-              that suits you.
-            </p>
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Ways to Support
+            </span>
+            <div className="h-px flex-1 bg-border" />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {PATRON_TIERS.map((tier) => (
-              <div
-                key={tier.name}
-                className={`border rounded-sm p-8 relative flex h-full flex-col ${
-                  tier.featured
-                    ? 'border-purple bg-purple/5'
-                    : 'border-border hover:border-purple/30'
-                } transition-colors`}
-              >
-                {tier.featured && (
-                  <div className="absolute -top-3 left-6">
-                    <span className="text-xs font-semibold uppercase tracking-wider px-3 py-1 bg-purple text-white rounded-full">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                <div className="mb-6">
-                  <h3 className="font-fraunces text-2xl mb-1">{tier.name}</h3>
-                  <p className="text-gold font-semibold">{tier.amount}</p>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  {tier.description}
-                </p>
-                <ul className="space-y-2 mb-8">
-                  {tier.perks.map((perk) => (
-                    <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="text-gold mt-0.5">✓</span>
-                      {perk}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="#"
-                  className={`mt-auto inline-flex w-full items-center justify-center px-4 py-2.5 text-sm font-medium rounded-sm transition-colors ${
-                    tier.featured
-                      ? 'bg-purple text-white hover:bg-purple/90'
-                      : 'border border-border hover:border-purple/40 hover:bg-muted/40'
-                  }`}
-                >
-                  Become a {tier.name}
-                </a>
-              </div>
-            ))}
+          <div className="grid gap-5 md:grid-cols-3">
+            {SUPPORT_OPTIONS.map((option) => {
+              const Icon = option.icon
+
+              return (
+                <article key={option.title} className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
+                  <Icon className="mb-6 h-9 w-9 text-gold" strokeWidth={1.35} />
+                  <h2 className="mb-3 font-fraunces text-2xl font-light">{option.title}</h2>
+                  <p className="mb-7 text-sm leading-7 text-muted-foreground">{option.description}</p>
+                  <Link href={option.href} className="text-sm font-medium text-purple hover:underline">
+                    {option.action} →
+                  </Link>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── One-time Donation ─────────────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-                One-Time Support
-              </p>
-              <h2 className="font-fraunces text-3xl font-light mb-4">Make a Donation</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Prefer to give once? One-time donations directly support the production of new
-                conversations, the maintenance of the archive, and the ongoing academic
-                translation work.
-              </p>
-            </div>
-            <div className="border border-border rounded-sm p-8 h-full">
-              <p className="text-sm text-muted-foreground mb-6">
-                One-time donation processing is being set up. In the meantime, contact us
-                directly to arrange a contribution.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
-              >
-                Contact us to donate
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Support Academic Translation ──────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-              Targeted Giving
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 md:grid-cols-[1fr_0.8fr] md:items-center lg:px-8">
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              One-Time Support
             </p>
-            <h2 className="font-fraunces text-3xl font-light mb-6">
-              Support Academic Translation Work
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              The editorial work, transcripts, summaries, citation infrastructure, further
-              reading lists, scholar profiles, is expensive and time-consuming. Targeted
-              contributions to this work ensure that the archive remains a serious intellectual
-              resource, not just a content library.
+            <h2 className="mb-4 font-fraunces text-4xl font-light">Make a Donation</h2>
+            <p className="max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+              One-time donations directly support new conversations, archive maintenance,
+              research summaries, and academic translation work.
+            </p>
+          </div>
+          <div className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
+            <Landmark className="mb-5 h-8 w-8 text-gold" strokeWidth={1.4} />
+            <p className="mb-6 text-sm leading-7 text-muted-foreground">
+              Donation processing is being set up. For now, contact us directly and we will route
+              the contribution properly.
             </p>
             <Link
-              href="/partner"
-              className="inline-flex items-center px-5 py-2.5 border border-border text-sm font-medium rounded-sm hover:border-purple/40 hover:bg-muted/40 transition-colors"
+              href="/contact"
+              className="inline-flex rounded-sm bg-purple px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-purple-800"
             >
-              Partner with us →
+              Contact us to donate
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Partnership Enquiries ─────────────────────────────────────────────── */}
       <section className="bg-purple text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-              Institutional Partnerships
-            </p>
-            <h2 className="font-fraunces text-3xl font-light mb-4">
-              Partner With Solomon Atah Pty Ltd
-            </h2>
-            <p className="text-white/70 leading-relaxed mb-6">
-              Universities, foundations, cultural organisations, and mission-aligned institutions
-              are invited to explore formal partnership, co-production, research collaboration,
-              media sponsorship, and strategic alliances.
-            </p>
-            <Link
-              href="/partner"
-              className="inline-flex items-center px-5 py-2.5 bg-white text-purple text-sm font-medium rounded-sm hover:bg-white/90 transition-colors"
-            >
-              Partnership enquiries
-            </Link>
-          </div>
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+            Institutional Partnerships
+          </p>
+          <p className="mb-7 max-w-4xl font-fraunces text-2xl font-light leading-tight md:text-4xl">
+            Universities, foundations, cultural organisations, and mission-aligned institutions
+            are invited to explore formal partnership and strategic alliances.
+          </p>
+          <Link
+            href="/partner"
+            className="inline-flex rounded-sm bg-white px-5 py-2.5 text-sm font-medium text-purple transition-colors hover:bg-white/90"
+          >
+            Partnership enquiries
+          </Link>
         </div>
       </section>
     </div>

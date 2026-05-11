@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
+import { EventCard } from '@/components/sections/EventCard'
+import { UPCOMING_EVENTS } from '@/lib/events'
 
 export const metadata: Metadata = {
   title: 'Events, Solomon Atah Pty Ltd',
@@ -8,82 +9,47 @@ export const metadata: Metadata = {
     'Upcoming events from Solomon Atah Pty Ltd, including the Academia in the Public Interest Conference.',
 }
 
-const EVENTS = [
-  {
-    title: 'Academia in the Public Interest Conference',
-    subtitle: 'Where Scholarship Meets Society',
-    presenter: 'The Solomon Atah Podcast Presents',
-    date: '5 September 2026',
-    location: 'Johannesburg, South Africa',
-    type: 'Conference',
-    hashtag: '#KnowTomorrowToday',
-    image: '/company%20resources/event_sep.jpeg',
-  },
-]
-
 export default function EventsPage() {
   return (
-    <div>
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-            Solomon Atah Pty Ltd
-          </p>
-          <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6">
-            Events
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Conferences, public scholarship gatherings, and institutional events from
-            Solomon Atah Pty Ltd.
-          </p>
+    <div className="bg-background text-foreground">
+      <section className="relative min-h-[430px] overflow-hidden border-b border-border bg-purple text-white md:min-h-[500px]">
+        <Image
+          src="/company%20resources/academic%20hero.webp"
+          alt="Academic event library"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-purple/72" />
+        <div className="relative z-10 mx-auto flex min-h-[430px] max-w-7xl items-end px-4 pb-16 pt-24 sm:px-6 md:min-h-[500px] md:pb-20 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              Public Programmes
+            </p>
+            <h1 className="mb-6 font-fraunces text-5xl font-light leading-tight text-white md:text-7xl">
+              Events
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-white/84 md:text-lg">
+              Conferences, public scholarship gatherings, and institutional events built for
+              rigorous conversation and long-horizon intellectual work.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-border bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-10">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               Upcoming Events
             </span>
-            <div className="flex-1 h-px bg-border" />
+            <div className="h-px flex-1 bg-border" />
           </div>
 
-          <div className="space-y-12">
-            {EVENTS.map((event) => (
-              <article key={event.title} className="grid gap-8 md:grid-cols-[minmax(220px,320px)_1fr] md:items-start">
-                <div className="relative w-full max-w-xs aspect-[3/4] rounded-sm overflow-hidden shadow-md">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 320px"
-                  />
-                </div>
-                <div className="py-2">
-                  <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">
-                    {event.presenter}
-                  </p>
-                  <span className="inline-flex text-xs font-medium px-2 py-0.5 rounded-full border border-border text-muted-foreground mb-4">
-                    {event.type}
-                  </span>
-                  <h2 className="font-fraunces text-3xl md:text-4xl font-light mb-2">
-                    {event.title}
-                  </h2>
-                  <p className="text-muted-foreground mb-6 italic">{event.subtitle}</p>
-                  <div className="space-y-2 mb-7">
-                    <p className="text-sm font-semibold text-gold">{event.date}</p>
-                    <p className="text-sm text-muted-foreground">{event.location}</p>
-                    <p className="text-sm text-purple font-medium">{event.hashtag}</p>
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
-                  >
-                    Register Interest
-                  </Link>
-                </div>
-              </article>
+          <div className="grid gap-8">
+            {UPCOMING_EVENTS.map((event) => (
+              <EventCard key={event.title} event={event} showMap />
             ))}
           </div>
         </div>
@@ -91,3 +57,4 @@ export default function EventsPage() {
     </div>
   )
 }
+

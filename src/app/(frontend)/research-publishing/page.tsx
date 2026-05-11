@@ -1,5 +1,1 @@
-import { redirect } from "next/navigation";
-
-export default function ResearchPublishingPage() {
-  redirect("/research");
-}
+export { default, metadata } from '../research/page'

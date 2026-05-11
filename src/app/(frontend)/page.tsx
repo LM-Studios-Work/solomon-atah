@@ -1,8 +1,9 @@
 ﻿import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { getPublishedConversations } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
+import { EventCard } from '@/components/sections/EventCard'
+import { UPCOMING_EVENTS } from '@/lib/events'
 
 export const metadata: Metadata = {
   title: 'Solomon Atah Pty Ltd, Know Tomorrow Today',
@@ -290,38 +291,14 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 items-start">
-            <Link href="/events" className="group block">
-              <div className="relative w-full aspect-[3/4] max-w-xs rounded-sm overflow-hidden">
-                <Image
-                  src="/company%20resources/event_sep.jpeg"
-                  alt="Academia in the Public Interest Conference"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
-              </div>
-            </Link>
-            <div className="flex flex-col justify-center">
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">
-                The Solomon Atah Podcast Presents
-              </p>
-              <h3 className="font-fraunces text-3xl md:text-4xl font-light mb-2">
-                Academia in the Public Interest Conference
-              </h3>
-              <p className="text-muted-foreground mb-5 italic">Where Scholarship Meets Society</p>
-              <div className="space-y-2 mb-6">
-                <p className="text-sm font-medium">5 September 2026</p>
-                <p className="text-sm text-muted-foreground">Johannesburg, South Africa</p>
-              </div>
-              <Link
-                href="/events"
-                className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors w-fit"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
+          {UPCOMING_EVENTS[0] && (
+            <EventCard
+              event={UPCOMING_EVENTS[0]}
+              ctaHref="/events"
+              ctaLabel="Learn More"
+              showMap
+            />
+          )}
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Clapperboard, FileText, Handshake, Play, RadioTower } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Film Projects, Solomon Atah Pty Ltd',
@@ -8,215 +9,168 @@ export const metadata: Metadata = {
     'The film division of Solomon Atah Pty Ltd, documentary projects, narrative film, and productions in development.',
 }
 
-const DOCUMENTARY_PROJECTS: {
-  title: string
-  logline: string
-  status: 'In Development' | 'In Production' | 'Completed'
-}[] = [
-  // Add documentary projects here
+const FILM_PROJECTS = [
+  {
+    title: 'Narrative Intelligence Africa',
+    category: 'Documentary',
+    logline:
+      'A documentary project examining how public stories shape institutions, power, and cultural memory across African contexts.',
+    status: 'In Development',
+    image: '/company%20resources/africa_film_division.jpeg',
+  },
+  {
+    title: 'The Public Interest Archive',
+    category: 'Documentary Series',
+    logline:
+      'A long-form series extending academic conversations into cinematic essays for scholars, institutions, and public audiences.',
+    status: 'Concept',
+    image: '/company%20resources/film_division.jpeg',
+  },
 ]
 
-const NARRATIVE_PROJECTS: {
-  title: string
-  logline: string
-  status: 'In Development' | 'In Production' | 'Completed'
-}[] = [
-  // Add narrative film projects here
+const PRODUCTION_NOTES = [
+  {
+    title: 'Documentary Development',
+    description: 'Research-led factual projects, interviews, archive work, and field production.',
+    icon: Clapperboard,
+  },
+  {
+    title: 'Narrative Film',
+    description: 'Scripted projects shaped by institutional critique, cultural memory, and public ideas.',
+    icon: Play,
+  },
+  {
+    title: 'Concept Notes',
+    description: 'Treatment documents available for verified broadcasters, producers, and funders.',
+    icon: FileText,
+  },
 ]
 
 export default function FilmPage() {
   return (
-    <div>
-      {/* ── Hero image ────────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="relative w-full h-72 md:h-96 overflow-hidden">
-          <Image
-            src="/company%20resources/film_division.jpeg"
-            alt="Solomon Atah Film Division"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="absolute inset-0 flex items-end">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">
-                Solomon Atah Pty Ltd
-              </p>
-              <h1 className="font-fraunces text-5xl md:text-6xl font-light text-white leading-tight">
-                Film Projects
-              </h1>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Intro ─────────────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            The film division develops documentary and narrative projects that translate intellectual
-            inquiry into cinematic form, extending the work of research and scholarship into
-            moving image.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Documentary Projects ──────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-              Documentary Projects
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-
-          {DOCUMENTARY_PROJECTS.length > 0 ? (
-            <div className="grid sm:grid-cols-2 gap-6">
-              {DOCUMENTARY_PROJECTS.map((project) => (
-                <ProjectCard key={project.title} project={project} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              Documentary projects will be listed here as they move into active development.
-            </p>
-          )}
-        </div>
-      </section>
-
-      {/* ── Narrative Film ────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-              Narrative Film Projects
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-
-          {NARRATIVE_PROJECTS.length > 0 ? (
-            <div className="grid sm:grid-cols-2 gap-6">
-              {NARRATIVE_PROJECTS.map((project) => (
-                <ProjectCard key={project.title} project={project} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              Narrative film projects will be listed here as they move into active development.
-            </p>
-          )}
-        </div>
-      </section>
-
-      {/* ── Concept Notes ────────────────────────────────────────────────────── */}
-      <section className="border-b border-border bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-              Concept Notes
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
+    <div className="bg-background text-foreground">
+      <section className="relative min-h-[460px] overflow-hidden border-b border-border bg-purple text-white md:min-h-[540px]">
+        <Image
+          src="/company%20resources/film_division.jpeg"
+          alt="Solomon Atah Film Division"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-purple/70" />
+        <div className="relative z-10 mx-auto flex min-h-[460px] max-w-7xl items-end px-4 pb-16 pt-24 sm:px-6 md:min-h-[540px] md:pb-20 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Concept notes for projects in development are available to verified production
-              partners, broadcasters, and development funds on request. Each note outlines
-              the intellectual premise, proposed format, and target audience for the project.
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              Solomon Atah Pty Ltd
             </p>
-            <Link
-              href="/contact"
-              className="text-sm text-purple hover:underline font-medium"
-            >
-              Request concept notes →
-            </Link>
+            <h1 className="mb-6 font-fraunces text-5xl font-light leading-tight text-white md:text-7xl">
+              Film Projects
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-white/84 md:text-lg">
+              Documentary and narrative projects that translate intellectual inquiry into
+              cinematic form, extending research, scholarship, and publishing into moving image.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ── Production Partnerships ───────────────────────────────────────────── */}
-      <section className="border-b border-border bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-                Production Partnerships
-              </p>
-              <h2 className="font-fraunces text-3xl font-light mb-6">
-                Collaborate on Film
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                We are open to co-production arrangements, distribution partnerships, and
-                institutional collaborations with broadcasters, cultural organisations, and
-                film development funds that share our commitment to rigorous, intellectually
-                serious storytelling.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-5 py-2.5 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Film Slate
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {FILM_PROJECTS.map((project) => (
+              <article
+                key={project.title}
+                className="group overflow-hidden border border-border bg-card shadow-[0_12px_28px_rgba(0,0,0,0.04)]"
               >
-                Production enquiries
+                <div className="relative aspect-[16/10] overflow-hidden bg-purple">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute left-4 top-4 rounded-full bg-purple px-3 py-1 text-xs font-medium text-white">
+                    {project.status}
+                  </div>
+                </div>
+                <div className="p-6">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+                    {project.category}
+                  </p>
+                  <h2 className="mb-3 font-fraunces text-2xl font-light">{project.title}</h2>
+                  <p className="text-sm leading-7 text-muted-foreground">{project.logline}</p>
+                </div>
+              </article>
+            ))}
+
+            <article className="flex min-h-[360px] flex-col justify-between border border-dashed border-border bg-muted/30 p-6">
+              <div>
+                <RadioTower className="mb-6 h-10 w-10 text-gold" strokeWidth={1.4} />
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Future Listing
+                </p>
+                <h2 className="mb-3 font-fraunces text-2xl font-light">New projects slot here</h2>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  The grid is prepared for additional documentary, narrative, and series projects
+                  as the slate expands.
+                </p>
+              </div>
+              <Link href="/contact" className="mt-8 text-sm font-medium text-purple hover:underline">
+                Submit a production enquiry →
               </Link>
-            </div>
-
-            <div className="relative w-full rounded-sm overflow-hidden">
-              <Image
-                src="/company%20resources/africa_film_division.jpeg"
-                alt="Africa Film Division"
-                width={600}
-                height={800}
-                className="w-full object-cover rounded-sm"
-              />
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
-      {/* ── Our Approach ──────────────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="grid gap-5 md:grid-cols-3">
+            {PRODUCTION_NOTES.map((item) => {
+              const Icon = item.icon
+
+              return (
+                <article key={item.title} className="border border-border bg-card p-6">
+                  <Icon className="mb-5 h-8 w-8 text-gold" strokeWidth={1.4} />
+                  <h3 className="mb-3 font-fraunces text-xl font-light">{item.title}</h3>
+                  <p className="text-sm leading-7 text-muted-foreground">{item.description}</p>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-purple text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:grid-cols-[1fr_auto] md:items-center lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-6">
-              Our Approach
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              Production Partnerships
             </p>
-            <p className="font-fraunces text-2xl md:text-3xl font-light leading-relaxed">
-              Our film work is an extension of the same intellectual commitments that drive
-              our podcast, research, and publishing, rigour, long horizon thinking, and
-              a commitment to ideas that endure. We develop cultural infrastructure, not content.
+            <p className="font-fraunces text-2xl font-light leading-tight md:text-4xl">
+              We are open to co-production, distribution, broadcaster, and institutional
+              partnerships for rigorous film work.
             </p>
           </div>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 text-sm font-medium text-purple transition-colors hover:bg-white/90"
+          >
+            <Handshake className="h-4 w-4" strokeWidth={1.7} />
+            Production enquiries
+          </Link>
         </div>
       </section>
     </div>
   )
 }
 
-function ProjectCard({
-  project,
-}: {
-  project: { title: string; logline: string; status: string }
-}) {
-  const statusColors: Record<string, string> = {
-    'In Development': 'text-gold border-gold/30',
-    'In Production': 'text-purple border-purple/30',
-    Completed: 'text-muted-foreground border-border',
-  }
-
-  return (
-    <div className="border border-border rounded-sm p-6 hover:border-purple/30 transition-colors">
-      <div className="flex items-start justify-between gap-4 mb-3">
-        <h3 className="font-fraunces text-lg leading-snug">{project.title}</h3>
-        <span
-          className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border ${
-            statusColors[project.status] || 'text-muted-foreground border-border'
-          }`}
-        >
-          {project.status}
-        </span>
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed">{project.logline}</p>
-    </div>
-  )
-}

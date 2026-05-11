@@ -1,4 +1,5 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
+import { Mail, MessageSquareText, Podcast, Search } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Contact, Solomon Atah Pty Ltd',
@@ -12,137 +13,112 @@ const CONTACT_CATEGORIES = [
     description:
       'Podcast appearances, episode enquiries, interview requests, and archive questions.',
     email: 'podcast@solomonatah.com',
-    formType: 'podcast',
+    icon: Podcast,
   },
   {
     title: 'Research Collaborations',
     description:
       'Research partnerships, advisory roles, NinTA Research commissions, and academic consulting enquiries.',
     email: 'research@solomonatah.com',
-    formType: 'research',
+    icon: Search,
   },
   {
     title: 'Information Enquiries',
     description:
-      'Questions about the podcast, the archive, Ninta Publishing, film projects, or anything else.',
+      'Questions about the archive, publishing, film projects, partnerships, or general company work.',
     email: 'info@solomonatah.com',
-    formType: 'info',
+    icon: Mail,
   },
 ]
 
 export default function ContactPage() {
   return (
-    <div>
-      {/* ── Page Header ───────────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-            Solomon Atah Pty Ltd
-          </p>
-          <h1 className="font-fraunces text-5xl md:text-6xl font-light leading-tight mb-6">
+    <div className="bg-background text-foreground">
+      <section className="border-b border-border bg-purple text-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
             Contact
+          </p>
+          <h1 className="mb-6 font-fraunces text-5xl font-light leading-tight md:text-7xl">
+            Get in Touch
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Reach the right person directly. Use the form or email address that matches
-            your enquiry.
+          <p className="max-w-2xl text-base leading-relaxed text-white/78 md:text-lg">
+            Reach the right person directly. Choose the enquiry path that fits, or use the form
+            and the message will be routed internally.
           </p>
         </div>
       </section>
 
-      {/* ── Contact categories ────────────────────────────────────────────────── */}
       <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid md:grid-cols-2 gap-6">
-            {CONTACT_CATEGORIES.map((cat) => (
-              <div key={cat.title} className="border border-border rounded-sm p-8 hover:border-purple/30 transition-colors">
-                <h2 className="font-fraunces text-2xl mb-3">{cat.title}</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                  {cat.description}
-                </p>
-                <a
-                  href={`mailto:${cat.email}`}
-                  className="text-sm text-purple hover:underline font-medium"
-                >
-                  {cat.email}
-                </a>
-              </div>
-            ))}
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-10 flex items-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Enquiry Paths
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {CONTACT_CATEGORIES.map((cat) => {
+              const Icon = cat.icon
+
+              return (
+                <article key={cat.title} className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
+                  <Icon className="mb-6 h-9 w-9 text-gold" strokeWidth={1.35} />
+                  <h2 className="mb-3 font-fraunces text-2xl font-light">{cat.title}</h2>
+                  <p className="mb-6 text-sm leading-7 text-muted-foreground">{cat.description}</p>
+                  <a href={`mailto:${cat.email}`} className="text-sm font-medium text-purple hover:underline">
+                    {cat.email}
+                  </a>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── Email Form ────────────────────────────────────────────────────────── */}
       <section className="border-b border-border bg-muted/20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="mb-10">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[0.8fr_1.2fr] md:py-20 lg:px-8">
+          <div>
+            <MessageSquareText className="mb-6 h-10 w-10 text-gold" strokeWidth={1.35} />
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
               Send a Message
             </p>
-            <h2 className="font-fraunces text-3xl font-light mb-3">Get in Touch</h2>
-            <p className="text-muted-foreground">
-              Not sure which category applies? Use this form and we will route your message.
+            <h2 className="mb-4 font-fraunces text-4xl font-light">General Contact Form</h2>
+            <p className="text-sm leading-7 text-muted-foreground md:text-base">
+              Use this form for anything that does not fit neatly into a category. Keep the
+              message specific so it can be routed quickly.
             </p>
           </div>
 
-          <form action="#" method="post" className="space-y-6">
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                  Full Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="w-full px-4 py-2.5 text-sm border border-border rounded-sm bg-background focus:outline-none focus:ring-2 focus:ring-purple/30 focus:border-purple"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full px-4 py-2.5 text-sm border border-border rounded-sm bg-background focus:outline-none focus:ring-2 focus:ring-purple/30 focus:border-purple"
-                />
-              </div>
+          <form action="#" method="post" className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field label="Full Name" id="name" type="text" required />
+              <Field label="Email Address" id="email" type="email" required />
             </div>
-
-            <div>
-              <label htmlFor="organisation" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                Organisation / Institution <span className="font-normal normal-case tracking-normal">(optional)</span>
-              </label>
-              <input
-                id="organisation"
-                name="organisation"
-                type="text"
-                className="w-full px-4 py-2.5 text-sm border border-border rounded-sm bg-background focus:outline-none focus:ring-2 focus:ring-purple/30 focus:border-purple"
-              />
+            <div className="mt-5">
+              <Field label="Organisation / Institution" id="organisation" type="text" />
             </div>
-
-            <div>
-              <label htmlFor="enquiry-type" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            <div className="mt-5">
+              <label htmlFor="enquiry-type" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 Enquiry Type
               </label>
               <select
                 id="enquiry-type"
                 name="enquiry_type"
                 required
-                className="w-full px-4 py-2.5 text-sm border border-border rounded-sm bg-background focus:outline-none focus:ring-2 focus:ring-purple/30 focus:border-purple"
+                className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/20"
               >
                 <option value="">Select a category</option>
                 <option value="podcast">Podcast Enquiry</option>
                 <option value="research">Research Collaboration</option>
+                <option value="film">Film / Production</option>
+                <option value="support">Support / Partnership</option>
                 <option value="info">Information Enquiry</option>
               </select>
             </div>
-
-            <div>
-              <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            <div className="mt-5">
+              <label htmlFor="message" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 Message
               </label>
               <textarea
@@ -150,53 +126,47 @@ export default function ContactPage() {
                 name="message"
                 rows={6}
                 required
-                className="w-full px-4 py-2.5 text-sm border border-border rounded-sm bg-background focus:outline-none focus:ring-2 focus:ring-purple/30 focus:border-purple resize-y"
+                className="w-full resize-y rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/20"
               />
             </div>
-
-            {/* Honeypot */}
             <input type="text" name="website" className="hidden" aria-hidden="true" tabIndex={-1} />
-
             <button
               type="submit"
-              className="px-8 py-3 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
+              className="mt-6 rounded-sm bg-purple px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-800"
             >
               Send Message
             </button>
           </form>
         </div>
       </section>
-
-      {/* ── Social / Follow ───────────────────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
-              Follow the Work
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-          <div className="flex flex-wrap gap-6">
-            {[
-              { label: 'YouTube', href: 'https://youtube.com/@solomonatah' },
-              { label: 'Twitter / X', href: 'https://twitter.com/solomonatah' },
-              { label: 'Instagram', href: 'https://instagram.com/solomonatah' },
-              { label: 'LinkedIn', href: 'https://linkedin.com/in/solomonatah' },
-              { label: 'RSS Feed', href: '/feed.xml' },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith('http') ? '_blank' : undefined}
-                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="text-sm font-medium text-muted-foreground hover:text-purple transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
+
+function Field({
+  label,
+  id,
+  type,
+  required = false,
+}: {
+  label: string
+  id: string
+  type: string
+  required?: boolean
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        required={required}
+        className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/20"
+      />
+    </div>
+  )
+}
+
