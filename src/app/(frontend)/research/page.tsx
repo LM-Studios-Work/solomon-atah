@@ -117,7 +117,7 @@ export default function ResearchPage() {
       <section className="relative w-full min-h-screen flex items-end overflow-hidden">
         {/* Background Image */}
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/company resources/research hero.jpg"
           alt="Academic research and publishing"
           fill
           className="object-cover"
@@ -173,7 +173,7 @@ export default function ResearchPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-muted rounded overflow-hidden aspect-square">
                 <Image
-                  src="/placeholder.svg?height=400&width=400"
+                  src="/company resources/ninta.jpeg"
                   alt="NinTA Research"
                   width={400}
                   height={400}
@@ -182,7 +182,7 @@ export default function ResearchPage() {
               </div>
               <div className="bg-muted rounded overflow-hidden aspect-square">
                 <Image
-                  src="/placeholder.svg?height=400&width=400"
+                  src="/company resources/africa.jpeg"
                   alt="Africa research"
                   width={400}
                   height={400}
@@ -191,7 +191,7 @@ export default function ResearchPage() {
               </div>
               <div className="bg-muted rounded overflow-hidden aspect-square col-span-2">
                 <Image
-                  src="/placeholder.svg?height=400&width=800"
+                  src="/company resources/books_museum.jpeg"
                   alt="Research illustration"
                   width={800}
                   height={400}
@@ -223,14 +223,14 @@ export default function ResearchPage() {
           {/* Book Carousel */}
           <div className="mb-16 overflow-x-auto pb-4 scrollbar-hide">
             <div className="flex gap-6 min-w-min">
-              {[1, 2, 3, 4].map((idx) => (
+              {['book.jpeg', 'book_2.jpeg', 'book_3.jpeg', 'book_2_back.jpeg'].map((book, idx) => (
                 <div
                   key={idx}
                   className="flex-shrink-0 w-48 h-64 bg-muted rounded shadow-sm hover:shadow-md transition-shadow"
                 >
                   <Image
-                    src={`/placeholder.svg?height=400&width=300`}
-                    alt={`Book ${idx}`}
+                    src={`/company resources/${book}`}
+                    alt={`Book ${idx + 1}`}
                     width={300}
                     height={400}
                     className="w-full h-full object-cover rounded"
@@ -266,7 +266,7 @@ export default function ResearchPage() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="relative h-96 bg-gradient-to-br from-purple/10 to-gold/5 rounded overflow-hidden">
               <Image
-                src="/placeholder.svg?height=600&width=400"
+                src="/company resources/book_2_cover.jpeg"
                 alt="University Dynamics"
                 fill
                 className="object-cover"
@@ -277,7 +277,7 @@ export default function ResearchPage() {
             </div>
             <div className="relative h-96 bg-gradient-to-br from-purple/10 to-gold/5 rounded overflow-hidden">
               <Image
-                src="/placeholder.svg?height=600&width=400"
+                src="/company resources/book.jpeg"
                 alt="The University of Money"
                 fill
                 className="object-cover"
