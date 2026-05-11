@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Events", href: "/events" },
   { label: "Film Projects", href: "/film" },
   { label: "Merchandise & Books", href: "/merchandise" },
-  { label: "Support", href: "/support" },
+  { label: "Donate", href: "/support" },
   { label: "Contact", href: "/contact" },
 ];
 

@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { Building2, HeartHandshake, Landmark, LibraryBig } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Support, Solomon Atah Pty Ltd',
+  title: 'Donate, Solomon Atah Pty Ltd',
   description:
-    'Support the work of Solomon Atah Pty Ltd, donate, become a patron, or partner with us.',
+    'Donate to Solomon Atah Pty Ltd, become a patron, or partner with us.',
 }
 
 const SUPPORT_OPTIONS = [
   {
-    title: 'Patron Support',
+    title: 'Patron Donation',
     description:
       'Sustain the archive, editorial work, scholar profiles, reading lists, and public scholarship infrastructure.',
     action: 'Become a patron',
@@ -20,7 +20,7 @@ const SUPPORT_OPTIONS = [
   {
     title: 'Institutional Partnership',
     description:
-      'For universities, foundations, cultural organisations, and aligned institutions supporting serious public knowledge.',
+      'For universities, foundations, cultural organisations, and aligned institutions donating to serious public knowledge.',
     action: 'Discuss partnership',
     href: '/partner',
     icon: Building2,
@@ -29,7 +29,7 @@ const SUPPORT_OPTIONS = [
     title: 'Academic Translation',
     description:
       'Fund transcripts, summaries, citations, research notes, and materials that make scholarship easier to use.',
-    action: 'Support translation',
+    action: 'Donate to translation',
     href: '/partner',
     icon: LibraryBig,
   },
@@ -41,13 +41,13 @@ export default function SupportPage() {
       <section className="border-b border-border bg-purple text-white">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-            Support
+            Donate
           </p>
           <h1 className="mb-6 max-w-3xl font-fraunces text-5xl font-light leading-tight md:text-7xl">
-            Support Our Work
+            Donate
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-white/78 md:text-lg">
-            The archive is free. The scholarship is rigorous. The work is ongoing. Support helps
+            The archive is free. The scholarship is rigorous. The work is ongoing. Donations help
             sustain the intellectual infrastructure being built across media, research, and public
             scholarship.
           </p>
@@ -58,7 +58,7 @@ export default function SupportPage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mb-10 flex items-center gap-4">
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Ways to Support
+              Ways to Donate
             </span>
             <div className="h-px flex-1 bg-border" />
           </div>
@@ -86,11 +86,11 @@ export default function SupportPage() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 md:grid-cols-[1fr_0.8fr] md:items-center lg:px-8">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-              One-Time Support
+              One-Time Donation
             </p>
             <h2 className="mb-4 font-fraunces text-4xl font-light">Make a Donation</h2>
             <p className="max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-              One-time donations directly support new conversations, archive maintenance,
+              One-time donations directly fund new conversations, archive maintenance,
               research summaries, and academic translation work.
             </p>
           </div>

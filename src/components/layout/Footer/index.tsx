@@ -29,9 +29,9 @@ const FOOTER_COLUMNS = [
     ],
   },
   {
-    heading: "Support",
+    heading: "Donate",
     links: [
-      { label: "Support Our Work", href: "/support" },
+      { label: "Donate", href: "/support" },
       { label: "Partner With Us", href: "/partner" },
       { label: "Propose a Conversation", href: "/propose" },
       { label: "Contact", href: "/contact" },

@@ -62,7 +62,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                 href="/support"
                 className="mt-6 inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-sm bg-gold text-gold-foreground hover:bg-gold/90 transition-colors"
               >
-                Support Our Work
+                Donate
               </Link>
             </nav>
           </div>,

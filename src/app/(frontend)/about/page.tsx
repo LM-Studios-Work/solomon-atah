@@ -197,7 +197,7 @@ export default function AboutPage() {
 
             {/* CTA */}
             <div className="border border-border rounded-sm p-6 bg-purple/5">
-              <h3 className="font-fraunces text-lg mb-3">Support Our Work</h3>
+              <h3 className="font-fraunces text-lg mb-3">Donate</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 Sustain the archive, the research, and the editorial work that makes scholarship
                 freely accessible.
@@ -206,7 +206,7 @@ export default function AboutPage() {
                 href="/support"
                 className="inline-flex w-full items-center justify-center px-4 py-2 bg-purple text-white text-sm font-medium rounded-sm hover:bg-purple/90 transition-colors"
               >
-                Support Us
+                Donate
               </Link>
             </div>
 

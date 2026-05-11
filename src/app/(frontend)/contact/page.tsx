@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Mail, MessageSquareText, Podcast, Search } from 'lucide-react'
+import { ContactForm } from '@/components/sections/ContactForm'
 
 export const metadata: Metadata = {
   title: 'Contact, Solomon Atah Pty Ltd',
@@ -91,81 +92,9 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <form action="#" method="post" className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Full Name" id="name" type="text" required />
-              <Field label="Email Address" id="email" type="email" required />
-            </div>
-            <div className="mt-5">
-              <Field label="Organisation / Institution" id="organisation" type="text" />
-            </div>
-            <div className="mt-5">
-              <label htmlFor="enquiry-type" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                Enquiry Type
-              </label>
-              <select
-                id="enquiry-type"
-                name="enquiry_type"
-                required
-                className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/20"
-              >
-                <option value="">Select a category</option>
-                <option value="podcast">Podcast Enquiry</option>
-                <option value="research">Research Collaboration</option>
-                <option value="film">Film / Production</option>
-                <option value="support">Support / Partnership</option>
-                <option value="info">Information Enquiry</option>
-              </select>
-            </div>
-            <div className="mt-5">
-              <label htmlFor="message" className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={6}
-                required
-                className="w-full resize-y rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/20"
-              />
-            </div>
-            <input type="text" name="website" className="hidden" aria-hidden="true" tabIndex={-1} />
-            <button
-              type="submit"
-              className="mt-6 rounded-sm bg-purple px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-800"
-            >
-              Send Message
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
-    </div>
-  )
-}
-
-function Field({
-  label,
-  id,
-  type,
-  required = false,
-}: {
-  label: string
-  id: string
-  type: string
-  required?: boolean
-}) {
-  return (
-    <div>
-      <label htmlFor={id} className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-        {label}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        required={required}
-        className="w-full rounded-sm border border-border bg-background px-4 py-3 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/20"
-      />
     </div>
   )
 }

@@ -55,9 +55,10 @@ const SERVICES = [
   {
     title: 'Website Services for Academics',
     description:
-      'Design and development of professional academic websites, helping scholars establish a durable digital presence that reflects the quality of their intellectual work. Includes portfolio sites, research pages, and speaking profiles.',
+      'Strategic academic websites for scholars who need independent digital infrastructure: a controlled domain, structured research archive, credible public profile, and clear collaboration pathway.',
     themes: [],
     icon: BriefcaseBusiness,
+    href: '/academic-services/website-services',
   },
 ]
 
@@ -99,8 +100,8 @@ export default function AcademicServicesPage() {
             <div className="h-px flex-1 bg-border" />
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {SERVICES.slice(0, 4).map((service) => {
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((service) => {
               const Icon = service.icon
 
               return (
@@ -137,10 +138,10 @@ export default function AcademicServicesPage() {
                       )}
                     </div>
                     <Link
-                      href="/contact"
+                      href={service.href ?? '/contact'}
                       className="mt-auto inline-flex w-fit items-center border-b border-gold/45 pt-7 text-sm font-semibold text-gold transition-colors hover:border-purple hover:text-purple"
                     >
-                      Learn More
+                      {service.href ? 'View Details' : 'Learn More'}
                     </Link>
                   </div>
                 </article>
