@@ -35,12 +35,12 @@ export function EventCard({
     return (
       <article className="grid items-start gap-6 md:grid-cols-2">
         <Link href={ctaHref} className="group block">
-          <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-sm">
+          <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-sm bg-purple/5">
             <Image
               src={event.image}
               alt={event.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 320px"
             />
           </div>
@@ -80,15 +80,15 @@ export function EventCard({
         <div
           className={
             showMap && event.mapEmbedUrl
-              ? 'relative min-h-[320px] overflow-hidden bg-purple sm:min-h-[380px] lg:min-h-full'
-              : 'relative aspect-[3/4] w-full max-w-[220px] overflow-hidden rounded-sm shadow-md'
+              ? 'relative aspect-[3/4] w-full overflow-hidden bg-purple/5 lg:min-h-full lg:aspect-auto'
+              : 'relative aspect-[3/4] w-full max-w-[220px] overflow-hidden rounded-sm bg-purple/5 shadow-md'
           }
         >
           <Image
             src={event.image}
             alt={event.title}
             fill
-            className="object-cover"
+            className={showMap && event.mapEmbedUrl ? 'object-contain lg:object-cover' : 'object-contain'}
             sizes={showMap && event.mapEmbedUrl ? '(max-width: 1024px) 100vw, 280px' : '(max-width: 768px) 100vw, 220px'}
           />
           {showMap && event.mapEmbedUrl && (

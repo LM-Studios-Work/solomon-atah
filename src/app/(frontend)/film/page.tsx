@@ -26,6 +26,12 @@ const FILM_PROJECTS = [
     status: 'Concept',
     image: '/company%20resources/film_division.jpeg',
   },
+  {
+    title: 'Moto Boyz',
+    category: 'Documentary',
+    status: 'In Development',
+    image: '/company%20resources/Moto%20Boyz%20Documentary%20Project.jpeg',
+  },
 ]
 
 const PRODUCTION_NOTES = [
@@ -106,8 +112,12 @@ export default function FilmPage() {
                   <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
                     {project.category}
                   </p>
-                  <h2 className="mb-3 font-fraunces text-2xl font-light">{project.title}</h2>
-                  <p className="text-sm leading-7 text-muted-foreground">{project.logline}</p>
+                  <h2 className="font-fraunces text-2xl font-light">{project.title}</h2>
+                  {'logline' in project && project.logline ? (
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                      {project.logline}
+                    </p>
+                  ) : null}
                 </div>
               </article>
             ))}

@@ -49,7 +49,7 @@ NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 DATABASE_URI=file:./sqlite.db
 ```
 
-The site will work without YouTube API or Resend keys, those features will gracefully degrade.
+The site will work without YouTube API keys; YouTube-powered features will gracefully degrade.
 
 ### Step 3: Run the development server
 
@@ -92,9 +92,6 @@ This creates:
 | `NEXT_PUBLIC_SERVER_URL` | Yes | Full URL of the deployment, e.g. `https://solomonatah.com` |
 | `YOUTUBE_API_KEY` | No* | YouTube Data API v3 key. Required for video sync. |
 | `YOUTUBE_CHANNEL_ID` | No* | Your YouTube channel ID (starts with `UC`). |
-| `RESEND_API_KEY` | No | Resend API key for transactional email. |
-| `RESEND_FROM_ADDRESS` | No | Sender email address, e.g. `noreply@solomonatah.com` |
-| `RESEND_TEAM_EMAIL` | No | Internal address for new proposal notifications. |
 | `CRON_SECRET` | No* | Secret to protect the `/api/cron/sync-youtube` endpoint. Required in production. |
 
 \* *Strongly recommended in production*
@@ -400,7 +397,6 @@ solomon-atah/
     ├── lib/
     │   ├── payload/           # Payload helper functions
     │   ├── youtube/           # YouTube Data API v3 client
-    │   ├── email/             # Resend email client
     │   ├── seo/               # Metadata helpers
     │   ├── fonts.ts           # Fraunces + Inter (next/font)
     │   └── utils.ts           # cn(), formatDate(), citation builders

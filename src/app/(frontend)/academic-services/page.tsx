@@ -22,13 +22,7 @@ const SERVICES = [
     title: 'Speaking & Keynotes',
     description:
       'Solomon Atah delivers keynote addresses and panel contributions on narrative intelligence, African intellectual production, public scholarship, and the intersection of media and knowledge systems.',
-    themes: [
-      'Narrative and institutional power',
-      'The future of African scholarship',
-      'Public intellectual practice',
-      'Media, knowledge, and accountability',
-      'Storytelling as strategy',
-    ],
+    themes: [],
     icon: Mic2,
   },
   {

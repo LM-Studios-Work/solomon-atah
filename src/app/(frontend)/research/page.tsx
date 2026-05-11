@@ -15,6 +15,7 @@ import {
   Search,
   ShieldCheck,
 } from 'lucide-react'
+import { BOOKS, getProductEnquiryHref } from '@/lib/products'
 
 export const metadata: Metadata = {
   title: 'Research & Publishing, Solomon Atah Pty Ltd',
@@ -52,47 +53,6 @@ const RESEARCH_CARDS = [
     description:
       'Study how narratives travel through networks, communities, institutions, and media ecosystems.',
     icon: Network,
-  },
-]
-
-const BOOKS: {
-  title: string
-  subtitle: string | null
-  image: string | null
-  status: string
-  description: string
-}[] = [
-  {
-    title: 'The Narrative Manifesto',
-    subtitle: 'How Stories Harm, And What You Can Do About It',
-    image: '/company%20resources/book.jpeg',
-    status: 'Available',
-    description:
-      'A systematic account of how stories operate as instruments of harm, and a practical framework for resistance and reconstruction.',
-  },
-  {
-    title: 'The Marriage Stock Exchange',
-    subtitle: 'Why Marriage Was Never About Love',
-    image: '/company%20resources/book_2_cover.jpeg',
-    status: 'Available',
-    description:
-      'An institutional and economic reading of marriage as a system of exchange, stripped of its romantic mythology.',
-  },
-  {
-    title: 'The 48 Laws of Personal Sovereignty',
-    subtitle: 'Self Preservation Intelligence',
-    image: '/company%20resources/book_3.jpeg',
-    status: 'Available',
-    description:
-      'A framework for navigating power, autonomy, and self-determination in an age of institutional overreach and social manipulation.',
-  },
-  {
-    title: 'The University of Money',
-    subtitle: 'Financialisation and Higher Education',
-    image: null,
-    status: 'Available',
-    description:
-      'A critical examination of the financialisation of higher education and its consequences for knowledge production.',
   },
 ]
 
@@ -280,12 +240,12 @@ export default function ResearchPage() {
 
           <div id="books" className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {BOOKS.map((book) => (
-              <article key={book.title} className="group">
+              <article key={book.slug} className="group">
                 <div className="relative mb-5 aspect-[2/3] overflow-hidden rounded-sm bg-muted/30 shadow-[0_18px_32px_rgba(0,0,0,0.12)]">
                   {book.image ? (
                     <Image
                       src={book.image}
-                      alt={book.title}
+                      alt={book.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -300,7 +260,7 @@ export default function ResearchPage() {
                   )}
                 </div>
                 <div className="mb-2 flex items-start justify-between gap-3">
-                  <h3 className="font-fraunces text-xl font-light leading-snug">{book.title}</h3>
+                  <h3 className="font-fraunces text-xl font-light leading-snug">{book.name}</h3>
                   <span className="shrink-0 rounded-full border border-purple/25 px-2.5 py-1 text-[11px] font-medium text-purple">
                     {book.status}
                   </span>
@@ -311,9 +271,9 @@ export default function ResearchPage() {
                   </p>
                 )}
                 <p className="mb-4 text-sm leading-6 text-muted-foreground">{book.description}</p>
-                <a href="#" className="text-sm font-medium text-purple hover:underline">
+                <Link href={getProductEnquiryHref(book)} className="text-sm font-medium text-purple hover:underline">
                   Order title →
-                </a>
+                </Link>
               </article>
             ))}
           </div>
