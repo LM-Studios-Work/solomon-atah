@@ -1,11 +1,19 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Building2, HeartHandshake, Landmark, LibraryBig } from 'lucide-react'
+import {
+  ArrowRight,
+  Building2,
+  HeartHandshake,
+  Landmark,
+  LibraryBig,
+  MessageSquarePlus,
+  Podcast,
+} from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Donate, Solomon Atah Pty Ltd',
   description:
-    'Donate to Solomon Atah Pty Ltd, become a patron, or partner with us.',
+    'Donate to Solomon Atah Pty Ltd, become a patron, partner with us, or propose a scholarly conversation.',
 }
 
 const SUPPORT_OPTIONS = [
@@ -32,6 +40,33 @@ const SUPPORT_OPTIONS = [
     action: 'Donate to translation',
     href: '/partner',
     icon: LibraryBig,
+  },
+]
+
+const ENGAGEMENT_OPTIONS = [
+  {
+    title: 'Partner With Us',
+    description:
+      'For institutions, foundations, research groups, cultural organisations, and sponsors interested in formal collaboration.',
+    action: 'Open partnership form',
+    href: '/partner',
+    icon: Building2,
+  },
+  {
+    title: 'Propose a Conversation',
+    description:
+      'For scholars, doctoral candidates, or nominators proposing a rigorous public conversation for the Solomon Atah Podcast.',
+    action: 'Open proposal form',
+    href: '/propose',
+    icon: Podcast,
+  },
+  {
+    title: 'Contact the Company',
+    description:
+      'For donation routing, general enquiries, media requests, research questions, or anything that needs direct follow-up.',
+    action: 'Send a message',
+    href: '/contact',
+    icon: MessageSquarePlus,
   },
 ]
 
@@ -72,8 +107,45 @@ export default function SupportPage() {
                   <Icon className="mb-6 h-9 w-9 text-gold" strokeWidth={1.35} />
                   <h2 className="mb-3 font-fraunces text-2xl font-light">{option.title}</h2>
                   <p className="mb-7 text-sm leading-7 text-muted-foreground">{option.description}</p>
-                  <Link href={option.href} className="text-sm font-medium text-purple hover:underline">
-                    {option.action} →
+                  <Link href={option.href} className="inline-flex items-center gap-2 text-sm font-medium text-purple hover:underline">
+                    {option.action}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              Get Involved
+            </p>
+            <h2 className="mb-4 font-fraunces text-4xl font-light">
+              Partner, propose, or contact us directly
+            </h2>
+            <p className="text-sm leading-7 text-muted-foreground md:text-base">
+              Donation is one way to support the work. If you are trying to collaborate,
+              sponsor a series, nominate a scholar, or propose a conversation, use the
+              dedicated forms below so the enquiry reaches the right workflow.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {ENGAGEMENT_OPTIONS.map((option) => {
+              const Icon = option.icon
+
+              return (
+                <article key={option.title} className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
+                  <Icon className="mb-6 h-9 w-9 text-gold" strokeWidth={1.35} />
+                  <h3 className="mb-3 font-fraunces text-2xl font-light">{option.title}</h3>
+                  <p className="mb-7 text-sm leading-7 text-muted-foreground">{option.description}</p>
+                  <Link href={option.href} className="inline-flex items-center gap-2 text-sm font-medium text-purple hover:underline">
+                    {option.action}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </article>
               )

@@ -7,33 +7,35 @@ const FOOTER_COLUMNS = [
     links: [
       { label: "Podcast", href: "/solomon-atah-podcast" },
       { label: "Scholars", href: "/scholars" },
+      { label: "Conversations", href: "/conversations" },
       { label: "Dispatches", href: "/dispatches" },
+      { label: "Propose a Conversation", href: "/propose" },
     ],
   },
   {
     heading: "Research & Publishing",
     links: [
-      { label: "Ninta Research", href: "/research#ninta-research" },
-      { label: "Ninta Publishing", href: "/research#ninta-publishing" },
-      { label: "Books", href: "/research#books" },
+      { label: "Research", href: "/research" },
+      { label: "Research Publishing", href: "/research-publishing" },
+      { label: "Disciplines", href: "/disciplines" },
+      { label: "Academic Services", href: "/academic-services" },
     ],
   },
   {
-    heading: "Company",
+    heading: "Media & Company",
     links: [
-      { label: "Academic Services", href: "/academic-services" },
       { label: "Events", href: "/events" },
       { label: "Film Projects", href: "/film" },
       { label: "Merchandise & Books", href: "/merchandise" },
+      { label: "Media", href: "/media" },
       { label: "About", href: "/about" },
     ],
   },
   {
-    heading: "Donate",
+    heading: "Get Involved",
     links: [
       { label: "Donate", href: "/support" },
       { label: "Partner With Us", href: "/partner" },
-      { label: "Propose a Conversation", href: "/propose" },
       { label: "Contact", href: "/contact" },
       { label: "RSS Feed", href: "/feed.xml", isExternal: true },
     ],
