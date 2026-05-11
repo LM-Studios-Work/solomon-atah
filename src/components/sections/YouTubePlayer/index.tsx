@@ -15,7 +15,7 @@ export function YouTubePlayer({ videoId, title }: YouTubePlayerProps) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-        className="h-full w-full"
+        className="absolute top-0 left-0 h-full w-full border-0"
       />
     </div>
   );
