@@ -5,6 +5,7 @@ import { DesktopNav } from "./DesktopNav";
 import { MobileMenu } from "./MobileMenu";
 
 const NAV_LINKS = [
+  { label: "About", href: "/about" },
   { label: "Solomon Atah Podcast", href: "/solomon-atah-podcast" },
   { label: "Research & Publishing", href: "/research" },
   { label: "Academic Services", href: "/academic-services" },
