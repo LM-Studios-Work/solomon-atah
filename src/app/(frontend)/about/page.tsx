@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -50,6 +50,131 @@ export default function AboutPage() {
                 and execution. Our work is deliberate, structurally grounded, and future-facing -
                 designed not for momentary visibility but for generational continuity.
               </p>
+            </div>
+          </section>
+
+          {/* Brand positioning */}
+          <section id="positioning">
+            <h2 className="font-fraunces text-3xl mb-6">Brand Positioning</h2>
+            <div className="prose-editorial space-y-6 text-muted-foreground">
+              <p>
+                The Solomon Atah Podcast is a public-facing academic media institution and academic
+                media production company that commissions, curates, produces and disseminates
+                scholarly conversations for global audiences.
+              </p>
+              <p>
+                We partner with universities, research institutes, conferences, governments and
+                international organisations to transform academic knowledge into premium
+                intellectual media experiences that extend the reach and impact of research far
+                beyond the campus.
+              </p>
+              <p>
+                Our work is driven by a simple conviction: knowledge achieves its greatest value
+                only when it is visible, accessible and engaged by society.
+              </p>
+
+              <blockquote className="pull-quote">
+                &ldquo;Knowledge achieves its greatest value only when it is visible, accessible
+                and engaged by society.&rdquo;
+              </blockquote>
+
+              <p>
+                Academic research continues to be constrained by three institutional barriers. The
+                lecture hall walls that confine ideas to classrooms. The conference walls that limit
+                intellectual exchange to those able to attend. The journal paywalls that restrict
+                publicly funded research from reaching the public it is intended to serve.
+              </p>
+
+              <div className="grid sm:grid-cols-3 gap-4 not-prose my-6">
+                <div className="p-4 rounded-sm border border-border bg-muted/20 space-y-1.5">
+                  <span className="text-xs font-semibold tracking-wider uppercase text-gold">
+                    Barrier I
+                  </span>
+                  <h4 className="font-fraunces text-base text-foreground font-medium">
+                    Lecture Hall Walls
+                  </h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Confine ideas to classrooms.
+                  </p>
+                </div>
+                <div className="p-4 rounded-sm border border-border bg-muted/20 space-y-1.5">
+                  <span className="text-xs font-semibold tracking-wider uppercase text-gold">
+                    Barrier II
+                  </span>
+                  <h4 className="font-fraunces text-base text-foreground font-medium">
+                    Conference Walls
+                  </h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Limit intellectual exchange to those able to attend.
+                  </p>
+                </div>
+                <div className="p-4 rounded-sm border border-border bg-muted/20 space-y-1.5">
+                  <span className="text-xs font-semibold tracking-wider uppercase text-gold">
+                    Barrier III
+                  </span>
+                  <h4 className="font-fraunces text-base text-foreground font-medium">
+                    Journal Paywalls
+                  </h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Restrict publicly funded research from reaching society.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-foreground font-medium text-lg">
+                The Solomon Atah Podcast exists to dismantle these barriers.
+              </p>
+
+              <p>
+                Through long-form interviews, conference media productions, executive
+                conversations, research storytelling and original editorial formats, we create
+                enduring public records of scholarship that connect researchers with policymakers,
+                industry leaders, students, journalists and citizens.
+              </p>
+              <p>
+                Our role extends beyond communication. We produce intellectual media ecosystems
+                that increase research visibility, strengthen institutional reputation, amplify
+                thought leadership and preserve important ideas as accessible public knowledge.
+              </p>
+              <p>
+                Our signature media experiences include the Academic Media Hub&trade;, Academic Red
+                Carpet&trade;, Leadership Studio&trade;, Daily Conference Show&trade;, Research
+                Spotlight&trade; and University Voices&trade;, enabling conferences and institutions
+                to transform temporary events into lasting intellectual assets.
+              </p>
+
+              <div className="flex flex-wrap gap-2.5 not-prose pt-1 pb-2">
+                {[
+                  'Academic Media Hub™',
+                  'Academic Red Carpet™',
+                  'Leadership Studio™',
+                  'Daily Conference Show™',
+                  'Research Spotlight™',
+                  'University Voices™',
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="inline-flex items-center text-xs font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-sm bg-purple/10 text-purple border border-purple/20 dark:bg-purple/20 dark:text-purple-300 dark:border-purple/30"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <p>
+                Positioned at the intersection of scholarship, media and public engagement, The
+                Solomon Atah Podcast helps organisations move beyond knowledge production to
+                knowledge visibility, ensuring that research is not merely published, but
+                discovered, understood and applied.
+              </p>
+
+              <div className="mt-8 p-6 border-l-4 border-purple bg-purple/5 rounded-r-sm not-prose">
+                <p className="font-fraunces text-xl md:text-2xl text-foreground leading-snug">
+                  We are building a new category of institution: an academic media production
+                  company dedicated to making the world&apos;s most important ideas impossible to
+                  ignore.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -180,6 +305,7 @@ export default function AboutPage() {
               <nav className="space-y-2">
                 {[
                   { label: 'The Company', href: '#mission' },
+                  { label: 'Brand Positioning', href: '#positioning' },
                   { label: 'The Host', href: '#host' },
                   { label: 'Editorial Principles', href: '#principles' },
                   { label: 'Press Kit', href: '#press' },
