@@ -1,8 +1,9 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { fraunces, inter } from "@/lib/fonts";
 import { Providers } from "@/components/layout/Providers";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CookieConsent } from "@/components/ui/cookie-consent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout({
           <Header />
           <main id="main-content">{children}</main>
           <Footer />
+          <CookieConsent />
         </Providers>
       </body>
     </html>
