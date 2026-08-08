@@ -107,13 +107,29 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
-            &copy; {year} Solomon Atah Pty Ltd. All rights reserved.
-          </p>
-          <p className="text-xs text-muted-foreground italic">
-            Rooted in South Africa. In conversation with the world.
-          </p>
+        <div className="py-6 border-t border-border flex flex-col gap-6">
+          <div className="flex flex-wrap justify-center sm:justify-start gap-x-2 gap-y-2 text-xs text-muted-foreground">
+            <Link href="/legal#privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+            <span className="opacity-50">|</span>
+            <Link href="/legal#terms" className="hover:text-foreground transition-colors">Terms</Link>
+            <span className="opacity-50">|</span>
+            <Link href="/legal#cookies" className="hover:text-foreground transition-colors">Cookies</Link>
+            <span className="opacity-50">|</span>
+            <Link href="/legal#podcast-consent" className="hover:text-foreground transition-colors">Podcast Consent</Link>
+            <span className="opacity-50">|</span>
+            <Link href="/legal#disclaimer" className="hover:text-foreground transition-colors">Disclaimer</Link>
+            <span className="opacity-50">|</span>
+            <Link href="/legal#copyright" className="hover:text-foreground transition-colors">Copyright</Link>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4">
+            <p className="text-xs text-muted-foreground text-center sm:text-left">
+              &copy; {year} Solomon Atah Pty Ltd. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground italic text-center sm:text-right">
+              Rooted in South Africa. In conversation with the world.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
