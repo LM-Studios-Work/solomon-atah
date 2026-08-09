@@ -265,10 +265,10 @@ export default function AboutPage() {
               <p>
                 Media enquiries, interview requests, and press coverage can be directed to{' '}
                 <a
-                  href="mailto:press@solomonatah.com"
+                  href="mailto:podcast@solomonatah.com"
                   className="text-purple hover:underline"
                 >
-                  press@solomonatah.com
+                  podcast@solomonatah.com
                 </a>
                 .
               </p>
