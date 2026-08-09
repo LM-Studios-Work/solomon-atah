@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx --version)",
+      "WebFetch(domain:payloadcms.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(rm \"/c/Personal/Code/solomon-atah/src/app/api/[...slug]/route.ts\")",
+      "Bash(rmdir \"/c/Personal/Code/solomon-atah/src/app/api/[...slug]\")",
+      "Bash(sed -i 's/hover:bg-purple\\\\/15/hover:bg-purple\\\\/10/g' src/components/sections/ConversationCard/index.tsx)",
+      "Bash(sed -i 's/hover:bg-purple\\\\/15/hover:bg-purple\\\\/10/g' \"src/app/\\(frontend\\)/conversations/[slug]/page.tsx\")",
+      "Bash(sed -i \"s/bg-purple\\\\/8/bg-purple\\\\/10/g\" \"src/app/\\(frontend\\)/conversations/page.tsx\")",
+      "Bash(sed -i \"s/bg-purple\\\\/8/bg-purple\\\\/10/g\" \"src/app/\\(frontend\\)/scholars/page.tsx\")",
+      "Bash(npx payload:*)",
+      "Bash(rm -f payload.config.ts)",
+      "Bash(rm -rf src/collections src/globals \"src/lib/payload\" \"src/app/\\(payload\\)\" src/app/api/cron src/seed sqlite.db)",
+      "Bash(git:*)"
+    ]
+  }
+}
