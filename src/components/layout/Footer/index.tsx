@@ -8,6 +8,7 @@ const FOOTER_COLUMNS = [
       { label: "Podcast", href: "/solomon-atah-podcast" },
       { label: "Scholars", href: "/scholars" },
       { label: "Conversations", href: "/conversations" },
+      { label: "Newsletter", href: "/newsletter" },
       { label: "Dispatches", href: "/dispatches" },
       { label: "Propose a Conversation", href: "/propose" },
     ],

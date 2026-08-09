@@ -1,0 +1,211 @@
+-- ==============================================================================
+-- SOLOMON ATAH PODCAST - JULY NEWSLETTER SEED INSERT SCRIPT
+-- ==============================================================================
+-- Run this in your Supabase project (SQL Editor -> New Query -> Run)
+-- It will insert (or update) the July Newsletter edition into the 'newsletters' table.
+
+INSERT INTO public.newsletters (
+    id,
+    slug,
+    title,
+    subtitle,
+    issue_number,
+    type,
+    status,
+    published_at,
+    cover_image_url,
+    excerpt,
+    tags,
+    blocks
+) VALUES (
+    '7b8f9e21-0a44-482d-88f5-30db80c651e7',
+    'research-deserves-more-than-publication-it-deserves-discoverability',
+    'Research Deserves More Than Publication. It Deserves Discoverability.',
+    'The Solomon Atah Podcast | July Newsletter',
+    7,
+    'newsletter',
+    'published',
+    '2026-07-15T09:00:00.000Z',
+    '/company%20resources/logo%20solomon%20atah%20main%20company.jpeg',
+    'Every year, African universities produce work of genuine global consequence. What''s missing is the infrastructure that carries knowledge from the seminar room into public life.',
+    ARRAY['Scholarship', 'Discoverability', 'Academic Infrastructure', 'ARC'],
+    '[
+      {
+        "id": "b1",
+        "type": "paragraph",
+        "text": "Every year, African universities and research institutions produce work of genuine global consequence in the sciences, in policy, in the humanities, in innovation. And every year, most of it disappears into the same three places: a paywalled journal, a conference programme, and a hard drive. The research is real. The rigour is real. What''s missing is the bridge between the two—the infrastructure that carries knowledge from the seminar room into public life."
+      },
+      {
+        "id": "b2",
+        "type": "paragraph",
+        "text": "This is the gap **The Solomon Atah Podcast** exists to close. Not as a media outlet looking for interesting guests, but as an academic media institution built specifically to solve the discoverability problem facing African scholarship for individual researchers and for the institutions that employ them."
+      },
+      {
+        "id": "b3",
+        "type": "paragraph",
+        "text": "Here''s what that means, and what it now looks like in practice."
+      },
+      {
+        "id": "b4",
+        "type": "heading",
+        "level": 2,
+        "text": "1. The Problem Isn''t Production. It''s Infrastructure."
+      },
+      {
+        "id": "b5",
+        "type": "paragraph",
+        "text": "Ask any working academic what happens after a paper is published, and the answer is almost always the same: **very little**. The article sits behind a paywall. It gets cited within a narrow disciplinary circle. It rarely reaches the policymakers, journalists, funders, or members of the public who could actually act on it. Meanwhile, search engines, AI systems, and public discourse increasingly decide whose work gets found, cited, and remembered—and that decision is being made whether or not the researcher has any say in it."
+      },
+      {
+        "id": "b6",
+        "type": "paragraph",
+        "text": "**This is not a talent gap. It is not an output gap.** African scholars are producing pioneering work across every discipline. What''s missing is ownership of the infrastructure through which that work is discovered."
+      },
+      {
+        "id": "b7",
+        "type": "paragraph",
+        "text": "Three forces are converging to make this urgent right now:"
+      },
+      {
+        "id": "b8",
+        "type": "list",
+        "style": "bullet",
+        "items": [
+          "**Search and AI systems are becoming the new front door to knowledge.** If a researcher''s name and work don''t resolve to a professional platform they control, someone else''s infrastructure or no infrastructure at all defines how they are found.",
+          "**Major funders now require it.** The National Research Foundation, Horizon Europe, the Wellcome Trust, and other major funding bodies increasingly mandate trackable public engagement and dissemination plans as a condition of funding—not a nice-to-have, but a compliance requirement.",
+          "**Institutional platforms are not permanent.** University profile pages get redesigned, departments get restructured, links break. Research communicated only through institutional channels is research that is one system migration away from disappearing."
+        ]
+      },
+      {
+        "id": "b9",
+        "type": "callout",
+        "variant": "gold",
+        "title": "The Translational & Visibility Gap",
+        "text": "The result is what we call the Translational and Visibility Gap—the distance between excellent research and the public value it should be generating. Closing that gap is not a communications add-on. It is research infrastructure in its own right."
+      },
+      {
+        "id": "b10",
+        "type": "heading",
+        "level": 2,
+        "text": "2. For the Individual Scholar: Own Your Digital Home"
+      },
+      {
+        "id": "b11",
+        "type": "paragraph",
+        "text": "For researchers, the fix starts with a simple but often-overlooked idea: **a personal academic website is not a vanity project—it''s an intellectual asset**."
+      },
+      {
+        "id": "b12",
+        "type": "paragraph",
+        "text": "Right now, most scholars'' public presence is scattered across an institutional profile, a LinkedIn page, and whatever appears when someone searches their name. None of these are owned by the researcher. All of them can change, disappear, or be redesigned without notice. And none of them tell the full story—the publications, the grants, the media appearances, the projects, the teaching, the years of accumulated expertise in one place."
+      },
+      {
+        "id": "b13",
+        "type": "paragraph",
+        "text": "**Academic Website Services** exist to fix exactly this. The offering is straightforward:"
+      },
+      {
+        "id": "b14",
+        "type": "list",
+        "style": "bullet",
+        "items": [
+          "**A professional, AI-ready personal domain** that consolidates a scholar''s entire body of work—publications, research projects, grants, media appearances, and professional identity into one searchable home.",
+          "**Full ownership.** The researcher controls the domain, the narrative, and the archive—not an institution, not a platform algorithm, not a redesign committee.",
+          "**Long-term visibility.** The site is built to outlast any single job, institution, or career stage, so a lifetime of scholarship remains findable rather than fragmented."
+        ]
+      },
+      {
+        "id": "b15",
+        "type": "paragraph",
+        "text": "The value compounds over time: greater citation visibility, stronger positioning for grant applications, a controlled digital identity, and a body of work that remains discoverable long after any individual paper, post, or platform has faded from view. **This is not about self-promotion. It is about making sure that excellent work is not lost simply because no one owned the address where it lived.**"
+      },
+      {
+        "id": "b16",
+        "type": "heading",
+        "level": 2,
+        "text": "3. For Institutions: A Dissemination Partner Built for the Research Office"
+      },
+      {
+        "id": "b17",
+        "type": "paragraph",
+        "text": "Universities, research councils, and science institutions face a version of the same problem at scale and a growing external pressure to solve it. Funders want evidence of public engagement. Communications offices are stretched thin. And ad-hoc media coverage—a press release here, an interview there—rarely adds up to a coherent public presence for an institution''s research output."
+      },
+      {
+        "id": "b18",
+        "type": "paragraph",
+        "text": "**Atah Research Communications (ARC)** is built to meet that need as a structured, enterprise-grade service rather than a one-off transaction. ARC converts institutional research and events into a tiered ecosystem of deliverables designed to fit directly into research office budgets, grant dissemination line items, and communications mandates:"
+      },
+      {
+        "id": "b19",
+        "type": "list",
+        "style": "bullet",
+        "items": [
+          "**Flagship long-form interviews**: deep, archival conversations with researchers, Chair-holders, and institutional leadership that serve as a permanent public record of the work.",
+          "**Newsletters and executive policy briefings**: regular, structured publications that translate complex research into accessible formats for policymakers, funders, and the public.",
+          "**Social-first micro-content**: short video reels, LinkedIn carousels, and citation-rich threads that extend a single piece of research into multiple accessible entry points.",
+          "**Live Streaming**: multi-camera coverage of conferences, graduations, inaugural lectures, and institutional town halls, with real-time distribution and permanent archival packaging."
+        ]
+      },
+      {
+        "id": "b20",
+        "type": "paragraph",
+        "text": "Anchored by signature platforms **academic Media Hub™**, **Academic Red Carpet™**, and **Leadership Studio™**, ARC is structured across service tiers, from single-grant dissemination packages to full faculty retainers and enterprise-level institutional partnerships, so that institutions of any size can plug into the ecosystem at the level that fits their budget and their ambition."
+      },
+      {
+        "id": "b21",
+        "type": "paragraph",
+        "text": "The underlying logic is consistent throughout: **this is not media coverage bought as an afterthought**. It is dissemination infrastructure built to satisfy funder requirements, extend citation reach, and position the institution—not just the individual researcher—as a visible, credible driver of public knowledge."
+      },
+      {
+        "id": "b22",
+        "type": "heading",
+        "level": 2,
+        "text": "Bringing It Together: One Institution, Two Doors In"
+      },
+      {
+        "id": "b23",
+        "type": "paragraph",
+        "text": "Strip away the service names and packages, and The Solomon Atah Podcast''s positioning comes down to one argument, applied at two different scales."
+      },
+      {
+        "id": "b24",
+        "type": "paragraph",
+        "text": "**For the individual scholar**, the argument is ownership: your research, your name, and your professional identity deserve a permanent, searchable home that you control—not one borrowed from an institution or a platform that can change the terms at any time."
+      },
+      {
+        "id": "b25",
+        "type": "paragraph",
+        "text": "**For the institution**, the argument is infrastructure: public engagement is no longer optional, funders are asking for proof of it, and a coherent, multi-tier dissemination system delivers that proof far more reliably than scattered, ad-hoc media coverage ever could."
+      },
+      {
+        "id": "b26",
+        "type": "quote",
+        "text": "Knowledge that isn''t discoverable might as well not exist. Publication was once the finish line for scholarship. Today, it''s the starting point—the moment before the real work of ensuring that research is found, understood, and used actually begins.",
+        "attribution": "The Solomon Atah Podcast Editorial"
+      },
+      {
+        "id": "b27",
+        "type": "paragraph",
+        "text": "That is the work The Solomon Atah Podcast has built itself to do for the researcher building a career-spanning digital home, and for the institution building a research communications system worthy of the work it produces. Africa does not lack ideas. It lacks systems that consistently turn those ideas into public value. Building those systems, one scholar and one institution at a time, is the mission this newsletter exists to report on."
+      },
+      {
+        "id": "b28",
+        "type": "callout",
+        "variant": "purple",
+        "title": "#KnowTomorrowToday",
+        "text": "Building durable knowledge infrastructure across African scholarship. Join our newsletter to receive every monthly dispatch."
+      }
+    ]'::jsonb
+)
+ON CONFLICT (slug) DO UPDATE SET
+    title = EXCLUDED.title,
+    subtitle = EXCLUDED.subtitle,
+    issue_number = EXCLUDED.issue_number,
+    type = EXCLUDED.type,
+    status = EXCLUDED.status,
+    published_at = EXCLUDED.published_at,
+    cover_image_url = EXCLUDED.cover_image_url,
+    excerpt = EXCLUDED.excerpt,
+    tags = EXCLUDED.tags,
+    blocks = EXCLUDED.blocks,
+    updated_at = NOW();

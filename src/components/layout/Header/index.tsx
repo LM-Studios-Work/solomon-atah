@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: "Solomon Atah Podcast", href: "/solomon-atah-podcast" },
   { label: "Research & Publishing", href: "/research" },
   { label: "Academic Services", href: "/academic-services" },
+  { label: "Newsletter", href: "/newsletter" },
   { label: "Events", href: "/events" },
   { label: "Film Projects", href: "/film" },
   { label: "Merchandise & Books", href: "/merchandise" },
