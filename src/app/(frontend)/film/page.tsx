@@ -55,7 +55,7 @@ const PRODUCTION_NOTES = [
 export default function FilmPage() {
   return (
     <div className="bg-background text-foreground">
-      <section className="relative min-h-[460px] overflow-hidden border-b border-border bg-purple text-white md:min-h-[540px]">
+      <section className="relative min-h-[430px] overflow-hidden border-b border-border bg-purple text-white md:min-h-[500px]">
         <Image
           src="/company%20resources/film_division.jpeg"
           alt="Solomon Atah Film Division"
@@ -65,7 +65,7 @@ export default function FilmPage() {
           priority
         />
         <div className="absolute inset-0 bg-purple/70" />
-        <div className="relative z-10 mx-auto flex min-h-[460px] max-w-7xl items-end px-4 pb-16 pt-24 sm:px-6 md:min-h-[540px] md:pb-20 lg:px-8">
+        <div className="relative z-10 mx-auto flex min-h-[430px] max-w-7xl items-end px-4 pb-16 pt-24 sm:px-6 md:min-h-[500px] md:pb-20 lg:px-8">
           <div className="max-w-2xl">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
               Solomon Atah Pty Ltd

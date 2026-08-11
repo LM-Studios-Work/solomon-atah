@@ -36,8 +36,8 @@ export default function ContactPage() {
   return (
     <div className="bg-background text-foreground">
       <section className="border-b border-border bg-purple text-white">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
             Contact
           </p>
           <h1 className="mb-6 font-fraunces text-5xl font-light leading-tight md:text-7xl">

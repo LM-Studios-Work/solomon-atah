@@ -82,13 +82,11 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
     line-height: 1.65;
-    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {

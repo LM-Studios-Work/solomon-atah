@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getNewsletterBySlug, getPublishedNewsletters } from '@/lib/newsletter-data';
 import { formatDate } from '@/lib/utils';
 import { NewsletterBlockRenderer } from '@/components/blocks/NewsletterBlockRenderer';
-import { ArrowLeft, BookOpen, Clock, Share2, Sparkles, PenSquare } from 'lucide-react';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -64,9 +63,9 @@ export default async function NewsletterIssuePage({ params }: Props) {
       <nav className="flex items-center justify-between gap-4 text-xs text-muted-foreground mb-10 pb-4 border-b border-border/60">
         <Link
           href="/newsletter"
-          className="inline-flex items-center gap-1.5 hover:text-gold transition-colors font-medium"
+          className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors font-medium"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
+          <span aria-hidden="true">←</span>
           <span>All Newsletters</span>
         </Link>
       </nav>
@@ -76,12 +75,12 @@ export default async function NewsletterIssuePage({ params }: Props) {
         {/* Issue Series & Number */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
           {newsletter.issue_number && (
-            <span className="font-mono text-xs font-bold text-gold px-2.5 py-1 rounded bg-gold/10 border border-gold/30">
+            <span className="font-mono text-xs font-bold text-muted-foreground px-2.5 py-1 rounded-sm bg-muted/50 border border-border">
               ISSUE #{String(newsletter.issue_number).padStart(3, '0')}
             </span>
           )}
           {newsletter.subtitle && (
-            <span className="text-xs font-semibold tracking-wider uppercase text-gold">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
               {newsletter.subtitle}
             </span>
           )}
@@ -94,22 +93,19 @@ export default async function NewsletterIssuePage({ params }: Props) {
 
         {/* Excerpt */}
         {newsletter.excerpt && (
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed italic max-w-3xl mb-8 border-l-2 border-gold/40 pl-4">
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mb-8">
             {newsletter.excerpt}
           </p>
         )}
 
         {/* Article Meta Bar */}
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground pt-4 border-t border-border/40">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 font-medium">
             <time dateTime={newsletter.published_at}>
               {formatDate(newsletter.published_at)}
             </time>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5 text-gold" />
-              <span>{readMinutes} min read</span>
-            </span>
+            <span className="text-border">•</span>
+            <span>{readMinutes} min read</span>
           </div>
 
           {/* Tags */}
@@ -118,7 +114,7 @@ export default async function NewsletterIssuePage({ params }: Props) {
               {newsletter.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] px-2 py-0.5 rounded bg-muted text-muted-foreground"
+                  className="text-[10px] px-2 py-0.5 rounded-sm bg-muted text-muted-foreground"
                 >
                   #{tag}
                 </span>
@@ -134,17 +130,17 @@ export default async function NewsletterIssuePage({ params }: Props) {
       </div>
 
       {/* Footer Sign-off & Next Steps */}
-      <footer className="mt-16 pt-12 border-t border-border space-y-10">
-        <div className="p-8 rounded-2xl bg-card border border-gold/30 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mt-16">
+        <div className="py-8 border-t border-border flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-gold flex items-center gap-1.5 mb-2">
-              <Sparkles className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-muted-foreground text-xs font-semibold uppercase tracking-[0.15em] mb-4">
               <span>The Solomon Atah Podcast</span>
-            </span>
-            <h3 className="font-fraunces text-2xl font-light text-foreground mb-2">
+              <div className="flex-1 h-px bg-border max-w-[4rem]" />
+            </div>
+            <h3 className="font-fraunces text-2xl font-light text-foreground mb-3">
               Enjoyed this dispatch?
             </h3>
-            <p className="text-sm text-muted-foreground max-w-md">
+            <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
               Share it with fellow researchers and colleagues, or subscribe to get every
               upcoming monthly newsletter edition directly in your inbox.
             </p>
@@ -153,13 +149,13 @@ export default async function NewsletterIssuePage({ params }: Props) {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href="/newsletter"
-              className="px-4 py-2.5 rounded-lg bg-gold hover:bg-gold-400 text-gold-foreground font-semibold text-xs transition-colors shadow-sm"
+              className="px-6 py-3 bg-foreground text-background font-medium text-sm transition-colors hover:bg-foreground/90 whitespace-nowrap"
             >
               Browse All Issues
             </Link>
           </div>
         </div>
-      </footer>
+      </div>
     </article>
   );
 }

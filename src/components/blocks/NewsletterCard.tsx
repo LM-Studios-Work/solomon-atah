@@ -1,9 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Newsletter } from '@/types/newsletter';
 import { formatDate } from '@/lib/utils';
-import { ArrowRight, BookOpen, Sparkles } from 'lucide-react';
 
 interface Props {
   newsletter: Newsletter;
@@ -13,27 +11,21 @@ interface Props {
 export function NewsletterCard({ newsletter, featured = false }: Props) {
   return (
     <article
-      className={`group relative rounded-xl border border-border bg-card/50 hover:bg-card hover:border-gold/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md ${
-        featured ? 'md:col-span-2 p-8 bg-gradient-to-br from-purple/10 via-card to-card border-gold/40' : 'p-6'
+      className={`group flex flex-col border border-border rounded-sm overflow-hidden hover:border-purple/30 transition-colors bg-card h-full ${
+        featured ? 'md:col-span-2' : ''
       }`}
     >
-      <div>
+      <div className={`flex flex-col flex-1 ${featured ? 'p-8 md:p-10' : 'p-6'}`}>
         {/* Top Metadata */}
-        <div className="flex items-center justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            {newsletter.issue_number && (
-              <span className="font-mono text-xs font-bold text-gold px-2.5 py-1 rounded-md bg-gold/10 border border-gold/30">
-                ISSUE #{String(newsletter.issue_number).padStart(3, '0')}
-              </span>
-            )}
-            <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground">
-              {newsletter.type}
+        <div className="flex flex-wrap items-center gap-2.5 mb-4">
+          {newsletter.issue_number && (
+            <span className="font-mono text-xs font-bold text-gold px-2.5 py-1 rounded-sm bg-gold/10 border border-gold/30">
+              ISSUE #{String(newsletter.issue_number).padStart(3, '0')}
             </span>
-          </div>
-
-          <time className="text-xs text-muted-foreground">
-            {formatDate(newsletter.published_at)}
-          </time>
+          )}
+          <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground">
+            {newsletter.type}
+          </span>
         </div>
 
         {/* Subtitle / Series if any */}
@@ -45,12 +37,11 @@ export function NewsletterCard({ newsletter, featured = false }: Props) {
 
         {/* Title */}
         <h3
-          className={`font-fraunces font-light text-foreground group-hover:text-gold transition-colors leading-snug mb-3 ${
-            featured ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'
+          className={`font-fraunces font-light leading-snug mb-3 flex-1 ${
+            featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'
           }`}
         >
-          <Link href={`/newsletter/${newsletter.slug}`} className="focus:outline-none">
-            <span className="absolute inset-0" aria-hidden="true" />
+          <Link href={`/newsletter/${newsletter.slug}`} className="hover:text-purple transition-colors">
             {newsletter.title}
           </Link>
         </h3>
@@ -64,29 +55,30 @@ export function NewsletterCard({ newsletter, featured = false }: Props) {
 
         {/* Tags */}
         {newsletter.tags && newsletter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-6">
-            {newsletter.tags.map((tag) => (
+          <div className="flex flex-wrap gap-1.5 mb-6 mt-auto">
+            {newsletter.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] font-medium px-2 py-0.5 rounded bg-muted/60 text-muted-foreground border border-border/50"
+                className="text-[10px] font-medium px-2 py-0.5 rounded-sm bg-muted/60 text-muted-foreground border border-border/50"
               >
                 #{tag}
               </span>
             ))}
           </div>
         )}
-      </div>
 
-      {/* Card Footer */}
-      <div className="pt-4 border-t border-border/50 flex items-center justify-between text-xs font-medium text-gold">
-        <span className="flex items-center gap-1.5">
-          <BookOpen className="w-3.5 h-3.5" />
-          <span>Read Dispatch</span>
-        </span>
-        <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          <span>Explore Issue</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </span>
+        {/* Card Footer */}
+        <div className="pt-4 border-t border-border mt-auto flex items-center justify-between">
+          <time className="text-xs text-muted-foreground">
+            {formatDate(newsletter.published_at)}
+          </time>
+          <Link
+            href={`/newsletter/${newsletter.slug}`}
+            className="text-xs font-medium text-purple hover:underline"
+          >
+            Read Dispatch →
+          </Link>
+        </div>
       </div>
     </article>
   );
