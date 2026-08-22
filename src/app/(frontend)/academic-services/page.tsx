@@ -24,6 +24,7 @@ const SERVICES = [
       'Solomon Atah delivers keynote addresses and panel contributions on narrative intelligence, African intellectual production, public scholarship, and the intersection of media and knowledge systems.',
     themes: [],
     icon: Mic2,
+    href: '/speakers',
   },
   {
     title: 'Academic Consulting',

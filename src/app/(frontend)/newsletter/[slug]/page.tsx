@@ -87,7 +87,7 @@ export default async function NewsletterIssuePage({ params }: Props) {
         </div>
 
         {/* Title */}
-        <h1 className="font-fraunces text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-[1.15] mb-6 text-balance">
+        <h1 className="font-fraunces text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-[1.15] mb-6">
           {newsletter.title}
         </h1>
 

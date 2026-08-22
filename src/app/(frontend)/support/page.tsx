@@ -89,6 +89,45 @@ export default function SupportPage() {
         </div>
       </section>
 
+      <section className="border-b border-border bg-muted/20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 md:grid-cols-[1fr_0.8fr] md:items-center lg:px-8">
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              One-Time Donation
+            </p>
+            <h2 className="mb-4 font-fraunces text-4xl font-light">Make a Donation</h2>
+            <p className="max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+              One-time donations directly fund new conversations, archive maintenance,
+              research summaries, and academic translation work.
+            </p>
+          </div>
+          <div className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
+            <Landmark className="mb-5 h-8 w-8 text-gold" strokeWidth={1.4} />
+            <h3 className="mb-4 font-fraunces text-2xl font-light">Bank Transfer Details</h3>
+            <div className="space-y-3 text-sm leading-6 text-muted-foreground">
+              <p>
+                <strong className="font-medium text-foreground">Bank Name:</strong> [Bank Name]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">Account Name:</strong> [Account Name]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">BSB / Sort Code:</strong> [BSB / Sort Code]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">Account Number:</strong> [Account Number]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">SWIFT / BIC:</strong> [SWIFT / BIC]
+              </p>
+              <p className="pt-2 text-xs italic opacity-80">
+                Please include your name or organisation in the transfer reference.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="border-b border-border">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mb-10 flex items-center gap-4">
@@ -154,44 +193,7 @@ export default function SupportPage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-muted/20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 md:grid-cols-[1fr_0.8fr] md:items-center lg:px-8">
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-              One-Time Donation
-            </p>
-            <h2 className="mb-4 font-fraunces text-4xl font-light">Make a Donation</h2>
-            <p className="max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-              One-time donations directly fund new conversations, archive maintenance,
-              research summaries, and academic translation work.
-            </p>
-          </div>
-          <div className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
-            <Landmark className="mb-5 h-8 w-8 text-gold" strokeWidth={1.4} />
-            <h3 className="mb-4 font-fraunces text-2xl font-light">Bank Transfer Details</h3>
-            <div className="space-y-3 text-sm leading-6 text-muted-foreground">
-              <p>
-                <strong className="font-medium text-foreground">Bank Name:</strong> [Bank Name]
-              </p>
-              <p>
-                <strong className="font-medium text-foreground">Account Name:</strong> [Account Name]
-              </p>
-              <p>
-                <strong className="font-medium text-foreground">BSB / Sort Code:</strong> [BSB / Sort Code]
-              </p>
-              <p>
-                <strong className="font-medium text-foreground">Account Number:</strong> [Account Number]
-              </p>
-              <p>
-                <strong className="font-medium text-foreground">SWIFT / BIC:</strong> [SWIFT / BIC]
-              </p>
-              <p className="pt-2 text-xs italic opacity-80">
-                Please include your name or organisation in the transfer reference.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       <section className="bg-purple text-white">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">

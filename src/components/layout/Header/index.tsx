@@ -9,17 +9,25 @@ import { MobileMenu } from "./MobileMenu";
 
 const NAV_LINKS = [
   { label: "About", href: "/about" },
-  { label: "Solomon Atah Podcast", href: "/solomon-atah-podcast" },
-  { label: "Blog", href: "/blog" },
-  { label: "Speakers", href: "/speakers" },
-  { label: "Research & Publishing", href: "/research" },
-  { label: "Academic Services", href: "/academic-services" },
-  { label: "Newsletter", href: "/newsletter" },
+  { 
+    label: "Services",
+    subLinks: [
+      { label: "Research & Publishing", href: "/research" },
+      { label: "Academic Services", href: "/academic-services" },
+      { label: "Speakers", href: "/speakers" },
+    ]
+  },
+  {
+    label: "Media",
+    subLinks: [
+      { label: "Podcast", href: "/solomon-atah-podcast" },
+      { label: "Film Projects", href: "/film" },
+      { label: "Blog", href: "/blog" },
+      { label: "Newsletter", href: "/newsletter" },
+    ]
+  },
   { label: "Events", href: "/events" },
-  { label: "Film Projects", href: "/film" },
-  { label: "Merchandise & Books", href: "/merchandise" },
-  { label: "Donate", href: "/support" },
-  { label: "Contact", href: "/contact" },
+  { label: "Store", href: "/merchandise" },
 ];
 
 export function Header() {
@@ -85,6 +93,20 @@ export function Header() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2.5 shrink-0">
+            <div className="hidden lg:flex items-center gap-2 mr-2">
+              <Link 
+                href="/contact"
+                className="px-4 py-2 text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                Contact
+              </Link>
+              <Link 
+                href="/support"
+                className="px-4 py-2 text-sm font-semibold rounded-sm bg-gold text-gold-foreground hover:bg-gold/90 transition-colors"
+              >
+                Donate
+              </Link>
+            </div>
             <ThemeToggle className="text-white/80 hover:text-gold" />
             <MobileMenu links={NAV_LINKS} />
           </div>

@@ -49,7 +49,7 @@ export default async function DispatchPage({ params }: Props) {
             {dispatch.type}
           </span>
         </div>
-        <h1 className="font-fraunces text-4xl md:text-5xl font-light leading-tight mb-4 text-balance">
+        <h1 className="font-fraunces text-4xl md:text-5xl font-light leading-tight mb-4">
           {dispatch.title}
         </h1>
         {dispatch.excerpt && (

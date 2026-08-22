@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPublishedConversations } from '@/lib/data'
 import { ConversationCard } from '@/components/sections/ConversationCard'
@@ -135,14 +135,14 @@ export default function HomePage() {
             </p>
 
             {/* Headline */}
-            <h1 className="font-fraunces text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] text-balance mb-6">
+            <h1 className="font-fraunces text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] mb-6">
               Building Durable
               <br />
               <em className="text-purple not-italic">Knowledge Infrastructures.</em>
             </h1>
 
             {/* Positioning statement */}
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-10 max-w-2xl font-light text-pretty">
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-10 max-w-2xl font-light">
               A sovereign intellectual holding company operating at the intersection of thought
               and execution, across media, research, publishing, and cultural production.
             </p>
@@ -239,7 +239,7 @@ export default function HomePage() {
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-6">
               Our Mandate
             </p>
-            <h2 className="font-fraunces text-3xl md:text-4xl font-light leading-relaxed mb-6 text-balance">
+            <h2 className="font-fraunces text-3xl md:text-4xl font-light leading-relaxed mb-6">
               We develop ideas that endure, translate complex scholarship into public
               intelligence, and construct narrative systems that shape institutions rather
               than merely respond to them.

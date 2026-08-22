@@ -90,7 +90,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-fraunces leading-tight;
+    @apply font-fraunces font-light leading-tight;
     letter-spacing: -0.01em;
   }
 
@@ -148,8 +148,8 @@
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
+  /* .text-balance { text-wrap: balance; } */
+  /* .text-pretty { text-wrap: pretty; } */
 
   .max-w-7xl {
     max-width: min(var(--site-max-width), calc(100vw - 2rem));

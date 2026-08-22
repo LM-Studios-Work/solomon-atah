@@ -7,11 +7,9 @@ const FOOTER_COLUMNS = [
     links: [
       { label: "Podcast", href: "/solomon-atah-podcast" },
       { label: "Scholars", href: "/scholars" },
-      { label: "Conversations", href: "/conversations" },
       { label: "Newsletter", href: "/newsletter" },
       { label: "Blog", href: "/blog" },
       { label: "Speakers", href: "/speakers" },
-      { label: "Dispatches", href: "/dispatches" },
       { label: "Propose a Conversation", href: "/propose" },
     ],
   },
@@ -20,7 +18,6 @@ const FOOTER_COLUMNS = [
     links: [
       { label: "Research", href: "/research" },
       { label: "Research Publishing", href: "/research-publishing" },
-      { label: "Disciplines", href: "/disciplines" },
       { label: "Academic Services", href: "/academic-services" },
     ],
   },
@@ -30,7 +27,6 @@ const FOOTER_COLUMNS = [
       { label: "Events", href: "/events" },
       { label: "Film Projects", href: "/film" },
       { label: "Merchandise & Books", href: "/merchandise" },
-      { label: "Media", href: "/media" },
       { label: "About", href: "/about" },
     ],
   },

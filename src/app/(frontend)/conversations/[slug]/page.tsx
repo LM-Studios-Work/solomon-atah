@@ -89,7 +89,7 @@ export default async function ConversationPage({ params }: Props) {
             )}
 
             {/* Title */}
-            <h1 className="font-fraunces text-4xl md:text-5xl font-light leading-tight mb-4 text-balance">
+            <h1 className="font-fraunces text-4xl md:text-5xl font-light leading-tight mb-4">
               {conv.title}
             </h1>
 
