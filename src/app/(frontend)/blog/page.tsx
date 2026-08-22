@@ -53,6 +53,12 @@ export default async function BlogPage() {
             <p className="text-muted-foreground text-base mb-3">
               No articles published yet.
             </p>
+            <Link
+              href="/blog/cms"
+              className="text-xs text-gold underline hover:text-gold-400"
+            >
+              Open CMS Editor to create your first article
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
