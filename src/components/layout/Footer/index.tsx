@@ -10,6 +10,7 @@ const FOOTER_COLUMNS = [
       { label: "Conversations", href: "/conversations" },
       { label: "Newsletter", href: "/newsletter" },
       { label: "Blog", href: "/blog" },
+      { label: "Speakers", href: "/speakers" },
       { label: "Dispatches", href: "/dispatches" },
       { label: "Propose a Conversation", href: "/propose" },
     ],

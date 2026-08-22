@@ -10,6 +10,8 @@ import { MobileMenu } from "./MobileMenu";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Solomon Atah Podcast", href: "/solomon-atah-podcast" },
+  { label: "Blog", href: "/blog" },
+  { label: "Speakers", href: "/speakers" },
   { label: "Research & Publishing", href: "/research" },
   { label: "Academic Services", href: "/academic-services" },
   { label: "Newsletter", href: "/newsletter" },
