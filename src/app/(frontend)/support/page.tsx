@@ -168,16 +168,27 @@ export default function SupportPage() {
           </div>
           <div className="border border-border bg-card p-7 shadow-[0_12px_28px_rgba(0,0,0,0.04)]">
             <Landmark className="mb-5 h-8 w-8 text-gold" strokeWidth={1.4} />
-            <p className="mb-6 text-sm leading-7 text-muted-foreground">
-              Donation processing is being set up. For now, contact us directly and we will route
-              the contribution properly.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex rounded-sm bg-purple px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-purple-800"
-            >
-              Contact us to donate
-            </Link>
+            <h3 className="mb-4 font-fraunces text-2xl font-light">Bank Transfer Details</h3>
+            <div className="space-y-3 text-sm leading-6 text-muted-foreground">
+              <p>
+                <strong className="font-medium text-foreground">Bank Name:</strong> [Bank Name]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">Account Name:</strong> [Account Name]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">BSB / Sort Code:</strong> [BSB / Sort Code]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">Account Number:</strong> [Account Number]
+              </p>
+              <p>
+                <strong className="font-medium text-foreground">SWIFT / BIC:</strong> [SWIFT / BIC]
+              </p>
+              <p className="pt-2 text-xs italic opacity-80">
+                Please include your name or organisation in the transfer reference.
+              </p>
+            </div>
           </div>
         </div>
       </section>

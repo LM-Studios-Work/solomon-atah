@@ -9,6 +9,7 @@ const FOOTER_COLUMNS = [
       { label: "Scholars", href: "/scholars" },
       { label: "Conversations", href: "/conversations" },
       { label: "Newsletter", href: "/newsletter" },
+      { label: "Blog", href: "/blog" },
       { label: "Dispatches", href: "/dispatches" },
       { label: "Propose a Conversation", href: "/propose" },
     ],
