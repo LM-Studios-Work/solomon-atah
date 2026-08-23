@@ -106,19 +106,16 @@ export default function SupportPage() {
             <h3 className="mb-4 font-fraunces text-2xl font-light">Bank Transfer Details</h3>
             <div className="space-y-3 text-sm leading-6 text-muted-foreground">
               <p>
-                <strong className="font-medium text-foreground">Bank Name:</strong> [Bank Name]
+                <strong className="font-medium text-foreground">Bank Name:</strong> Standard Bank
               </p>
               <p>
-                <strong className="font-medium text-foreground">Account Name:</strong> [Account Name]
+                <strong className="font-medium text-foreground">Account Name:</strong> Solomon Atah
               </p>
               <p>
-                <strong className="font-medium text-foreground">BSB / Sort Code:</strong> [BSB / Sort Code]
+                <strong className="font-medium text-foreground">Account Number:</strong> 074 658 557
               </p>
               <p>
-                <strong className="font-medium text-foreground">Account Number:</strong> [Account Number]
-              </p>
-              <p>
-                <strong className="font-medium text-foreground">SWIFT / BIC:</strong> [SWIFT / BIC]
+                <strong className="font-medium text-foreground">Branch:</strong> Thibault Square
               </p>
               <p className="pt-2 text-xs italic opacity-80">
                 Please include your name or organisation in the transfer reference.

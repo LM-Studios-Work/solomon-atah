@@ -92,3 +92,76 @@ DROP POLICY IF EXISTS "Anyone can upload newsletter images" ON storage.objects;
 CREATE POLICY "Anyone can upload newsletter images"
     ON storage.objects FOR INSERT
     WITH CHECK (bucket_id = 'newsletter-media');
+
+-- ==============================================================================
+-- BLOG SCHEMA
+-- ==============================================================================
+-- 7. Create the blogs table
+CREATE TABLE IF NOT EXISTS public.blogs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    slug TEXT UNIQUE NOT NULL,
+    title TEXT NOT NULL,
+    subtitle TEXT,
+    status TEXT DEFAULT 'published' CHECK (status IN ('draft', 'published', 'archived')),
+    published_at TIMESTAMPTZ DEFAULT NOW(),
+    cover_image_url TEXT,
+    excerpt TEXT,
+    content TEXT NOT NULL DEFAULT '',
+    tags TEXT[] DEFAULT '{}'::TEXT[],
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 8. Performance Indexes
+CREATE INDEX IF NOT EXISTS idx_blogs_slug ON public.blogs(slug);
+CREATE INDEX IF NOT EXISTS idx_blogs_status ON public.blogs(status);
+CREATE INDEX IF NOT EXISTS idx_blogs_published_at ON public.blogs(published_at DESC);
+
+-- 9. Automatic updated_at trigger for blogs
+DROP TRIGGER IF EXISTS tr_blogs_updated_at ON public.blogs;
+CREATE TRIGGER tr_blogs_updated_at
+    BEFORE UPDATE ON public.blogs
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- 10. Enable Row Level Security (RLS)
+ALTER TABLE public.blogs ENABLE ROW LEVEL SECURITY;
+
+-- 11. RLS Policies for blogs
+-- A. Anyone can read published blogs
+DROP POLICY IF EXISTS "Public can view published blogs" ON public.blogs;
+CREATE POLICY "Public can view published blogs"
+    ON public.blogs
+    FOR SELECT
+    USING (status = 'published');
+
+-- B. Authenticated users (admin) have full CRUD access
+DROP POLICY IF EXISTS "Authenticated users have full access on blogs" ON public.blogs;
+CREATE POLICY "Authenticated users have full access on blogs"
+    ON public.blogs
+    FOR ALL
+    TO authenticated
+    USING (true)
+    WITH CHECK (true);
+
+-- C. Anonymous access policies for dev/CMS api integration
+DROP POLICY IF EXISTS "Allow anon inserts with service role or dev on blogs" ON public.blogs;
+CREATE POLICY "Allow anon inserts with service role or dev on blogs"
+    ON public.blogs
+    FOR INSERT
+    TO anon
+    WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow anon update for dev on blogs" ON public.blogs;
+CREATE POLICY "Allow anon update for dev on blogs"
+    ON public.blogs
+    FOR UPDATE
+    TO anon
+    USING (true);
+
+DROP POLICY IF EXISTS "Allow anon delete for dev on blogs" ON public.blogs;
+CREATE POLICY "Allow anon delete for dev on blogs"
+    ON public.blogs
+    FOR DELETE
+    TO anon
+    USING (true);
