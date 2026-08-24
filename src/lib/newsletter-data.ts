@@ -6,7 +6,6 @@ const fallbackNewsletters: Newsletter[] = rawNewsletters as Newsletter[];
 
 export async function getPublishedNewsletters(): Promise<Newsletter[]> {
   const supabase = createServerClient();
-  let fetched: Newsletter[] = [];
 
   if (supabase) {
     try {
@@ -17,23 +16,14 @@ export async function getPublishedNewsletters(): Promise<Newsletter[]> {
         .order('published_at', { ascending: false });
 
       if (!error && data && data.length > 0) {
-        fetched = data as Newsletter[];
+        return data as Newsletter[];
       }
     } catch (err) {
       console.warn('Supabase fetch failed, falling back to local newsletters:', err);
     }
   }
 
-  const local = fallbackNewsletters.filter((n) => n.status === 'published');
-  
-  // Merge, prioritizing Supabase items
-  const mergedMap = new Map<string, Newsletter>();
-  local.forEach(n => mergedMap.set(n.slug, n));
-  fetched.forEach(n => mergedMap.set(n.slug, n));
-  
-  return Array.from(mergedMap.values()).sort(
-    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
-  );
+  return fallbackNewsletters.filter((n) => n.status === 'published');
 }
 
 export async function getNewsletterBySlug(slug: string): Promise<Newsletter | null> {
@@ -61,7 +51,6 @@ export async function getNewsletterBySlug(slug: string): Promise<Newsletter | nu
 
 export async function getAllNewsletters(): Promise<Newsletter[]> {
   const supabase = createServerClient();
-  let fetched: Newsletter[] = [];
 
   if (supabase) {
     try {
@@ -71,19 +60,12 @@ export async function getAllNewsletters(): Promise<Newsletter[]> {
         .order('created_at', { ascending: false });
 
       if (!error && data && data.length > 0) {
-        fetched = data as Newsletter[];
+        return data as Newsletter[];
       }
     } catch (err) {
       console.warn('Supabase fetch failed:', err);
     }
   }
 
-  // Merge, prioritizing Supabase items
-  const mergedMap = new Map<string, Newsletter>();
-  fallbackNewsletters.forEach(n => mergedMap.set(n.slug, n));
-  fetched.forEach(n => mergedMap.set(n.slug, n));
-  
-  return Array.from(mergedMap.values()).sort(
-    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
-  );
+  return fallbackNewsletters;
 }

@@ -66,7 +66,7 @@ export default async function BlogPage() {
               <BlogCard
                 key={blog.id || blog.slug}
                 blog={blog}
-                featured={idx === 0}
+                featured={false}
               />
             ))}
           </div>

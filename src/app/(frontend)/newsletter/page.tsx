@@ -99,7 +99,7 @@ export default async function NewsletterPage() {
               <NewsletterCard
                 key={newsletter.id || newsletter.slug}
                 newsletter={newsletter}
-                featured={idx === 0}
+                featured={false}
               />
             ))}
           </div>

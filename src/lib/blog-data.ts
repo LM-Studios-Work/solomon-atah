@@ -6,7 +6,6 @@ const fallbackBlogs: Blog[] = rawBlogs as Blog[];
 
 export async function getPublishedBlogs(): Promise<Blog[]> {
   const supabase = createServerClient();
-  let fetched: Blog[] = [];
 
   if (supabase) {
     try {
@@ -17,23 +16,14 @@ export async function getPublishedBlogs(): Promise<Blog[]> {
         .order('published_at', { ascending: false });
 
       if (!error && data && data.length > 0) {
-        fetched = data as Blog[];
+        return data as Blog[];
       }
     } catch (err) {
       console.warn('Supabase fetch failed, falling back to local blogs:', err);
     }
   }
 
-  const local = fallbackBlogs.filter((b) => b.status === 'published');
-  
-  // Merge, prioritizing Supabase items
-  const mergedMap = new Map<string, Blog>();
-  local.forEach(b => mergedMap.set(b.slug, b));
-  fetched.forEach(b => mergedMap.set(b.slug, b));
-  
-  return Array.from(mergedMap.values()).sort(
-    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
-  );
+  return fallbackBlogs.filter((b) => b.status === 'published');
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
@@ -61,7 +51,6 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
 
 export async function getAllBlogs(): Promise<Blog[]> {
   const supabase = createServerClient();
-  let fetched: Blog[] = [];
 
   if (supabase) {
     try {
@@ -71,19 +60,12 @@ export async function getAllBlogs(): Promise<Blog[]> {
         .order('created_at', { ascending: false });
 
       if (!error && data && data.length > 0) {
-        fetched = data as Blog[];
+        return data as Blog[];
       }
     } catch (err) {
       console.warn('Supabase fetch failed:', err);
     }
   }
 
-  // Merge, prioritizing Supabase items
-  const mergedMap = new Map<string, Blog>();
-  fallbackBlogs.forEach(b => mergedMap.set(b.slug, b));
-  fetched.forEach(b => mergedMap.set(b.slug, b));
-  
-  return Array.from(mergedMap.values()).sort(
-    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
-  );
+  return fallbackBlogs;
 }
