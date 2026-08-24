@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-export function proxy(req: NextRequest) {
+export function middleware(req: NextRequest) {
   // 1. Existing logic for /media redirect
   if (req.nextUrl.pathname.startsWith('/media')) {
     return NextResponse.redirect(new URL('/solomon-atah-podcast', req.url), 308)
@@ -9,7 +9,9 @@ export function proxy(req: NextRequest) {
   // 2. Auth logic for CMS
   if (
     req.nextUrl.pathname.startsWith('/newsletter/cms') ||
-    (req.nextUrl.pathname.startsWith('/api/newsletters') && req.method !== 'GET') // Protect POST/PUT/DELETE
+    (req.nextUrl.pathname.startsWith('/api/newsletters') && req.method !== 'GET') ||
+    req.nextUrl.pathname.startsWith('/blog/cms') ||
+    (req.nextUrl.pathname.startsWith('/api/blogs') && req.method !== 'GET')
   ) {
     const basicAuth = req.headers.get('authorization');
     const url = req.nextUrl;
@@ -47,5 +49,5 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/media', '/newsletter/cms/:path*', '/api/newsletters/:path*'],
+  matcher: ['/media', '/newsletter/cms/:path*', '/api/newsletters/:path*', '/blog/cms/:path*', '/api/blogs/:path*'],
 }

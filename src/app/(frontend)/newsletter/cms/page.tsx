@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   description: 'Visual block-based newsletter editor and publishing studio.',
 };
 
-import { getPublishedNewsletters } from '@/lib/newsletter-data';
+import { getAllNewsletters } from '@/lib/newsletter-data';
 
 export default async function NewsletterCMSPage() {
-  const allNewsletters = await getPublishedNewsletters();
+  const allNewsletters = await getAllNewsletters();
   return <NewsletterCMS allNewsletters={allNewsletters} />;
 }

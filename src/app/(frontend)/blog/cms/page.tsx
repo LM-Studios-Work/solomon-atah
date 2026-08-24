@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { BlogCMS } from '@/components/blocks/BlogCMS';
-import { getPublishedBlogs } from '@/lib/blog-data';
+import { getAllBlogs } from '@/lib/blog-data';
 
 export const metadata: Metadata = {
   title: 'Blog Writing Studio | The Solomon Atah Podcast',
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogCMSPage() {
-  const allBlogs = await getPublishedBlogs();
+  const allBlogs = await getAllBlogs();
   return <BlogCMS allBlogs={allBlogs} />;
 }
