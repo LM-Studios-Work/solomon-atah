@@ -13,9 +13,10 @@ export async function getPublishedNewsletters(): Promise<Newsletter[]> {
         .from('newsletters')
         .select('*')
         .eq('status', 'published')
+        .eq('deleted', false)
         .order('published_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         return data as Newsletter[];
       }
     } catch (err) {
@@ -35,6 +36,7 @@ export async function getNewsletterBySlug(slug: string): Promise<Newsletter | nu
         .from('newsletters')
         .select('*')
         .eq('slug', slug)
+        .eq('deleted', false)
         .single();
 
       if (!error && data) {
@@ -57,9 +59,10 @@ export async function getAllNewsletters(): Promise<Newsletter[]> {
       const { data, error } = await supabase
         .from('newsletters')
         .select('*')
+        .eq('deleted', false)
         .order('created_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         return data as Newsletter[];
       }
     } catch (err) {

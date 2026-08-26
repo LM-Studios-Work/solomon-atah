@@ -81,7 +81,10 @@ export async function DELETE(req: NextRequest) {
     const supabase = createServerClient();
 
     if (supabase) {
-      const { error } = await supabase.from('newsletters').delete().eq('id', id);
+      const { error } = await supabase
+        .from('newsletters')
+        .update({ deleted: true })
+        .eq('id', id);
 
       if (error) {
         console.error('Supabase error deleting newsletter:', error);
