@@ -35,12 +35,13 @@ export function EventCard({
     return (
       <article className="flex flex-col gap-6">
         <Link href={ctaHref} className="group block">
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm bg-purple/5">
+          <div className="relative w-full overflow-hidden rounded-sm bg-card">
             <Image
               src={event.image}
               alt={event.title}
-              fill
-              className="object-contain transition-transform duration-300 group-hover:scale-105"
+              width={1200}
+              height={800}
+              className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
@@ -80,25 +81,18 @@ export function EventCard({
         <div
           className={
             showMap && event.mapEmbedUrl
-              ? 'relative aspect-[16/9] lg:aspect-auto w-full overflow-hidden bg-purple/5 border-b lg:border-b-0 lg:border-r border-border lg:h-full'
-              : 'relative aspect-[16/9] w-full overflow-hidden rounded-sm bg-purple/5 shadow-md'
+              ? 'relative w-full overflow-hidden border-b lg:border-b-0 lg:border-r border-border flex items-center justify-center bg-card lg:h-full'
+              : 'relative w-full overflow-hidden rounded-sm shadow-md bg-card'
           }
         >
           <Image
             src={event.image}
             alt={event.title}
-            fill
-            className="object-contain"
+            width={1600}
+            height={1000}
+            className="w-full h-auto object-contain"
             sizes={showMap && event.mapEmbedUrl ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 1024px) 100vw, 50vw'}
           />
-          {showMap && event.mapEmbedUrl && (
-            <>
-              <div className="absolute inset-0 bg-gradient-to-t from-purple/56 via-transparent to-transparent pointer-events-none" />
-              <span className="absolute bottom-5 left-5 inline-flex items-center rounded-sm bg-white/92 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-purple shadow-sm">
-                {event.type}
-              </span>
-            </>
-          )}
         </div>
 
         <div className="flex flex-col h-full">
