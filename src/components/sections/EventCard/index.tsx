@@ -33,15 +33,15 @@ export function EventCard({
 }: EventCardProps) {
   if (variant === 'compact') {
     return (
-      <article className="grid items-start gap-6 md:grid-cols-2">
+      <article className="flex flex-col gap-6">
         <Link href={ctaHref} className="group block">
-          <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-sm bg-purple/5">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm bg-purple/5">
             <Image
               src={event.image}
               alt={event.title}
               fill
               className="object-contain transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 320px"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </Link>
@@ -73,27 +73,27 @@ export function EventCard({
       <div
         className={
           showMap && event.mapEmbedUrl
-            ? 'grid gap-0 lg:grid-cols-[280px_minmax(0,1fr)_360px]'
-            : 'grid gap-8 p-6 md:grid-cols-[220px_1fr] md:p-8'
+            ? 'grid gap-0 lg:grid-cols-2'
+            : 'grid gap-8 p-6 lg:grid-cols-2 md:p-8 lg:items-center'
         }
       >
         <div
           className={
             showMap && event.mapEmbedUrl
-              ? 'relative aspect-[3/4] w-full overflow-hidden bg-purple/5 lg:min-h-full lg:aspect-auto'
-              : 'relative aspect-[3/4] w-full max-w-[220px] overflow-hidden rounded-sm bg-purple/5 shadow-md'
+              ? 'relative aspect-[16/9] lg:aspect-auto w-full overflow-hidden bg-purple/5 border-b lg:border-b-0 lg:border-r border-border lg:h-full'
+              : 'relative aspect-[16/9] w-full overflow-hidden rounded-sm bg-purple/5 shadow-md'
           }
         >
           <Image
             src={event.image}
             alt={event.title}
             fill
-            className={showMap && event.mapEmbedUrl ? 'object-contain lg:object-cover' : 'object-contain'}
-            sizes={showMap && event.mapEmbedUrl ? '(max-width: 1024px) 100vw, 280px' : '(max-width: 768px) 100vw, 220px'}
+            className="object-contain"
+            sizes={showMap && event.mapEmbedUrl ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 1024px) 100vw, 50vw'}
           />
           {showMap && event.mapEmbedUrl && (
             <>
-              <div className="absolute inset-0 bg-gradient-to-t from-purple/56 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-purple/56 via-transparent to-transparent pointer-events-none" />
               <span className="absolute bottom-5 left-5 inline-flex items-center rounded-sm bg-white/92 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-purple shadow-sm">
                 {event.type}
               </span>
@@ -101,100 +101,96 @@ export function EventCard({
           )}
         </div>
 
-        <div
-          className={
-            showMap && event.mapEmbedUrl
-              ? 'flex flex-col justify-center border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r'
-              : 'py-2'
-          }
-        >
-          {showAcademicBadge ? (
-            <div className="mb-4 flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
-                <CalendarDays className="h-3.5 w-3.5 text-gold" strokeWidth={1.6} />
-                {event.type}
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
-                <Landmark className="h-3.5 w-3.5 text-gold" strokeWidth={1.6} />
-                Academic programme
-              </span>
-            </div>
-          ) : (
-            event.presenter && (
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-                {event.presenter}
-              </p>
-            )
-          )}
-
-          <h2 className="mb-3 font-fraunces text-3xl font-light leading-tight md:text-5xl">
-            {event.title}
-          </h2>
-          {event.subtitle && <p className="mb-7 max-w-2xl italic text-muted-foreground">{event.subtitle}</p>}
-          <div
-            className={
-              showMap && event.mapEmbedUrl
-                ? 'mb-8 grid gap-4 text-sm text-muted-foreground sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3'
-                : 'mb-7 space-y-2'
-            }
-          >
-            <span className={showMap && event.mapEmbedUrl ? 'inline-flex items-center gap-2' : 'block text-sm font-semibold text-gold'}>
-              {showMap && event.mapEmbedUrl && (
-                <CalendarDays className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.6} />
-              )}
-              {event.date}
-            </span>
-            <span className={showMap && event.mapEmbedUrl ? 'inline-flex items-center gap-2' : 'block text-sm text-muted-foreground'}>
-              {showMap && event.mapEmbedUrl && (
-                <MapPin className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.6} />
-              )}
-              {event.location}
-            </span>
-            {showMap && event.mapEmbedUrl ? (
-              <span className="inline-flex items-center gap-2 font-medium text-purple">
-                <Mic2 className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.6} />
-                {event.type}
-              </span>
+        <div className="flex flex-col h-full">
+          <div className={showMap && event.mapEmbedUrl ? "flex flex-col justify-center p-6 sm:p-8 flex-1" : "py-2 flex-1 flex flex-col justify-center"}>
+            {showAcademicBadge ? (
+              <div className="mb-4 flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <CalendarDays className="h-3.5 w-3.5 text-gold" strokeWidth={1.6} />
+                  {event.type}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <Landmark className="h-3.5 w-3.5 text-gold" strokeWidth={1.6} />
+                  Academic programme
+                </span>
+              </div>
             ) : (
-              event.hashtag && <span className="block text-sm font-medium text-purple">{event.hashtag}</span>
+              event.presenter && (
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+                  {event.presenter}
+                </p>
+              )
             )}
-          </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href={ctaHref}
-              className="inline-flex w-fit items-center rounded-sm bg-purple px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-purple-800"
-            >
-              {ctaLabel}
-            </Link>
-            {showMap && event.hashtag && (
-              <span className="text-sm font-medium text-purple">{event.hashtag}</span>
-            )}
-          </div>
-        </div>
 
-        {showMap && event.mapEmbedUrl && (
-          <div className="bg-muted/20 p-4 sm:p-5">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Location
+            <h2 className="mb-3 font-fraunces text-3xl font-light leading-tight md:text-5xl lg:text-4xl xl:text-5xl">
+              {event.title}
+            </h2>
+            {event.subtitle && <p className="mb-7 max-w-2xl italic text-muted-foreground">{event.subtitle}</p>}
+            <div
+              className={
+                showMap && event.mapEmbedUrl
+                  ? 'mb-8 grid gap-4 text-sm text-muted-foreground sm:grid-cols-2'
+                  : 'mb-7 space-y-2'
+              }
+            >
+              <span className={showMap && event.mapEmbedUrl ? 'inline-flex items-center gap-2' : 'block text-sm font-semibold text-gold'}>
+                {showMap && event.mapEmbedUrl && (
+                  <CalendarDays className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.6} />
+                )}
+                {event.date}
               </span>
-              <span className="inline-flex items-center gap-1.5 text-sm font-medium text-purple">
-                <MapPin className="h-4 w-4 text-gold" strokeWidth={1.6} />
-                Johannesburg
+              <span className={showMap && event.mapEmbedUrl ? 'inline-flex items-center gap-2' : 'block text-sm text-muted-foreground'}>
+                {showMap && event.mapEmbedUrl && (
+                  <MapPin className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.6} />
+                )}
+                {event.location}
               </span>
+              {showMap && event.mapEmbedUrl ? (
+                <span className="inline-flex items-center gap-2 font-medium text-purple sm:col-span-2 mt-2">
+                  <Mic2 className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.6} />
+                  {event.type}
+                </span>
+              ) : (
+                event.hashtag && <span className="block text-sm font-medium text-purple">{event.hashtag}</span>
+              )}
             </div>
-            <div className="aspect-[4/3] overflow-hidden border border-border bg-card shadow-sm lg:h-[calc(100%-2rem)] lg:min-h-[320px] lg:aspect-auto">
-              <iframe
-                title={`${event.title} map location in Johannesburg`}
-                src={event.mapEmbedUrl}
-                className="h-full w-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href={ctaHref}
+                className="inline-flex w-fit items-center rounded-sm bg-purple px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-purple-800"
+              >
+                {ctaLabel}
+              </Link>
+              {showMap && event.hashtag && (
+                <span className="text-sm font-medium text-purple">{event.hashtag}</span>
+              )}
             </div>
           </div>
-        )}
+
+          {showMap && event.mapEmbedUrl && (
+            <div className="bg-muted/20 p-4 sm:p-5 border-t border-border">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Location
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-purple">
+                  <MapPin className="h-4 w-4 text-gold" strokeWidth={1.6} />
+                  {event.location.split(',')[0]}
+                </span>
+              </div>
+              <div className="aspect-[21/9] overflow-hidden border border-border bg-card shadow-sm lg:aspect-[16/9]">
+                <iframe
+                  title={`${event.title} map location`}
+                  src={event.mapEmbedUrl}
+                  className="h-full w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </article>
   )
